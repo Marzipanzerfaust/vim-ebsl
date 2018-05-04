@@ -7,6 +7,9 @@ if exists('b:current_syntax')
   finish
 endif
 
+let s:cpo_save = &cpo
+set cpo&vim
+
 syn match ebslComment /\%(^\s*\zs\|;\)\%(\*\|REM\s\).*/ contains=ebslTodo
 syn keyword ebslTodo TODO FIXME XXX NOTE contained
 
@@ -52,3 +55,6 @@ hi def link ebslSubroutineLabel Label
 hi def link ebslSystemVariable Constant
 
 let b:current_syntax = 'ebsl'
+
+let &cpo = s:cpo_save
+unlet s:cpo_save

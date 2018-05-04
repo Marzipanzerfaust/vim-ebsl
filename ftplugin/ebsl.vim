@@ -11,6 +11,9 @@ endif
 " Don't load another plugin for this buffer
 let b:did_ftplugin = 1
 
+let s:cpo_save = &cpo
+set cpo&vim
+
 setlocal comments=:*
 setlocal commentstring=*\ %s
 setlocal iskeyword+=.
@@ -43,3 +46,6 @@ setlocal iskeyword+=.
 " Undo the stuff we changed
 let b:undo_ftplugin = "setlocal comments< commentstring< iskeyword<" .
       \ " | unlet! b:match_ignorecase b:match_words"
+
+let &cpo = s:cpo_save
+unlet s:cpo_save
