@@ -10,7 +10,7 @@ endif
 let s:cpo_save = &cpo
 set cpo&vim
 
-syn region ebslComment /\%(^\s*\|;\)\%(\*\|REM\s\).*$/ contains=ebslTodo skipwhite
+syn match ebslComment /\%(^\s*\|;\)\%(\*\|REM\s\).*$/ contains=ebslTodo skipwhite
 syn keyword ebslTodo TODO FIXME XXX NOTE contained
 
 syn match ebslMacro /^\s*\zs\%(FOR\|END\)_\(\w\|\.\)*/ nextgroup=ebslMacroQualifier
