@@ -41,5 +41,5 @@ setlocal iskeyword+=.
 " endif
 
 " Undo the stuff we changed
-let b:undo_ftplugin = "setlocal comments< commentstring< iskeyword< " .
-      \ "unlet! b:match_ignorecase b:match_words"
+let b:undo_ftplugin = "setlocal comments< commentstring< iskeyword<" .
+      \ " | unlet! b:match_ignorecase b:match_words"
