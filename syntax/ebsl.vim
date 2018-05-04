@@ -10,7 +10,7 @@ endif
 let s:cpo_save = &cpo
 set cpo&vim
 
-syn region ebslComment start=/\%(\%(^\s*\zs\)\|;\)\%(\*\|REM\s\)/ end=/$/ contains=ebslTodo
+syn region ebslComment /\%(^\s*\|;\)\%(\*\|REM\s\).*$/ contains=ebslTodo skipwhite
 syn keyword ebslTodo TODO FIXME XXX NOTE contained
 
 syn match ebslMacro /^\s*\zs\%(FOR\|END\)_\(\w\|\.\)*/ nextgroup=ebslMacroQualifier
@@ -38,7 +38,7 @@ syn region ebslString start=/`/ end=/`/
 
 syn match ebslSubroutineLabel /^\s*\zs\%(\w\|\.\)\+:/
 
-syn match ebslSystemVariable /\<@\%(ACCOUNT\|COMMAND\|CONV\|CRTHIGH\|CRTWIDE\|DATA\|DATE\|DAY\|DICT\|FORMAT\|GID\|HEADER\|ID\|LASTVERB\|LEVEL\|LOGNAME\|LPTRHIGH\|LPTRWIDE\|MONTH\|NULL\|PARASENTENCE\|PATH\|RECORD\|RECUR0\|RECUR1\|RECUR2\|RECUR3\|RECUR4\|SENTENCE\|SYS.BELL\|SYSTEM.RETURN.CODE\|TIME\|TTY\|TUPLE\|UDTHOME\|UID\|USER.RETURN.CODE\|USER.TYPE\|USER0\|USER1\|USER3\|USER4\|USERNO\|WHO\|YEAR\|IM\|FM\|AM\|VM\|SM\|SVM\|TM\)\>/
+syn match ebslSystemVariable /@\%(ACCOUNT\|COMMAND\|CONV\|CRTHIGH\|CRTWIDE\|DATA\|DATE\|DAY\|DICT\|FORMAT\|GID\|HEADER\|ID\|LASTVERB\|LEVEL\|LOGNAME\|LPTRHIGH\|LPTRWIDE\|MONTH\|NULL\|PARASENTENCE\|PATH\|RECORD\|RECUR0\|RECUR1\|RECUR2\|RECUR3\|RECUR4\|SENTENCE\|SYS\.BELL\|SYSTEM\.RETURN\.CODE\|TIME\|TTY\|TUPLE\|UDTHOME\|UID\|USER\.RETURN\.CODE\|USER\.TYPE\|USER0\|USER1\|USER3\|USER4\|USERNO\|WHO\|YEAR\|IM\|FM\|AM\|VM\|SM\|SVM\|TM\)\>/
 
 syn match ebslPunctuation /,\|(\|)\|;/
 
