@@ -1,0 +1,54 @@
+" Vim syntax file
+" Language:   Envision-Based Software Language (EBSL) a.k.a. Envision Basic
+" Maintainer: Jeffrey Crochet <jeffrey02468@gmail.com>
+" URL:        https://github.com/marzipanzerfaust/vim-ebsl
+
+if exists('b:current_syntax')
+  finish
+endif
+
+syn match ebslComment /\%(^\s*\zs\|;\)\%(\*\|REM\s\).*/ contains=ebslTodo
+syn keyword ebslTodo TODO FIXME XXX NOTE contained
+
+syn match ebslMacro /^\s*\zs\%(FOR\|END\)_\(\w\|\.\)*/
+" syn match ebslMacroQualifier contained
+
+syn match ebslFunction /\<\%(ABS\|ACOS\|ALPHA\|ASCII\|ASIN\|ATAN\|BITAND\|BITNOT\|BITOR\|BITXOR\|CALCULATE\|CATS\|CHAR\|CHARLEN\|CHECKSUM\|COL1\|COL2\|COS\|COUNT\|COUNTS\|DATE\|DCOUNT\|DELETE\|DIR\|DOWNCASE\|DQUOTE\|DROUND\|EBCDIC\|ENVIRON\|EQS\|EXP\|EXTRACT\|FIELD\|FIELDSTORE\|FMT\|GES\|GETPTR\|GETUSERNAME\|GROUP\|HASH\|ICONV\|ICONVS\|INDEX\|INDICES\|INMAT\|INSERT\|INT\|ITYPE\|LEN\|LENS\|LES\|LN\|LOWER\|LTS\|MATCHFIELD\|MAXIMUM\|MINIMUM\|MOD\|NEG\|NES\|NOT\|NOTS\|NUM\|NUMS\|OCONV\|OCONVS\|PWR\|QUOTE\|RAISE\|REM\|REMOVE\|REPLACE\|REUSE\|RND\|SADD\|SCMP\|SDIV\|SEQ\|SEQS\|SIN\|SMUL\|SOUNDEX\|SPACE\|SQRT\|SQUOTE\|SSUB\|STATUS\|STR\|SUBSTRINGS\|SUM\|SYSTEM\|TAN\|TIME\|TIMEDATE\|TRIM\|TRIMB\|TRIMF\|TRIMS\|UNASSIGNED\|UPCASE\|XLATE\)\>/
+
+syn keyword ebslKeyword BEGIN BY CALL CALL_SCREEN CASE CDD CONVAFTER CONVERT DO ELSE END FIND FINDSTR FOR GOSUB IF IGNORE IN LOCATE LOCKED LOOP NEXT PROCEDURE PROGRAM PROMPT PROMPT_IN_PLACE PROMPT_WIDE REPEAT REPROMPT RETURN SETTING STEP SUBROUTINE SWAP THEN TO TRANSLATE UNTIL WHILE
+
+syn match ebslNumber /\<\d\+\>/
+syn match ebslNumber /\<\d\.\d*\>/
+syn match ebslNumber /\.\d\+\>/
+
+syn match ebslOperator /\*\|\/\|\^\|#\|=\|&\|!\|:\|<\|>\|-\|+/
+syn keyword ebslOperator AND OR EQ NE GT LT GE LE MATCH MATCHES
+
+syn region ebslPreProcStatement start=/\$/ end=/$/
+
+syn keyword ebslReservedVariable EDITED.DATA ERROR.OCCURRED INPUT.DATA MSG MSG.ARGUMENTS NEXT.PROC.FLD OUTPUT.DATA WARNING.OCCURRED
+syn match ebslReservedVariable /\<VL\=\.\%(\w\|\.\)\+\>/
+
+syn region ebslString start=/'/ end=/'/
+syn region ebslString start=/"/ end=/"/
+syn region ebslString start=/`/ end=/`/
+
+syn match ebslSubroutineLabel /^\s*\zs\%(\w\|\.\)\+:/
+
+syn keyword ebslSystemVariable @ACCOUNT @COMMAND @CONV @CRTHIGH @CRTWIDE @DATA @DATE @DAY @DICT @FORMAT @GID @HEADER @ID @LASTVERB @LEVEL @LOGNAME @LPTRHIGH @LPTRWIDE @MONTH @NULL @PARASENTENCE @PATH @RECORD @RECUR0 @RECUR1 @RECUR2 @RECUR3 @RECUR4 @SENTENCE @SYS.BELL @SYSTEM.RETURN.CODE @TIME @TTY @TUPLE @UDTHOME @UID @USER.RETURN.CODE @USER.TYPE @USER0 @USER1 @USER3 @USER4 @USERNO @WHO @YEAR @IM @FM @AM @VM @SM @SVM @TM
+
+hi def link ebslComment Comment
+hi def link ebslTodo Todo
+hi def link ebslMacro Keyword
+hi def link ebslMacroQualifier Special
+hi def link ebslFunction Function
+hi def link ebslKeyword Keyword
+hi def link ebslNumber Number
+hi def link ebslOperator Operator
+hi def link ebslPreProcStatement PreProc
+hi def link ebslReservedVariable Special
+hi def link ebslString String
+hi def link ebslSubroutineLabel Label
+hi def link ebslSystemVariable Constant
+
+let b:current_syntax = 'ebsl'
