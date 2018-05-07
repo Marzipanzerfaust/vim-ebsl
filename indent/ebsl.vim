@@ -11,8 +11,7 @@ let b:did_indent = 1
 
 setlocal autoindent
 setlocal indentexpr=GetEBSLIndent(v:lnum)
-setlocal indentkeys&
-setlocal indentkeys+==~end,=~next,=~repeat,=~while,=~until,=~end_
+setlocal indentkeys=0=~end,0=~next,=~repeat,=~while,=~until,0=~end_
 
 let s:keepcpo=&cpo
 set cpo&vim
@@ -22,40 +21,11 @@ if exists("*GetEBSLIndent")
   finish
 endif
 
-" This function borrows parts from indent/lua.vim
-function! GetEBSLIndent(...)
-  " Use the first argument as the current line number, or use v:lnum as
-  " default
-  let clnum = a:0 ? a:1 : v:lnum
-
-  " Find a non-blank line above the current line
-  let prevlnum = prevnonblank(clnum-1)
-
-  " At the start of the file, user zero indent
-  if prevlnum == 0
-    return 0
-  endif
-
-  " Add a 'shiftwidth' after lines that start a block
-  let ind = indent(prevlnum)
-  let prevline = getline(prevlnum)
-  let midx = match(prevline, '^\s*\%(IF\>\|FOR\>\|END\s\+ELSE\>\|UNTIL\>\|WHILE\>\|FIND\>\|FINDSTR\>\|LOCATE\>\|FOR_\%(\w\|\.\)*\)')
-
-  if midx != -1
-    " Add 'shiftwidth' if what we found previously is not in a comment
-    if synIDattr(synID(prevlnum, midx + 1, 1), "name") != 'ebslComment'
-      let ind += &shiftwidth
-    endif
-  endif
-
-  " Subtract a 'shiftwidth' on END, REPEAT, NEXT, and END_*
-  " This is the part that requires 'indentkeys'
-  let midx = match(getline(clnum), '^\s*\%(END\>\|REPEAT\>\|NEXT\>\|END_\%(\w\|\.\)*\)')
-  if midx != -1 && synIDattr(synID(clnum, midx + 1, 1), "name") != 'ebslComment'
-    let ind -= &shiftwidth
-  endif
-
-  return ind
+" I copied most of this from indent/vb.vim
+function! GetEBSLIndent(lnum)
+  " Labels and pre-processor statements get zero indent
+  let this_line = getline(a:lnum)
+  let labels_or_preproc = '^\s*\%(\)'
 endfunction
 
 let b:undo_indent = 'setl si<'

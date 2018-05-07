@@ -17,6 +17,7 @@ set cpo&vim
 setlocal comments=:*
 setlocal commentstring=*\ %s
 setlocal iskeyword+=.
+setlocal iskeyword-=@
 setlocal tabstop=3 softtabstop=3 shiftwidth=3
 
 " " Folding
