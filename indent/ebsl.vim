@@ -11,16 +11,16 @@ let b:did_indent = 1
 
 setlocal nosmartindent
 setlocal indentexpr=GetEBSLIndent(v:lnum)
-setlocal indentkeys=0=END,0=NEXT,0=REPEAT,0=WHILE,0=UNTIL,0=END_
+setlocal indentkeys=0=end,0=next,0=repeat,0=while,0=until,0=end_
 " setlocal autoindent
+
+let s:keepcpo=&cpo
+set cpo&vim
 
 " Only define the function once
 if exists("*GetEBSLIndent")
   finish
 endif
-
-let s:keepcpo=&cpo
-set cpo&vim
 
 " This function borrows parts from indent/lua.vim
 function! GetEBSLIndent(...)
