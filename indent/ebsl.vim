@@ -11,7 +11,7 @@ let b:did_indent = 1
 
 setlocal nosmartindent
 setlocal indentexpr=GetEBSLIndent(v:lnum)
-setlocal indentkeys=0=end,0=next,0=repeat,0=while,0=until,0=end_
+setlocal indentkeys=0=~end,0=~next,0=~repeat,0=~while,0=~until,0=~end_
 " setlocal autoindent
 
 let s:keepcpo=&cpo

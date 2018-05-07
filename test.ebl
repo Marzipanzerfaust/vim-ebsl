@@ -29,3 +29,8 @@ END
 IF FOO THEN
    BAR
 END
+
+IF FOO THEN
+   BAR
+END
+
