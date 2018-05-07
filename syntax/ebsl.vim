@@ -7,8 +7,8 @@ if exists('b:current_syntax')
   finish
 endif
 
-let s:cpo_save = &cpo
-set cpo&vim
+" let s:cpo_save = &cpo
+" set cpo&vim
 
 syn match ebslComment /\%(^\s*\|;\)\%(\*\|REM\s\).*$/ contains=ebslTodo
 syn keyword ebslTodo TODO FIXME XXX NOTE contained
@@ -59,5 +59,5 @@ hi def link ebslPunctuation Delimiter
 
 let b:current_syntax = 'ebsl'
 
-let &cpo = s:cpo_save
-unlet s:cpo_save
+" let &cpo = s:cpo_save
+" unlet s:cpo_save
