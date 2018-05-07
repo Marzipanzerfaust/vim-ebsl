@@ -1,7 +1,7 @@
 " Vim indent file
-" Language:   Envision-Based Software Language (EBSL) a.k.a. Envision Basic
-" Maintainer: Jeffrey Crochet <jeffrey02468@gmail.com>
-" URL:        https://github.com/marzipanzerfaust/vim-ebsl
+" Language: Envision-Based Software Language (EBSL) a.k.a. Envision Basic
+" Author: Jeffrey Crochet <jeffrey02468@gmail.com>
+" URL: https://github.com/marzipanzerfaust/vim-ebsl
 
 " Only load this indent file when no other was loaded
 if exists("b:did_indent")
@@ -9,10 +9,10 @@ if exists("b:did_indent")
 endif
 let b:did_indent = 1
 
-setlocal nosmartindent
+setlocal autoindent
 setlocal indentexpr=GetEBSLIndent(v:lnum)
-setlocal indentkeys=0=~end,0=~next,0=~repeat,0=~while,0=~until,0=~end_
-" setlocal autoindent
+setlocal indentkeys&
+setlocal indentkeys+==~end,=~next,=~repeat,=~while,=~until,=~end_
 
 let s:keepcpo=&cpo
 set cpo&vim

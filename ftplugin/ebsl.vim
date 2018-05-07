@@ -1,7 +1,7 @@
 " Vim filetype plugin file
-" Language:   Envision-Based Software Language (EBSL) a.k.a. Envision Basic
-" Maintainer: Jeffrey Crochet <jeffrey02468@gmail.com>
-" URL:        https://github.com/marzipanzerfaust/vim-ebsl
+" Language: Envision-Based Software Language (EBSL) a.k.a. Envision Basic
+" Author: Jeffrey Crochet <jeffrey02468@gmail.com>
+" URL: https://github.com/marzipanzerfaust/vim-ebsl
 
 " Only do this when not done yet for this buffer
 if exists("b:did_ftplugin")
