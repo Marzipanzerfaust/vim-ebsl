@@ -17,17 +17,19 @@ setlocal autoindent
 if exists("*GetEBSLIndent")
   finish
 endif
+let s:keepcpo=&cpo
+set cpo&vim
 
 " This function borrows parts from indent/lua.vim
 function! GetEBSLIndent(...)
-  " Use the first argument as the current line number, of use v:lnum as
+  " Use the first argument as the current line number, or use v:lnum as
   " default
   let clnum = a:0 ? a:1 : v:lnum
 
   " Find a non-blank line above the current line
   let prevlnum = prevnonblank(clnum-1)
 
-  " Hit the start of the file, user zero indent
+  " At the start of the file, user zero indent
   if prevlnum == 0
     return 0
   endif
@@ -35,7 +37,7 @@ function! GetEBSLIndent(...)
   " Add a 'shiftwidth' after lines that start a block
   let ind = indent(prevlnum)
   let prevline = getline(prevlnum)
-  let midx = match(prevline, '^\s*\%(IF\>\|FOR\>\|END\s\+ELSE\>\|UNTIL\>\|WHILE\>\|LOOP\>\|FIND\>\|FINDSTR\>\|LOCATE\>\|FOR_\%(\w\|\.\)*\)')
+  let midx = match(prevline, '^\s*\%(IF\>\|FOR\>\|END\s\+ELSE\>\|UNTIL\>\|WHILE\>\|FIND\>\|FINDSTR\>\|LOCATE\>\|FOR_\%(\w\|\.\)*\)')
 
   if midx != -1
     " Add 'shiftwidth' if what we found previously is not in a comment
@@ -55,3 +57,6 @@ function! GetEBSLIndent(...)
 endfunction
 
 let b:undo_indent = 'setl si<'
+
+let &cpo = s:keepcpo
+unlet s:keepcpo
