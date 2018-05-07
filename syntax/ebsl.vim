@@ -10,7 +10,7 @@ endif
 let s:cpo_save = &cpo
 set cpo&vim
 
-syn region ebslMacro start=/^\s*\zs/ end=/$/ contains=ebslMacroKeyword,ebslMacroQualifier
+syn region ebslMacro start=/^\s*\zs/ end=/$/ oneline contains=ebslMacroKeyword,ebslMacroQualifier
 syn match ebslMacroKeyword /\%(FOR\|END\)_\(\w\|\.\)*/ contained containedin=ebslMacro
 syn keyword ebslMacroQualifier ASCENDING ASSOCIATED AT BATCHED BREAKING_ON CANCELLING COMMITTING COMMIT_EVERY COUNTED CREATE_NEW CRITERIA DEFER_COMMIT DELETING DESCENDING EXISTING FIRST FROM GRAPHED INTO INTO_REFERENCED KEY_IN LAST LEFT LIMITING MATCHING NEW NEWLIST ONLY PRE-ASSEMBLED PROTECTED RECURSIVE REFERENCED RELEASING RIGHT SECONDARY SELECTED SINGLE TESTING THIS_APPLICATION THIS_INSTANCE_OF TO UNVALIDATED USING WRITING contained containedin=ebslMacro
 
