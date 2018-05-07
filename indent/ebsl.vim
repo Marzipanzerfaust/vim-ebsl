@@ -10,7 +10,7 @@ endif
 let b:did_indent = 1
 
 setlocal indentexpr=GetEBSLIndent(v:lnum)
-setlocal indentkeys==END,=NEXT,=REPEAT,=WHILE,=UNTIL
+setlocal indentkeys=0=END,0=NEXT,0=REPEAT,0=WHILE,0=UNTIL
 setlocal autoindent
 
 " Only define the function once
