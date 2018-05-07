@@ -3,4 +3,4 @@
 " Maintainer: Jeffrey Crochet <jeffrey02468@gmail.com>
 " URL:        https://github.com/marzipanzerfaust/vim-ebsl
 
-au BufNewFile,BufRead *.ebl set ft=ebsl
+au BufNewFile,BufRead *.ebl setfiletype ebsl

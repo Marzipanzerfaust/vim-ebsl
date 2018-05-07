@@ -17,6 +17,7 @@ set cpo&vim
 setlocal comments=:*
 setlocal commentstring=*\ %s
 setlocal iskeyword+=.
+setlocal tabstop=3 softtabstop=3 shiftwidth=3
 
 " " vim-matchit support
 " if exists('loaded_matchit') && !exists('b:match_words')
