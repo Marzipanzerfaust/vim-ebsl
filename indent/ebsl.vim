@@ -19,9 +19,13 @@ if exists("*GetEBSLIndent")
 endif
 
 " This function borrows parts from indent/lua.vim
-function! GetEBSLIndent()
+function! GetEBSLIndent(...)
+  " Use the first argument as the current line number, of use v:lnum as
+  " default
+  let clnum = a:0 ? a:1 : v:lnum
+
   " Find a non-blank line above the current line
-  let prevlnum = prevnonblank(v:lnum-1)
+  let prevlnum = prevnonblank(clnum-1)
   echom prevlnum
 
   " Hit the start of the file, user zero indent
@@ -46,8 +50,8 @@ function! GetEBSLIndent()
 
   " Subtract a 'shiftwidth' on END, REPEAT, NEXT, and END_*
   " This is the part that requires 'indentkeys'
-  let midx = match(getline(v:lnum), '^\s*\%(END\>\|REPEAT\>\|NEXT\>\|END_\%(\w\|\.\)*\)')
-  if midx != -1 && synIDattr(synID(v:lnum, midx + 1, 1), "name") != 'ebslComment'
+  let midx = match(getline(clnum), '^\s*\%(END\>\|REPEAT\>\|NEXT\>\|END_\%(\w\|\.\)*\)')
+  if midx != -1 && synIDattr(synID(clnum, midx + 1, 1), "name") != 'ebslComment'
     let ind -= &shiftwidth
   endif
 

@@ -23,3 +23,6 @@ END
 RETURN
 
 IF FOO THEN
+   BAR
+END
+
