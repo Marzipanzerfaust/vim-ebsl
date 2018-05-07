@@ -22,6 +22,7 @@ endif
 function! GetEBSLIndent()
   " Find a non-blank line above the current line
   let prevlnum = prevnonblank(v:lnum-1)
+  echom prevlnum
 
   " Hit the start of the file, user zero indent
   if prevlnum == 0
@@ -32,6 +33,9 @@ function! GetEBSLIndent()
   let ind = indent(prevlnum)
   let prevline = getline(prevlnum)
   let midx = match(prevline, '^\s*\%(IF\>\|FOR\>\|END\s\+ELSE\>\|UNTIL\>\|WHILE\>\|LOOP\>\|FIND\>\|FINDSTR\>\|LOCATE\>\|FOR_\%(\w\|\.\)*\)')
+  echom ind
+  echom prevline
+  echom midx
 
   if midx != -1
     " Add 'shiftwidth' if what we found previously is not in a comment
@@ -47,6 +51,7 @@ function! GetEBSLIndent()
     let ind -= &shiftwidth
   endif
 
+  echom ind
   return ind
 endfunction
 
