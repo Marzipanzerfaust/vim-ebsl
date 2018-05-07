@@ -9,14 +9,16 @@ if exists("b:did_indent")
 endif
 let b:did_indent = 1
 
+setlocal nosmartindent
 setlocal indentexpr=GetEBSLIndent(v:lnum)
-setlocal indentkeys=0=END,0=NEXT,0=REPEAT,0=WHILE,0=UNTIL
-setlocal autoindent
+setlocal indentkeys=0=END,0=NEXT,0=REPEAT,0=WHILE,0=UNTIL,0=END_
+" setlocal autoindent
 
 " Only define the function once
 if exists("*GetEBSLIndent")
   finish
 endif
+
 let s:keepcpo=&cpo
 set cpo&vim
 
