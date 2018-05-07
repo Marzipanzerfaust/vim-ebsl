@@ -46,6 +46,8 @@ function! GetEBSLIndent()
   if midx != -1 && synIDattr(synID(v:lnum, midx + 1, 1), "name") != 'ebslComment'
     let ind -= &shiftwidth
   endif
+
+  return ind
 endfunction
 
 let b:undo_indent = 'setl si<'
