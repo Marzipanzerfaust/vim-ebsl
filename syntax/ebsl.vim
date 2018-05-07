@@ -7,11 +7,9 @@ if exists('b:current_syntax')
   finish
 endif
 
-" let s:cpo_save = &cpo
-" set cpo&vim
+let s:cpo_save = &cpo
+set cpo&vim
 
-syn match ebslComment /\%(^\s*\|;\)\%(\*\|REM\s\).*$/ contains=ebslTodo
-syn keyword ebslTodo TODO FIXME XXX NOTE contained
 
 syn match ebslMacro /^\s*\zs\%(FOR\|END\)_\(\w\|\.\)*/ nextgroup=ebslMacroQualifier skipwhite
 syn keyword ebslMacroQualifier ASCENDING ASSOCIATED AT BATCHED BREAKING_ON CANCELLING COMMITTING COMMIT_EVERY COUNTED CREATE_NEW CRITERIA DEFER_COMMIT DELETING DESCENDING EXISTING FIRST FROM GRAPHED INTO INTO_REFERENCED KEY_IN LAST LEFT LIMITING MATCHING NEW NEWLIST ONLY PRE-ASSEMBLED PROTECTED RECURSIVE REFERENCED RELEASING RIGHT SECONDARY SELECTED SINGLE TESTING THIS_APPLICATION THIS_INSTANCE_OF TO UNVALIDATED USING WRITING contained
@@ -41,6 +39,8 @@ syn match ebslSubroutineLabel /^\s*\zs\%(\w\|\.\)\+:/
 syn match ebslSystemVariable /@\%(ACCOUNT\|COMMAND\|CONV\|CRTHIGH\|CRTWIDE\|DATA\|DATE\|DAY\|DICT\|FORMAT\|GID\|HEADER\|ID\|LASTVERB\|LEVEL\|LOGNAME\|LPTRHIGH\|LPTRWIDE\|MONTH\|NULL\|PARASENTENCE\|PATH\|RECORD\|RECUR0\|RECUR1\|RECUR2\|RECUR3\|RECUR4\|SENTENCE\|SYS\.BELL\|SYSTEM\.RETURN\.CODE\|TIME\|TTY\|TUPLE\|UDTHOME\|UID\|USER\.RETURN\.CODE\|USER\.TYPE\|USER0\|USER1\|USER3\|USER4\|USERNO\|WHO\|YEAR\|IM\|FM\|AM\|VM\|SM\|SVM\|TM\)\>/
 
 syn match ebslPunctuation /,\|(\|)\|;/
+syn match ebslComment /\%(^\s*\zs\|;\)\%(\*\|REM\s\).*$/ contains=ebslTodo
+syn keyword ebslTodo TODO FIXME XXX NOTE contained
 
 hi def link ebslComment Comment
 hi def link ebslTodo Todo
@@ -53,11 +53,11 @@ hi def link ebslOperator Operator
 hi def link ebslPreProcStatement PreProc
 hi def link ebslReservedVariable Constant
 hi def link ebslString String
-hi def link ebslSubroutineLabel Label
+hi def link ebslSubroutineLabel Special
 hi def link ebslSystemVariable Constant
 hi def link ebslPunctuation Delimiter
 
 let b:current_syntax = 'ebsl'
 
-" let &cpo = s:cpo_save
-" unlet s:cpo_save
+let &cpo = s:cpo_save
+unlet s:cpo_save
