@@ -40,7 +40,7 @@ function! GetEBSLIndent()
     endif
   endif
 
-  " Subtact a 'shiftwidth' on END, REPEAT, NEXT, and END_*
+  " Subtract a 'shiftwidth' on END, REPEAT, NEXT, and END_*
   " This is the part that requires 'indentkeys'
   let midx = match(getline(v:lnum), '^\s*\%(END\>\|REPEAT\>\|NEXT\>\|END_\%(\w\|\.\)*\)')
   if midx != -1 && synIDattr(synID(v:lnum, midx + 1, 1), "name") != 'ebslComment'

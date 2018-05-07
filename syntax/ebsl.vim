@@ -35,7 +35,7 @@ syn region ebslString start=/"/ end=/"/
 syn region ebslString start=/`/ end=/`/
 
 syn region ebslSubroutine start=/^\s*\%(\w\|\.\)\+:/ end=/^\s*RETURN/ transparent contains=ebslSubroutineLabel
-syn match ebslSubroutineLabel /^\s*\zs\%(\w\|\.\)\+:/
+syn match ebslSubroutineLabel /^\s*\zs\%(\w\|\.\)\+:/ contained
 
 syn match ebslSystemVariable /@\%(ACCOUNT\|COMMAND\|CONV\|CRTHIGH\|CRTWIDE\|DATA\|DATE\|DAY\|DICT\|FORMAT\|GID\|HEADER\|ID\|LASTVERB\|LEVEL\|LOGNAME\|LPTRHIGH\|LPTRWIDE\|MONTH\|NULL\|PARASENTENCE\|PATH\|RECORD\|RECUR0\|RECUR1\|RECUR2\|RECUR3\|RECUR4\|SENTENCE\|SYS\.BELL\|SYSTEM\.RETURN\.CODE\|TIME\|TTY\|TUPLE\|UDTHOME\|UID\|USER\.RETURN\.CODE\|USER\.TYPE\|USER0\|USER1\|USER3\|USER4\|USERNO\|WHO\|YEAR\|IM\|FM\|AM\|VM\|SM\|SVM\|TM\)\>/
 
