@@ -76,6 +76,8 @@ function! GetEBSLIndent(lnum)
       let ind += &sw
     endif
   endif
+
+	return ind
 endfunction
 
 let b:undo_indent = 'setl si<'
