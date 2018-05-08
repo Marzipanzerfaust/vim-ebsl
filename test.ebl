@@ -17,4 +17,5 @@ END_EACH LIST.VAR1
 
 RETURN
 
-CRT 'abc'[2]
+CRT 'abc'[2]  ;* bleh
+CRT FOO; CRT BAR

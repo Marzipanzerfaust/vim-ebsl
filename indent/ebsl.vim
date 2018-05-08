@@ -11,7 +11,7 @@ let b:did_indent = 1
 
 setlocal autoindent
 setlocal indentexpr=GetEBSLIndent(v:lnum)
-setlocal indentkeys=0=~end,0=~next,=~repeat,=~while,=~until,0=~end_
+setlocal indentkeys=o,O,0=~end,0=~next,0=~repeat,0=~while,0=~until
 
 let s:keepcpo=&cpo
 set cpo&vim
@@ -21,11 +21,61 @@ if exists("*GetEBSLIndent")
   finish
 endif
 
-" I copied most of this from indent/vb.vim
+" Some of this is copied from indent/vb.vim
 function! GetEBSLIndent(lnum)
   " Labels and pre-processor statements get zero indent
   let this_line = getline(a:lnum)
-  let labels_or_preproc = '^\s*\%(\)'
+  let labels_or_preproc = '^\s*\<\k\+\>:'
+  if this_line =~? labels_or_preproc
+    return 0
+  endif
+
+  " Find a non-blank line above the current line;
+  " skip over labels and pre-processor directives
+  let lnum = a:lnum
+  while lnum > 0
+    let lnum = prevnonblank(lnum - 1)
+    let previous_line = getline(lnum)
+    if previous_line !~? labels_or_preproc
+      break
+    endif
+  endwhile
+
+  " Hit the start of the file, use zero indent
+  if lnum == 0
+    return 0
+  endif
+
+  let ind = indent(lnum)
+
+  " Add
+  if previous_line =~? '^\s*begin case\>' ||
+        \ previous_line =~? '\<\%(then\|else\)\s*$' ||
+        \ previous_line =~? '^\s*\%(for\|loop\|while\|until\)\>' && previous_line !~? '\<repeat\s*$' ||
+        \ previous_line =~? '^\s*for_\k*\>'
+    let ind += &sw
+  endif
+
+  " Subtract
+  if this_line =~? '^\s*end case\>'
+    if previous_line =~? '^\s*begin case\>'
+      let ind -= &sw
+    else
+      let ind -= 2 * &sw
+    endif
+  elseif this_line =~? '^\s*end\>' ||
+        \ this_line =~? '^\s*\%(while\|until\|next\|repeat\)\>' ||
+        \ this_line =~? '^\s*end_\k*\>'
+    let ind -= &sw
+  endif
+
+  " There's an edge case where a CASE statement occurs immediately after
+  " another empty CASE statement, which should cause no indentation
+  if this_line =~? '^\s*case\>'
+    if previous_line !~? '^\s*case\>'
+      let ind += &sw
+    endif
+  endif
 endfunction
 
 let b:undo_indent = 'setl si<'
