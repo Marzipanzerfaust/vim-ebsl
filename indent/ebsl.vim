@@ -73,7 +73,7 @@ function! GetEBSLIndent(lnum)
   " another empty CASE statement, which should cause no indentation
   if this_line =~? '^\s*case\>'
     if previous_line !~? '^\s*case\>'
-      let ind += &sw
+      let ind -= &sw
     endif
   endif
 
