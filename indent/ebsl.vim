@@ -11,7 +11,7 @@ let b:did_indent = 1
 
 setlocal autoindent
 setlocal indentexpr=GetEBSLIndent(v:lnum)
-setlocal indentkeys=o,O,0=~end,0=~next,0=~repeat,0=~while,0=~until
+setlocal indentkeys=o,O,=~end,=~next,=~repeat,=~while,=~until
 
 let s:keepcpo=&cpo
 set cpo&vim

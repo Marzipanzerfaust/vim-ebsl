@@ -19,3 +19,9 @@ RETURN
 
 CRT 'abc'[2]  ;* bleh
 CRT FOO; CRT BAR
+
+IF FOO THEN
+   BLEH
+END ELSE
+   BLOOP
+END
