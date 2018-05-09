@@ -16,11 +16,11 @@ setlocal indentkeys+==~end,=~next,=~repeat,=~while,=~until
 
 " If available, use shiftwidth() instead of &shiftwidth
 if exists('*shiftwidth')
-  func s:sw()
+  function! s:sw()
     return shiftwidth()
   endfunc
 else
-  func s:sw()
+  function! s:sw()
     return &sw
   endfunc
 endif

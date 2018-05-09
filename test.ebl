@@ -34,5 +34,3 @@ BEGIN CASE
    CASE 1
    CASE 2
 END CASE
-
-
