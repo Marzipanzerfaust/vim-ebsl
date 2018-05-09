@@ -12,7 +12,7 @@ endif
 let b:did_ftplugin = 1
 
 setlocal comments=:*
-setlocal commentstring=*\ %s
+setlocal commentstring=*%s
 setlocal iskeyword=A-Z,.,48-57,_
 setlocal tabstop=3 softtabstop=3 shiftwidth=3
 
@@ -66,7 +66,6 @@ if exists('loaded_matchit')
   let b:match_words =
         \ '\%(^\s*\)\@<=\<begin case\>:\%(^\s*\)\@<=\<case\>:\%(^\s*\)\@<=\<end case\>,' .
         \ '\%(^\s*\)\@<=\<if\>:\%(^\s*\)\@<=\<end else\>:\%(^\s*\)\@<=\<end\>,' .
-        \ '\%(^\s*\)\@<=\<for\>:\%(^\s*\)\@<=\<\%(while\|until\)\>:\%(^\s*\)\@<=\<next\>,' .
         \ '\%(^\s*\)\@<=\<loop\>:\%(^\s*\)\@<=\<\%(while\|until\)\>:\%(^\s*\)\@<=\<repeat\>,' .
         \ '\%(^\s*\)\@<=\<for_\k*\>:\%(^\s*\)\@<=\<end_\k*\>,' .
         \ '(:),[:]'
