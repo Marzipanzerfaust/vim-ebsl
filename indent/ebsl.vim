@@ -58,7 +58,6 @@ function! GetEBSLIndent(lnum)
 
   " Add
   if previous_line =~? '^\s*begin case\>' ||
-        \ previous_line =~? '^\s*case\>' ||
         \ previous_line =~? '\<\%(then\|else\)\s*$' ||
         \ previous_line =~? '^\s*\%(for\|loop\|while\|until\)\>' && previous_line !~? '\<repeat\s*$' ||
         \ previous_line =~? '^\s*for_\k*\>'
@@ -78,10 +77,18 @@ function! GetEBSLIndent(lnum)
     let ind -= s:sw()
   endif
 
-  " There's an edge case where a CASE statement occurs immediately after
-  " another empty CASE statement, which should cause no indentation
-  if this_line =~? '^\s*case\>' && previous_line =~? '^\s*case\>'
-    let ind -= s:sw()
+  " " There's an edge case where a CASE statement occurs immediately after
+  " " another empty CASE statement, which should cause no indentation
+  " if this_line =~? '^\s*case\>' && previous_line =~? '^\s*case\>'
+  "   let ind -= s:sw()
+  " endif
+
+  " There's a few edge cases for the CASE statement that we have to
+  " handle separately
+  if previous_line =~? '^\s*case\>'
+    if this_line !~? '^\s*case\>'
+      let ind += s:sw()
+    endif
   endif
 
   return ind
