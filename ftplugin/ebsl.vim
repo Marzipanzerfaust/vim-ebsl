@@ -64,7 +64,7 @@ setlocal tabstop=3 softtabstop=3 shiftwidth=3
 if exists('loaded_matchit')
   let b:match_ignorecase = 1
   let b:match_words =
-        \ '\(^\s*\)\<begin case\>:\%(\1\s\{'.&sw.'}\)\<case\>:\1\<end case\>,' .
+        \ '\(^\s*\)\<\zsbegin case\>:\%(\1\s\{'.&sw.'}\)\<\zscase\>:\1\<\zsend case\>,' .
         \ '\(^\s*\)\@<=\<\%(if\|find\|findstr\|locate\)\>:\%(^\s*\)\@<=\<end else\>:\%(^\s*\)\@<=\<end\s*$,' .
         \ '\(^\s*\)\@<=\<\%(for\|loop\)\>:\%(^\s*\)\@<=\<\%(while\|until\)\>:\%(^\s*\)\@<=\<\%(next\|repeat\)\>,' .
         \ '\(^\s*\)\@<=\<for_\k*\>:\%(^\s*\)\@<=\<end_\k*\>,' .
