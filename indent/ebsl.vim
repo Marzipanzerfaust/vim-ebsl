@@ -11,7 +11,8 @@ let b:did_indent = 1
 
 setlocal autoindent
 setlocal indentexpr=GetEBSLIndent(v:lnum)
-setlocal indentkeys=o,O,=~end,=~next,=~repeat,=~while,=~until
+setlocal indentkeys&
+setlocal indentkeys+=o,O,=~end,=~next,=~repeat,=~while,=~until
 
 " If available, use shiftwidth() instead of &shiftwidth
 if exists('*shiftwidth')
@@ -76,12 +77,6 @@ function! GetEBSLIndent(lnum)
         \ this_line =~? '^\s*end_\k*\>'
     let ind -= s:sw()
   endif
-
-  " " There's an edge case where a CASE statement occurs immediately after
-  " " another empty CASE statement, which should cause no indentation
-  " if this_line =~? '^\s*case\>' && previous_line =~? '^\s*case\>'
-  "   let ind -= s:sw()
-  " endif
 
   " There's a few edge cases for the CASE statement that we have to
   " handle separately
