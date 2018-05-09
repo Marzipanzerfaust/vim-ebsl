@@ -62,12 +62,12 @@ setlocal tabstop=3 softtabstop=3 shiftwidth=3
 
 " vim-matchit support
 if exists('loaded_matchit')
-  let b:match_ignorecase = 1
+  let b:match_ignorecase = 0
   let b:match_words =
-        \ '\%(^\s*\)\@<=\<begin case\>:\%(^\s*\)\@<=\<case\>:\%(^\s*\)\@<=\<end case\>,' .
-        \ '\%(^\s*\)\@<=\<\%(if\|find\|findstr\|locate\)\>:\%(^\s*\)\@<=\<end else\>:\%(^\s*\)\@<=\<end\s*$,' .
-        \ '\%(^\s*\)\@<=\<\%(for\|loop\)\>:\%(^\s*\)\@<=\<\%(while\|until\)\>:\%(^\s*\)\@<=\<\%(next\|repeat\)\>,' .
-        \ '\%(^\s*\)\@<=\<for_\k*\>:\%(^\s*\)\@<=\<end_\k*\>,' .
+        \ '\%(^\s*\)\@<=\<BEGIN CASE\>:\%(^\s*\)\@<=\<CASE\>:\%(^\s*\)\@<=\<END CASE\>,' .
+        \ '\%(^\s*\)\@<=\<\%(IF\|FIND\|FINDSTR\|LOCATE\)\>:\%(^\s*\)\@<=\<END ELSE\>:\%(^\s*\)\@<=\<END\s*$,' .
+        \ '\%(^\s*\)\@<=\<\%(FOR\|LOOP\)\>:\%(^\s*\)\@<=\<\%(WHILE\|UNTIL\)\>:\%(^\s*\)\@<=\<\%(NEXT\|REPEAT\)\>,' .
+        \ '\%(^\s*\)\@<=\<FOR_\k*\>:\%(^\s*\)\@<=\<END_\k*\>,' .
         \ '(:),[:]'
 endif
 
@@ -79,5 +79,6 @@ endif
 " endif
 
 " Undo the stuff we changed
-let b:undo_ftplugin = "setlocal comments< commentstring< iskeyword<" .
-      \ " | unlet! b:match_ignorecase b:match_words"
+let b:undo_ftplugin = "setlocal comments< commentstring< iskeyword< ts< sts< sw<" .
+      \ " | unlet! b:match_ignorecase b:match_words" .
+      \ " | unlet! b:endwise_pattern b:endwise_addition"
