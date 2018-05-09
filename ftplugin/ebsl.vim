@@ -11,9 +11,6 @@ endif
 " Don't load another plugin for this buffer
 let b:did_ftplugin = 1
 
-let s:cpo_save = &cpo
-set cpo&vim
-
 setlocal comments=:*
 setlocal commentstring=*\ %s
 setlocal iskeyword=A-Z,.,48-57,_
@@ -63,23 +60,12 @@ setlocal tabstop=3 softtabstop=3 shiftwidth=3
 "   return '0'
 " endfunction
 
-" " vim-matchit support
-" if exists('loaded_matchit') && !exists('b:match_words')
-"   let b:match_ignorecase = 0
-
-"   let s:word = '[\w\._]'
-
-"   let b:match_words =
-"         \ '\<FOR_\('.s:word.'*\)\s\+.*\>:\<END_\1\>,' .
-"         \ '\<IF\>:\<END\s\+ELSE\>:\<END\>,' .
-"         \ '\<FIND\>:\<END\s\+ELSE\>:\<END\>,' .
-"         \ '\<FINDSTR\>:\<END\s\+ELSE\>:\<END\>,' .
-"         \ '\<LOCATE\>:\<END\s\+ELSE\>:\<END\>,' .
-"         \ '\<BEGIN\s\+CASE\>:\<CASE\>:\<END\s\+CASE\>,' .
-"         \ '\<LOOP\>:\<WHILE\>:\<UNTIL\>:\<REPEAT\>,' .
-"         \ '\<FOR\>:\<WHILE\>:\<UNTIL\>:\<NEXT\>,' .
-"         \ '\[:\],(:)'
-" endif
+" vim-matchit support
+if exists('loaded_matchit')
+  let b:match_ignorecase = 1
+  let b:match_words =
+        \ '^\s*begin case\>:^\s*case:^\s*end case\>'
+endif
 
 " " vim-endwise support
 " if exists('loaded_endwise')
@@ -91,6 +77,3 @@ setlocal tabstop=3 softtabstop=3 shiftwidth=3
 " Undo the stuff we changed
 let b:undo_ftplugin = "setlocal comments< commentstring< iskeyword<" .
       \ " | unlet! b:match_ignorecase b:match_words"
-
-let &cpo = s:cpo_save
-unlet s:cpo_save
