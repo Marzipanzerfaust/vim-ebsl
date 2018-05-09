@@ -85,10 +85,12 @@ function! GetEBSLIndent(lnum)
 
   " There's a few edge cases for the CASE statement that we have to
   " handle separately
-  if previous_line =~? '^\s*case\>'
-    if this_line !~? '^\s*case\>'
-      let ind += s:sw()
-    endif
+  if previous_line =~? '^\s*case\>' && this_line !~? '^\s*case\>'
+    let ind += s:sw()
+  endif
+
+  if previous_line !~? '^\s*case\>' && this_line =~? '^\s*case\>'
+    let ind -= s:sw()
   endif
 
   return ind
