@@ -89,7 +89,7 @@ function! GetEBSLIndent(lnum)
     let ind += s:sw()
   endif
 
-  if previous_line !~? '^\s*case\>' && this_line =~? '^\s*case\>'
+  if previous_line !~? '^\s*\%(case\|begin case\)\>' && this_line =~? '^\s*case\>'
     let ind -= s:sw()
   endif
 
