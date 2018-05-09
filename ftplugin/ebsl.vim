@@ -76,7 +76,7 @@ if exists('loaded_endwise')
   " This is is a list of all qualifiers that can appear in an EBSL macro
   " statement; it is required for matching the actual key element of a
   " macro statement.
-  let l:macro_qualifiers = [
+  let macro_qualifiers = [
         \ 'ASCENDING', 'ASSOCIATED', 'AT', 'BATCHED', 'BREAKING_ON', 'CANCELLING', 'COMMITTING', 'COMMIT_EVERY', 'COUNTED', 'CREATE_NEW', 'CRITERIA', 'DEFER_COMMIT', 'DELETING', 'DESCENDING', 'EXISTING', 'FIRST', 'FROM', 'GRAPHED', 'INTO', 'INTO_REFERENCED', 'KEY_IN', 'LAST', 'LEFT', 'LIMITING', 'MATCHING', 'NEW', 'NEWLIST', 'ONLY', 'PRE-ASSEMBLED', 'PROTECTED', 'RECURSIVE', 'REFERENCED', 'RELEASING', 'RIGHT', 'SECONDARY', 'SELECTED', 'SINGLE', 'TESTING', 'THIS_APPLICATION', 'THIS_INSTANCE_OF', 'TO', 'UNVALIDATED', 'USING', 'WRITING'
         \ ]
 
@@ -92,7 +92,7 @@ if exists('loaded_endwise')
         \ '\%(^\s*\)\@<=\<\%(' .
         \ 'BEGIN CASE\|' .
         \ '\%(IF\|FIND\|FINDSTR\|LOCATE\)\|' .
-        \ 'FOR_\(\k*\) \%('.join(l:macro_qualifiers, ' \|').'\)*\(\k\+\)\|' .
+        \ 'FOR_\(\k*\) \%('.join(macro_qualifiers, ' \|').'\)*\(\k\+\)\|' .
         \ 'FOR \(\k\+\)\|' .
         \ 'LOOP' .
         \ '\)\>'
