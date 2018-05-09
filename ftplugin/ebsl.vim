@@ -65,8 +65,8 @@ if exists('loaded_matchit')
   let b:match_ignorecase = 1
   let b:match_words =
         \ '\%(^\s*\)\@<=\<begin case\>:\%(^\s*\)\@<=\<case\>:\%(^\s*\)\@<=\<end case\>,' .
-        \ '\%(^\s*\)\@<=\<if\>:\%(^\s*\)\@<=\<end else\>:\%(^\s*\)\@<=\<end\>,' .
-        \ '\%(^\s*\)\@<=\<loop\>:\%(^\s*\)\@<=\<\%(while\|until\)\>:\%(^\s*\)\@<=\<repeat\>,' .
+        \ '\%(^\s*\)\@<=\<\%(if\|find\|findstr\|locate\)\>:\%(^\s*\)\@<=\<end else\>:\%(^\s*\)\@<=\<end\s*$,' .
+        \ '\%(^\s*\)\@<=\<\%(for\|loop\)\>:\%(^\s*\)\@<=\<\%(while\|until\)\>:\%(^\s*\)\@<=\<\%(next\|repeat\)\>,' .
         \ '\%(^\s*\)\@<=\<for_\k*\>:\%(^\s*\)\@<=\<end_\k*\>,' .
         \ '(:),[:]'
 endif
