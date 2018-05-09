@@ -13,8 +13,16 @@ setlocal autoindent
 setlocal indentexpr=GetEBSLIndent(v:lnum)
 setlocal indentkeys=o,O,=~end,=~next,=~repeat,=~while,=~until
 
-let s:keepcpo=&cpo
-set cpo&vim
+" If available, use shiftwidth() instead of &shiftwidth
+if exists('*shiftwidth')
+  func s:sw()
+    return shiftwidth()
+  endfunc
+else
+  func s:sw()
+    return &sw
+  endfunc
+endif
 
 " Only define the function once
 if exists("*GetEBSLIndent")
@@ -54,32 +62,29 @@ function! GetEBSLIndent(lnum)
         \ previous_line =~? '\<\%(then\|else\)\s*$' ||
         \ previous_line =~? '^\s*\%(for\|loop\|while\|until\)\>' && previous_line !~? '\<repeat\s*$' ||
         \ previous_line =~? '^\s*for_\k*\>'
-    let ind += &sw
+    let ind += s:sw()
   endif
 
   " Subtract
   if this_line =~? '^\s*end case\>'
     if previous_line =~? '^\s*begin case\>'
-      let ind -= &sw
+      let ind -= s:sw()
     else
-      let ind -= 2 * &sw
+      let ind -= 2 * s:sw()
     endif
   elseif this_line =~? '^\s*end\>' ||
         \ this_line =~? '^\s*\%(while\|until\|next\|repeat\)\>' ||
         \ this_line =~? '^\s*end_\k*\>'
-    let ind -= &sw
+    let ind -= s:sw()
   endif
 
   " There's an edge case where a CASE statement occurs immediately after
   " another empty CASE statement, which should cause no indentation
-  if this_line =~? '^\s*case\>' && previous_line !~? '^\s*case\>'
-    let ind -= &sw
+  if this_line =~? '^\s*case\>' && previous_line =~? '^\s*case\>'
+    let ind -= s:sw()
   endif
 
-	return ind
+  return ind
 endfunction
 
 let b:undo_indent = 'setl si<'
-
-let &cpo = s:keepcpo
-unlet s:keepcpo

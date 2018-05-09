@@ -27,10 +27,10 @@ END ELSE
 END
 
 BEGIN CASE
-      CASE FOO
-      BAR
-         CASE QUX
-         BAZ
-            CASE 1
-            CASE 2
-      END CASE
+CASE FOO
+   BAR
+CASE QUX
+   BAZ
+CASE 1
+   CASE 2
+END CASE
