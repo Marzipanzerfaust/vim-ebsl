@@ -11,7 +11,7 @@ let b:did_indent = 1
 
 setlocal autoindent
 setlocal indentexpr=GetEBSLIndent(v:lnum)
-setlocal indentkeys=o,O,\*<Return>
+setlocal indentkeys=o,O,\*<return>,\*<esc>
 
 " If available, use shiftwidth() instead of &shiftwidth
 if exists('*shiftwidth')
@@ -65,15 +65,25 @@ function! GetEBSLIndent(lnum)
   endif
 
   " Subtract
-  if this_line =~? '^\s*end case\>'
-    if previous_line =~? '^\s*begin case\>'
-      let ind -= s:sw()
-    else
-      let ind -= 2 * s:sw()
-    endif
-  elseif this_line =~? '^\s*end\>' ||
+  " if this_line =~? '^\s*end case\>'
+  "   if previous_line =~? '^\s*begin case\>'
+  "     let ind -= s:sw()
+  "   else
+  "     let ind -= 2 * s:sw()
+  "   endif
+  " elseif this_line =~? '^\s*end\>' ||
+  "       \ this_line =~? '^\s*\%(while\|until\|next\|repeat\)\>' ||
+  "       \ this_line =~? '^\s*end_\k*\>'
+  "   let ind -= s:sw()
+  " endif
+
+  if this_line =~? '^\s*end\>' ||
         \ this_line =~? '^\s*\%(while\|until\|next\|repeat\)\>' ||
         \ this_line =~? '^\s*end_\k*\>'
+    let ind -= s:sw()
+  endif
+
+  if this_line =~? '^\s*end case\>' && previous_line !~? '^\s*begin case\>'
     let ind -= s:sw()
   endif
 
