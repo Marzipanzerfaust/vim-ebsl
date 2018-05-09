@@ -64,7 +64,7 @@ setlocal tabstop=3 softtabstop=3 shiftwidth=3
 if exists('loaded_matchit')
   let b:match_ignorecase = 1
   let b:match_words =
-        \ '^\s*begin case\>:^\s*case:^\s*end case\>'
+        \ '\%(^\s*\)\@<=\<begin case\>:\%(^\s*\)\@<=\<case:\%(^\s*\)\@<=\<end case\>'
 endif
 
 " " vim-endwise support
