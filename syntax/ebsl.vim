@@ -7,9 +7,6 @@ if exists('b:current_syntax')
   finish
 endif
 
-let s:cpo_save = &cpo
-set cpo&vim
-
 syn match ebslMacro /^\s*\zs\%(FOR\|END\)_\k*.*$/ transparent contains=ebslMacroKeyword,ebslMacroQualifier,ebslNumber,ebslString
 syn match ebslMacroKeyword /\%(FOR\|END\)_\k*/ contained
 syn keyword ebslMacroQualifier ASCENDING ASSOCIATED AT BATCHED BREAKING_ON CANCELLING COMMITTING COMMIT_EVERY COUNTED CREATE_NEW CRITERIA DEFER_COMMIT DELETING DESCENDING EXISTING FIRST FROM GRAPHED INTO INTO_REFERENCED KEY_IN LAST LEFT LIMITING MATCHING NEW NEWLIST ONLY PRE-ASSEMBLED PROTECTED RECURSIVE REFERENCED RELEASING RIGHT SECONDARY SELECTED SINGLE TESTING THIS_APPLICATION THIS_INSTANCE_OF TO UNVALIDATED USING WRITING contained
@@ -59,6 +56,3 @@ hi def link ebslComment Comment
 hi def link ebslTodo Todo
 
 let b:current_syntax = 'ebsl'
-
-let &cpo = s:cpo_save
-unlet s:cpo_save

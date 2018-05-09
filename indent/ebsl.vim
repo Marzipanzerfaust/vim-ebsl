@@ -57,31 +57,31 @@ function! GetEBSLIndent(lnum)
   let ind = indent(lnum)
 
   " Add
-  if previous_line =~? '^\s*begin case\>' ||
-        \ previous_line =~? '\<\%(then\|else\)\s*$' ||
-        \ previous_line =~? '^\s*\%(for\|loop\|while\|until\)\>' && previous_line !~? '\<repeat\s*$' ||
-        \ previous_line =~? '^\s*for_\k*\>'
+  if previous_line =~? '^\s*BEGIN CASE\>' ||
+        \ previous_line =~? '\<\%(THEN\|ELSE\)\s*$' ||
+        \ previous_line =~? '^\s*\%(FOR\|LOOP\|WHILE\|UNTIL\)\>' && previous_line !~? '\<REPEAT\s*$' ||
+        \ previous_line =~? '^\s*FOR_\k*\>'
     let ind += s:sw()
   endif
 
   " Subtract
-  if this_line =~? '^\s*end\>' ||
-        \ this_line =~? '^\s*\%(while\|until\|next\|repeat\)\>' ||
-        \ this_line =~? '^\s*end_\k*\>'
+  if this_line =~? '^\s*END\>' ||
+        \ this_line =~? '^\s*\%(WHILE\|UNTIL\|NEXT\|REPEAT\)\>' ||
+        \ this_line =~? '^\s*END_\k*\>'
     let ind -= s:sw()
   endif
 
-  if this_line =~? '^\s*end case\>' && previous_line !~? '^\s*begin case\>'
+  if this_line =~? '^\s*END CASE\>' && previous_line !~? '^\s*BEGIN CASE\>'
     let ind -= s:sw()
   endif
 
   " There's a few edge cases for the CASE statement that we have to
   " handle separately
-  if previous_line =~? '^\s*case\>' && this_line !~? '^\s*case\>'
+  if previous_line =~? '^\s*CASE\>' && this_line !~? '^\s*CASE\>'
     let ind += s:sw()
   endif
 
-  if previous_line !~? '^\s*\%(case\|begin case\)\>' && this_line =~? '^\s*case\>'
+  if previous_line !~? '^\s*\%(CASE\|BEGIN CASE\)\>' && this_line =~? '^\s*CASE\>'
     let ind -= s:sw()
   endif
 
