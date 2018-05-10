@@ -84,7 +84,7 @@ if exists('loaded_endwise')
         \ '\=submatch(0) == "THEN" ? "END" : ' .
         \ 'submatch(0) == "ELSE" ? "END" : ' .
         \ 'submatch(0) == "BEGIN CASE" ? "END CASE" : ' .
-        \ 'submatch(0) =~ "FOR\\s" ? "NEXT ".submatch(1) : ' .
+        \ 'submatch(0) =~ "FOR\\s" ? "NEXT ".submatch(3) : ' .
         \ 'submatch(0) =~ "LOOP" ? "REPEAT" : ' .
         \ 'submatch(0) =~ "FOR_" ? "END_".submatch(1)." ".submatch(2) : ""'
   let b:endwise_words = 'THEN,ELSE,BEGIN CASE,FOR,LOOP'
@@ -102,4 +102,4 @@ endif
 " Undo the stuff we changed
 let b:undo_ftplugin = "setlocal comments< commentstring< iskeyword< ts< sts< sw<" .
       \ " | unlet! b:match_ignorecase b:match_words" .
-      \ " | unlet! b:endwise_pattern b:endwise_addition"
+      \ " | unlet! b:endwise_addition b:endwise_words b:endwise_pattern b:endwise_syngroups"
