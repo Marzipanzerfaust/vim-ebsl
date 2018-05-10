@@ -81,9 +81,9 @@ if exists('loaded_endwise')
         \ ]
 
   let b:endwise_addition =
-        \ '\=submatch(0) == "THEN" ? "END" : ' .
-        \ 'submatch(0) == "ELSE" ? "END" : ' .
-        \ 'submatch(0) == "BEGIN CASE" ? "END CASE" : ' .
+        \ '\=submatch(0) =~ "THEN" ? "END" : ' .
+        \ 'submatch(0) =~ "ELSE" ? "END" : ' .
+        \ 'submatch(0) =~ "BEGIN CASE" ? "END CASE" : ' .
         \ 'submatch(0) =~ "FOR\\s" ? "NEXT ".submatch(3) : ' .
         \ 'submatch(0) =~ "LOOP" ? "REPEAT" : ' .
         \ 'submatch(0) =~ "FOR_" ? "END_".submatch(1)." ".submatch(2) : ""'
