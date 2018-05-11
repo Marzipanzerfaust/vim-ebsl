@@ -90,7 +90,7 @@ if exists('loaded_endwise')
   let b:endwise_words = ''
   let b:endwise_pattern =
         \ '^\s*\zs\%(' .
-        \ '\%(IF\|FIND\|FINDSTR\|LOCATE\)\+\>.*\<\%(THEN\|ELSE\)\|' .
+        \ '\(IF\|FIND\|FINDSTR\|LOCATE\)\+\>.*\<\%(THEN\|ELSE\)\|' .
         \ 'END ELSE\|' .
         \ 'BEGIN CASE\|' .
         \ 'LOOP.*\|' .
