@@ -80,20 +80,32 @@ if exists('loaded_endwise')
         \ 'ASCENDING', 'ASSOCIATED', 'AT', 'BATCHED', 'BREAKING_ON', 'CANCELLING', 'COMMITTING', 'COMMIT_EVERY', 'COUNTED', 'CREATE_NEW', 'CRITERIA', 'DEFER_COMMIT', 'DELETING', 'DESCENDING', 'EXISTING', 'FIRST', 'FROM', 'GRAPHED', 'INTO', 'INTO_REFERENCED', 'KEY_IN', 'LAST', 'LEFT', 'LIMITING', 'MATCHING', 'NEW', 'NEWLIST', 'ONLY', 'PRE-ASSEMBLED', 'PROTECTED', 'RECURSIVE', 'REFERENCED', 'RELEASING', 'RIGHT', 'SECONDARY', 'SELECTED', 'SINGLE', 'TESTING', 'THIS_APPLICATION', 'THIS_INSTANCE_OF', 'TO', 'UNVALIDATED', 'USING', 'WRITING'
         \ ]
 
+  " let b:endwise_addition =
+  "       \ '\=submatch(0) =~ "THEN" ? "END" : ' .
+  "       \ 'submatch(0) =~ "ELSE" ? "END" : ' .
+  "       \ 'submatch(0) =~ "BEGIN CASE" ? "END CASE" : ' .
+  "       \ 'submatch(0) =~ "FOR\\s" ? "NEXT ".submatch(3) : ' .
+  "       \ 'submatch(0) =~ "LOOP" ? "REPEAT" : ' .
+  "       \ 'submatch(0) =~ "FOR_" ? "END_".submatch(1)." ".submatch(2) : ""'
+  " let b:endwise_words = 'THEN,ELSE,BEGIN CASE,FOR,LOOP'
+  " let b:endwise_pattern =
+  "       \ '\%(^\s*\)\@<=\<\%(' .
+  "       \ 'BEGIN CASE\|' .
+  "       \ '\%(IF\|FIND\|FINDSTR\|LOCATE\)\|' .
+  "       \ 'FOR_\(\k*\) \%('.join(macro_qualifiers, ' \|').'\)*\(\k\+\)\|' .
+  "       \ 'FOR \(\k\+\)\|' .
+  "       \ 'LOOP' .
+  "       \ '\)\>'
   let b:endwise_addition =
-        \ '\=submatch(0) =~ "THEN" ? "END" : ' .
-        \ 'submatch(0) =~ "ELSE" ? "END" : ' .
-        \ 'submatch(0) =~ "BEGIN CASE" ? "END CASE" : ' .
-        \ 'submatch(0) =~ "FOR\\s" ? "NEXT ".submatch(3) : ' .
-        \ 'submatch(0) =~ "LOOP" ? "REPEAT" : ' .
-        \ 'submatch(0) =~ "FOR_" ? "END_".submatch(1)." ".submatch(2) : ""'
-  let b:endwise_words = 'THEN,ELSE,BEGIN CASE,FOR,LOOP'
+        \ '\=submatch(0) == "THEN" ? "END" : ' .
+        \ 'submatch(0) == "ELSE" ? "END" : ' .
+        \ 'submatch(0) == "BEGIN CASE" ? "END CASE" : ' .
+        \ 'submatch(0) == "LOOP" ? "REPEAT" : ' .
+  let b:endwise_words = 'IF,END ELSE,FIND,FINDSTR,LOCATE,BEGIN CASE,FOR,LOOP,FOR_'
   let b:endwise_pattern =
         \ '\%(^\s*\)\@<=\<\%(' .
         \ 'BEGIN CASE\|' .
         \ '\%(IF\|FIND\|FINDSTR\|LOCATE\)\|' .
-        \ 'FOR_\(\k*\) \%('.join(macro_qualifiers, ' \|').'\)*\(\k\+\)\|' .
-        \ 'FOR \(\k\+\)\|' .
         \ 'LOOP' .
         \ '\)\>'
   let b:endwise_syngroups = 'ebslMacro,ebslKeyword'
