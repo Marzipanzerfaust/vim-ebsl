@@ -104,7 +104,7 @@ if exists('loaded_endwise')
   let b:endwise_words = 'IF,THEN,ELSE,FIND,FINDSTR,LOCATE,BEGIN CASE,FOR,LOOP,FOR_'
   let b:endwise_pattern =
         \ '\%(^\s*\)\@<=\<\%(' .
-        \ 'IF\|' .
+        \ 'THEN\|' .
         \ 'BEGIN CASE\|' .
         \ 'LOOP' .
         \ '\)\>'
