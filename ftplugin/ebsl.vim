@@ -104,8 +104,8 @@ if exists('loaded_endwise')
   let b:endwise_words = 'IF,END ELSE,FIND,FINDSTR,LOCATE,BEGIN CASE,FOR,LOOP,FOR_'
   let b:endwise_pattern =
         \ '\%(^\s*\)\@<=\<\%(' .
+        \ 'IF\|' .
         \ 'BEGIN CASE\|' .
-        \ '\%(IF\|FIND\|FINDSTR\|LOCATE\)\|' .
         \ 'LOOP' .
         \ '\)\>'
   let b:endwise_syngroups = 'ebslMacro,ebslKeyword'
