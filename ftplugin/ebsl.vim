@@ -104,6 +104,7 @@ if exists('loaded_endwise')
         \ 'submatch(0) == "LOOP" ? "REPEAT" : ' .
         \ 'submatch(0) == "FOR" ? "NEXT" : ""'
   let b:endwise_words = 'IF,THEN,ELSE,FIND,FINDSTR,LOCATE,BEGIN CASE,FOR,LOOP,FOR_EACH'
+  let b:endwise_pattern = '^\s*\zs.*\ze\s*$'
   let b:endwise_syngroups = 'ebslKeyword,ebslMacroKeyword'
 endif
 
