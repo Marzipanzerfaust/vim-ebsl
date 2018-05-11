@@ -89,14 +89,14 @@ if exists('loaded_endwise')
         \ 'submatch(0) =~ "FOR" ? "NEXT ".submatch(0)." / ".submatch(1)." / ".submatch(2) : ""'
   let b:endwise_words = ''
   let b:endwise_pattern =
-        \ '^\s*\zs\%(' .
+        \ '^\s*\%(' .
         \ '\(IF\|FIND\|FINDSTR\|LOCATE\)\+\>.*\<\%(THEN\|ELSE\)\|' .
         \ 'END ELSE\|' .
         \ 'BEGIN CASE\|' .
         \ 'LOOP.*\|' .
         \ 'FOR_\(\k*\).*\|' .
         \ 'FOR \(\k\+\).*\|' .
-        \ '\)\ze\s*$'
+        \ '\)\s*$'
   let b:endwise_syngroups = 'ebslKeyword,ebslMacroKeyword'
 endif
 
