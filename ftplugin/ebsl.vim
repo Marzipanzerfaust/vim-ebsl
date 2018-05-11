@@ -112,7 +112,7 @@ if exists('loaded_endwise')
         \ 'BEGIN CASE\|' .
         \ 'LOOP.*\|' .
         \ 'FOR \(\k\+\).*\|' .
-        \ 'FOR_\(\k*\)\|' .
+        \ 'FOR_\(\k*\).*\|' .
         \ '\)\ze\s*$'
   let b:endwise_syngroups = 'ebslKeyword,ebslMacroKeyword'
 endif
