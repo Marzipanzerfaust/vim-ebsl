@@ -96,7 +96,8 @@ if exists('loaded_endwise')
   "       \ 'FOR \(\k\+\)\|' .
   "       \ 'LOOP' .
   "       \ '\)\>'
-  let b:endwise_addition = 'END'
+
+  let b:endwise_addition = 'END,END,END,END,END,END,END CASE,NEXT,REPEAT,END_'
   let b:endwise_words = 'IF,THEN,ELSE,FIND,FINDSTR,LOCATE,BEGIN CASE,FOR,LOOP,FOR_'
   let b:endwise_syngroups = 'ebslMacro,ebslKeyword'
 endif
