@@ -85,8 +85,8 @@ if exists('loaded_endwise')
         \ 'submatch(0) =~ "ELSE" ? "END" : ' .
         \ 'submatch(0) == "BEGIN CASE" ? "END CASE" : ' .
         \ 'submatch(0) =~ "LOOP" ? "REPEAT" : ' .
-        \ 'submatch(0) =~ "FOR_" ? "END_".submatch(1) : ' .
-        \ 'submatch(0) =~ "FOR" ? "NEXT ".submatch(2) : ""'
+        \ 'submatch(0) =~ "FOR_" ? "END_".submatch(0) : ' .
+        \ 'submatch(0) =~ "FOR" ? "NEXT ".submatch(0) : ""'
   let b:endwise_words = ''
   let b:endwise_pattern =
         \ '^\s*\zs\%(' .
