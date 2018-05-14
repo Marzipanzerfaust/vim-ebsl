@@ -68,7 +68,7 @@ if exists('loaded_matchit')
         \ '\%(^\s*\)\@<=\<\%(IF\|FIND\|FINDSTR\|LOCATE\)\>:\%(^\s*\)\@<=\<END ELSE\>:\%(^\s*\)\@<=\<END\s*$,' .
         \ '\%(^\s*\)\@<=\<\%(FOR\|LOOP\)\>:\%(^\s*\)\@<=\<\%(WHILE\|UNTIL\)\>:\%(^\s*\)\@<=\<\%(NEXT\|REPEAT\)\>,' .
         \ '\%(^\s*\)\@<=\<FOR_\k*\>:\%(^\s*\)\@<=\<END_\k*\>,' .
-        \ '(:),[:]'
+        \ '(:),[:],<:>'
 endif
 
 " vim-endwise support
