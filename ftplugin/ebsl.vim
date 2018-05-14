@@ -87,7 +87,7 @@ if exists('loaded_endwise')
         \ 'submatch(0) =~ "LOOP" ? "REPEAT" : ' .
         \ 'submatch(0) =~ "FOR_" ? "END_" : ' .
         \ 'submatch(0) =~ "FOR" ? "NEXT " : ""'
-  " let b:endwise_words = 'THEN,ELSE,BEGIN CASE,FOR'
+  let b:endwise_words = ''
   let b:endwise_pattern =
         \ '^\s*\zs\%(' .
         \ '\%(IF\|FIND\|FINDSTR\|LOCATE\)\+\>.*\<\%(THEN\|ELSE\)\|' .
