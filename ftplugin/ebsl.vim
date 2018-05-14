@@ -88,7 +88,7 @@ if exists('loaded_endwise')
   "       \ 'submatch(0) =~ "FOR_" ? "END_" : ' .
   "       \ 'submatch(0) =~ "FOR" ? "NEXT " : ""'
   let b:endwise_addition =
-        \ '&'
+        \ '\=submatch(1)'
   let b:endwise_words = ''
   let b:endwise_pattern =
         \ '^\s*\zs\%(' .
