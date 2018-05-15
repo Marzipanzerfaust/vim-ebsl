@@ -102,9 +102,7 @@ if exists('loaded_endwise')
   let b:endwise_addition = '&'
   let b:endwise_words = '\(\k\+\)'
   let b:endwise_pattern =
-        \ '^\s*\%(' .
-        \ 'FOR &\>.*' .
-        \ '\)\s*$'
+        \ '^\s*FOR \zs&\ze.*$'
   let b:endwise_syngroups = 'ebslKeyword,ebslMacroKeyword'
 endif
 
