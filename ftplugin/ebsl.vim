@@ -74,10 +74,10 @@ endif
 
 " vim-endwise support
 if exists('loaded_endwise')
-  " This is is a list of all qualifiers that can appear in an EBSL macro
-  " statement; it is required for matching the actual key element of a
-  " macro statement.
-  let s:macro_qualifiers = [
+  " This is is a list of all qualifiers that can appear in an EBSL
+  " transaction statement; it is required for matching the actual key
+  " element of a transaction statement.
+  let s:transaction_qualifiers = [
         \ 'ASCENDING', 'ASSOCIATED', 'AT', 'BATCHED', 'BREAKING_ON', 'CANCELLING', 'COMMITTING', 'COMMIT_EVERY', 'COUNTED', 'CREATE_NEW', 'CRITERIA', 'DEFER_COMMIT', 'DELETING', 'DESCENDING', 'EXISTING', 'FIRST', 'FROM', 'GRAPHED', 'INTO', 'INTO_REFERENCED', 'KEY_IN', 'LAST', 'LEFT', 'LIMITING', 'MATCHING', 'NEW', 'NEWLIST', 'ONLY', 'PRE-ASSEMBLED', 'PROTECTED', 'RECURSIVE', 'REFERENCED', 'RELEASING', 'RIGHT', 'SECONDARY', 'SELECTED', 'SINGLE', 'TESTING', 'THIS_APPLICATION', 'THIS_INSTANCE_OF', 'TO', 'UNVALIDATED', 'USING', 'WRITING'
         \ ]
 
@@ -94,9 +94,9 @@ if exists('loaded_endwise')
         \ '\%(IF\|FIND\|FINDSTR\|LOCATE\).\+\zs\%(THEN\|ELSE\)\ze\|' .
         \ '\zsBEGIN CASE\ze\|' .
         \ '\zsLOOP\ze\|' .
-        \ '\zsFOR_\k\+ \%('.join(s:macro_qualifiers, ' \|').'\)*\k\+\ze' .
+        \ '\zsFOR_\k* \%('.join(s:transaction_qualifiers, ' \|').'\)*\k\+\ze' .
         \ '\).*$'
-  let b:endwise_syngroups = 'ebslKeyword,ebslMacroKeyword'
+  let b:endwise_syngroups = 'ebslStatement,ebslTransactionStatement'
 endif
 
 " Undo the stuff we changed
