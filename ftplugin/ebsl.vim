@@ -110,7 +110,10 @@ if exists('loaded_endwise')
   let b:endwise_addition =
         \ '\=submatch(0) =~ "FOR " ? "NEXT ".split(submatch(0))[1] : ""'
   let b:endwise_words = ''
-  let b:endwise_pattern = '^\s*\zsFOR \k\+\ze'
+  let b:endwise_pattern =
+        \ '^\s*\zs\%(' .
+        \ 'FOR \k\+' .
+        \ '\)\ze'
   let b:endwise_syngroups = 'ebslKeyword,ebslMacroKeyword'
 endif
 
