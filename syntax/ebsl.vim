@@ -7,7 +7,7 @@ if exists('b:current_syntax')
   finish
 endif
 
-syn match ebslMacro /^\s*\zs\%(FOR\|END\)_\k*.*$/ transparent contains=ebslMacroKeyword,ebslMacroQualifier,ebslNumber,ebslString
+syn match ebslMacro /^\s*\zs\%(FOR\|END\)_\k*.*$/ contains=ebslMacroKeyword,ebslMacroQualifier,ebslNumber,ebslString
 syn match ebslMacroKeyword /\%(FOR\|END\)_\k*/ contained
 syn keyword ebslMacroQualifier ASCENDING ASSOCIATED AT BATCHED BREAKING_ON CANCELLING COMMITTING COMMIT_EVERY COUNTED CREATE_NEW CRITERIA DEFER_COMMIT DELETING DESCENDING EXISTING FIRST FROM GRAPHED INTO INTO_REFERENCED KEY_IN LAST LEFT LIMITING MATCHING NEW NEWLIST ONLY PRE-ASSEMBLED PROTECTED RECURSIVE REFERENCED RELEASING RIGHT SECONDARY SELECTED SINGLE TESTING THIS_APPLICATION THIS_INSTANCE_OF TO UNVALIDATED USING WRITING contained
 
