@@ -71,34 +71,34 @@ if exists('loaded_matchit')
         \ '(:),[:],<:>'
 endif
 
-" " vim-endwise support
-" if exists('loaded_endwise')
-"   " This is is a list of all qualifiers that can appear in an EBSL macro
-"   " statement; it is required for matching the actual key element of a
-"   " macro statement.
-"   let macro_qualifiers = [
-"         \ 'ASCENDING', 'ASSOCIATED', 'AT', 'BATCHED', 'BREAKING_ON', 'CANCELLING', 'COMMITTING', 'COMMIT_EVERY', 'COUNTED', 'CREATE_NEW', 'CRITERIA', 'DEFER_COMMIT', 'DELETING', 'DESCENDING', 'EXISTING', 'FIRST', 'FROM', 'GRAPHED', 'INTO', 'INTO_REFERENCED', 'KEY_IN', 'LAST', 'LEFT', 'LIMITING', 'MATCHING', 'NEW', 'NEWLIST', 'ONLY', 'PRE-ASSEMBLED', 'PROTECTED', 'RECURSIVE', 'REFERENCED', 'RELEASING', 'RIGHT', 'SECONDARY', 'SELECTED', 'SINGLE', 'TESTING', 'THIS_APPLICATION', 'THIS_INSTANCE_OF', 'TO', 'UNVALIDATED', 'USING', 'WRITING'
-"         \ ]
+" vim-endwise support
+if exists('loaded_endwise')
+  " This is is a list of all qualifiers that can appear in an EBSL macro
+  " statement; it is required for matching the actual key element of a
+  " macro statement.
+  let macro_qualifiers = [
+        \ 'ASCENDING', 'ASSOCIATED', 'AT', 'BATCHED', 'BREAKING_ON', 'CANCELLING', 'COMMITTING', 'COMMIT_EVERY', 'COUNTED', 'CREATE_NEW', 'CRITERIA', 'DEFER_COMMIT', 'DELETING', 'DESCENDING', 'EXISTING', 'FIRST', 'FROM', 'GRAPHED', 'INTO', 'INTO_REFERENCED', 'KEY_IN', 'LAST', 'LEFT', 'LIMITING', 'MATCHING', 'NEW', 'NEWLIST', 'ONLY', 'PRE-ASSEMBLED', 'PROTECTED', 'RECURSIVE', 'REFERENCED', 'RELEASING', 'RIGHT', 'SECONDARY', 'SELECTED', 'SINGLE', 'TESTING', 'THIS_APPLICATION', 'THIS_INSTANCE_OF', 'TO', 'UNVALIDATED', 'USING', 'WRITING'
+        \ ]
 
-"   let b:endwise_addition =
-"         \ '\=submatch(0) =~ "THEN" ? "END" : ' .
-"         \ 'submatch(0) =~ "ELSE" ? "END" : ' .
-"         \ 'submatch(0) == "BEGIN CASE" ? "END CASE" : ' .
-"         \ 'submatch(0) =~ "LOOP" ? "REPEAT" : ' .
-"         \ 'submatch(0) =~ "FOR_" ? "END_" : ' .
-"         \ 'submatch(0) =~ "FOR" ? "NEXT " : ""'
-"   let b:endwise_words = ''
-"   let b:endwise_pattern =
-"         \ '^\s*\zs\%(' .
-"         \ '\%(IF\|FIND\|FINDSTR\|LOCATE\)\+\>.*\<\%(THEN\|ELSE\)\|' .
-"         \ 'END ELSE\|' .
-"         \ 'BEGIN CASE\|' .
-"         \ 'LOOP.*\|' .
-"         \ 'FOR_\(\k*\).*\|' .
-"         \ 'FOR \(\k\+\).*\|' .
-"         \ '\)\ze\s*$'
-"   let b:endwise_syngroups = 'ebslKeyword,ebslMacroKeyword'
-" endif
+  let b:endwise_addition =
+        \ '\=submatch(0) =~ "THEN" ? "END" : ' .
+        \ 'submatch(0) =~ "ELSE" ? "END" : ' .
+        \ 'submatch(0) == "BEGIN CASE" ? "END CASE" : ' .
+        \ 'submatch(0) =~ "LOOP" ? "REPEAT" : ' .
+        \ 'submatch(0) =~ "FOR_" ? "END_" : ' .
+        \ 'submatch(0) =~ "FOR" ? "NEXT "." / ".&." / ".submatch(1) : ""'
+  let b:endwise_words = '\(\k\+\)'
+  let b:endwise_pattern =
+        \ '^\s*\zs\%(' .
+        \ '\%(IF\|FIND\|FINDSTR\|LOCATE\)\+\>.*\<\%(THEN\|ELSE\)\|' .
+        \ 'END ELSE\|' .
+        \ 'BEGIN CASE\|' .
+        \ 'LOOP.*\|' .
+        \ 'FOR_\(\k*\).*\|' .
+        \ 'FOR &\>.*\|' .
+        \ '\)\ze\s*$'
+  let b:endwise_syngroups = 'ebslKeyword,ebslMacroKeyword'
+endif
 
 " Undo the stuff we changed
 let b:undo_ftplugin = "setlocal comments< commentstring< iskeyword< ts< sts< sw<" .
