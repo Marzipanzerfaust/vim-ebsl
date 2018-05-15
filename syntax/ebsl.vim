@@ -7,7 +7,7 @@ if exists('b:current_syntax')
   finish
 endif
 
-syn match ebslTransaction /^\s*\zs\%(FOR\|END\)_\k*\ze.*$/ contains=ebslTransactionStatement,ebslTransactionQualifier,ebslNumber,ebslString
+syn match ebslTransaction /^\s*\zs\%(FOR\|END\)_\k*.*$/ contains=ebslTransactionStatement,ebslTransactionQualifier,ebslNumber,ebslString
 syn match ebslTransactionStatement /\%(FOR\|END\)_\k*/ contained
 syn keyword ebslTransactionQualifier ASCENDING ASSOCIATED AT BATCHED BREAKING_ON CANCELLING COMMITTING COMMIT_EVERY COUNTED CREATE_NEW CRITERIA DEFER_COMMIT DELETING DESCENDING EXISTING FIRST FROM GRAPHED INTO INTO_REFERENCED KEY_IN LAST LEFT LIMITING MATCHING NEW NEWLIST ONLY PRE-ASSEMBLED PROTECTED RECURSIVE REFERENCED RELEASING RIGHT SECONDARY SELECTED SINGLE TESTING THIS_APPLICATION THIS_INSTANCE_OF TO UNVALIDATED USING WRITING contained
 
@@ -42,7 +42,7 @@ syn keyword ebslTodo TODO FIXME XXX NOTE contained
 
 " Block regions defined for folding support
 " syn region ebslConditionalBlock start=/^\z(\s*\)\%(IF\|FIND\|FINDSTR\|LOCATE\).\+\%(THEN\|ELSE\)\s*$/ end=/^\z1END\s*$/ transparent fold
-syn region ebslLabelBlock start=/^\z(\s*\)\k\+:/ end=/^\z1RETURN/ transparent fold
+" syn region ebslLabelBlock start=/^\z(\s*\)\k\+:/ end=/^\z1RETURN/ transparent fold
 
 hi def link ebslTransactionStatement Keyword
 hi def link ebslTransactionQualifier Type
