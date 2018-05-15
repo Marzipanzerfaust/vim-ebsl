@@ -120,7 +120,7 @@ if exists('loaded_endwise')
         \ '\%(IF\|FIND\|FINDSTR\|LOCATE\).\+\zs\%(THEN\|ELSE\)\ze\|' .
         \ '\zsBEGIN CASE\ze\|' .
         \ '\zsLOOP\ze\|' .
-        \ '\zsFOR_\k\+ \%(\%('.join(s:macro_qualifiers, '\|').'\)\s*\)* \k\+\ze' .
+        \ '\zsFOR_\k\+ \%('.join(s:macro_qualifiers, '\|').'\) \k\+\ze' .
         \ '\).*$'
   let b:endwise_syngroups = 'ebslKeyword,ebslMacroKeyword'
 endif
