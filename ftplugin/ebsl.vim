@@ -99,7 +99,7 @@ if exists('loaded_endwise')
   "       \ '\)\ze\s*$'
   " let b:endwise_syngroups = 'ebslKeyword,ebslMacroKeyword'
 
-  let b:endwise_addition = '&'
+  let b:endwise_addition = '\=submatch(0).submatch(1)'
   let b:endwise_words = '\(\k\+\)'
   let b:endwise_pattern =
         \ '^\s*FOR \zs&\ze.*$'
