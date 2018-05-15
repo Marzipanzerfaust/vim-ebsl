@@ -80,13 +80,14 @@ if exists('loaded_endwise')
         \ 'ASCENDING', 'ASSOCIATED', 'AT', 'BATCHED', 'BREAKING_ON', 'CANCELLING', 'COMMITTING', 'COMMIT_EVERY', 'COUNTED', 'CREATE_NEW', 'CRITERIA', 'DEFER_COMMIT', 'DELETING', 'DESCENDING', 'EXISTING', 'FIRST', 'FROM', 'GRAPHED', 'INTO', 'INTO_REFERENCED', 'KEY_IN', 'LAST', 'LEFT', 'LIMITING', 'MATCHING', 'NEW', 'NEWLIST', 'ONLY', 'PRE-ASSEMBLED', 'PROTECTED', 'RECURSIVE', 'REFERENCED', 'RELEASING', 'RIGHT', 'SECONDARY', 'SELECTED', 'SINGLE', 'TESTING', 'THIS_APPLICATION', 'THIS_INSTANCE_OF', 'TO', 'UNVALIDATED', 'USING', 'WRITING'
         \ ]
 
-  let b:endwise_addition =
-        \ '\=submatch(0) =~ "THEN" ? "END" : ' .
-        \ 'submatch(0) =~ "ELSE" ? "END" : ' .
-        \ 'submatch(0) == "BEGIN CASE" ? "END CASE" : ' .
-        \ 'submatch(0) =~ "LOOP" ? "REPEAT" : ' .
-        \ 'submatch(0) =~ "FOR_" ? "END_" : ' .
-        \ 'submatch(0) =~ "FOR" ? & : ""'
+  " let b:endwise_addition =
+  "       \ '\=submatch(0) =~ "THEN" ? "END" : ' .
+  "       \ 'submatch(0) =~ "ELSE" ? "END" : ' .
+  "       \ 'submatch(0) == "BEGIN CASE" ? "END CASE" : ' .
+  "       \ 'submatch(0) =~ "LOOP" ? "REPEAT" : ' .
+  "       \ 'submatch(0) =~ "FOR_" ? "END_" : ' .
+  "       \ 'submatch(0) =~ "FOR" ? "NEXT" : ""'
+  let b:endwise_addition = '&'
   let b:endwise_words = '\(\k\+\)'
   let b:endwise_pattern =
         \ '^\s*\zs\%(' .
