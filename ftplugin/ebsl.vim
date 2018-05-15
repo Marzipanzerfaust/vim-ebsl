@@ -108,7 +108,7 @@ if exists('loaded_endwise')
   " "       \ '\%(\<FOR\>\s*\)\@<=\<\k\+\>'
 
   let b:endwise_addition =
-        \ '\=submatch(0) =~ "FOR_" ? "END_" . split(submatch(0))[0][4:] . split(submatch(0))[-1] : ' .
+        \ '\=submatch(0) =~ "FOR_" ? "END_" . split(submatch(0))[0][4:] . " " . split(submatch(0))[-1] : ' .
         \ 'submatch(0) =~ "FOR" ? "NEXT ".split(submatch(0))[1] : ' .
         \ 'submatch(0) == "THEN" || submatch(0) == "ELSE" ? "END" : ' .
         \ 'submatch(0) == "BEGIN CASE" ? "END CASE" : ' .
