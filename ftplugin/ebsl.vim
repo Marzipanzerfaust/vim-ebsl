@@ -99,13 +99,17 @@ if exists('loaded_endwise')
   "       \ '\)\ze\s*$'
   " let b:endwise_syngroups = 'ebslKeyword,ebslMacroKeyword'
 
-  let b:endwise_addition =
-        \ 'NEXT &'
-  let b:endwise_words = ''
-  let b:endwise_pattern =
-        \ '\%(^\s*FOR\s*\)\@<=\k\+'
+  " let b:endwise_addition =
+  "       \ 'NEXT &'
+  " let b:endwise_words = ''
   " let b:endwise_pattern =
-  "       \ '\%(\<FOR\>\s*\)\@<=\<\k\+\>'
+  "       \ '\%(^\s*FOR\s\+\)\@<=\k\+'
+  " " let b:endwise_pattern =
+  " "       \ '\%(\<FOR\>\s*\)\@<=\<\k\+\>'
+
+  let b:endwise_addition = 'End &'
+  let b:endwise_words = 'FOR'
+  let b:endwise_pattern = '\%(\<NEXT\>.*\)\@<!\<&\>'
   let b:endwise_syngroups = 'ebslKeyword,ebslMacroKeyword'
 endif
 
