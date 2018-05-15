@@ -7,13 +7,6 @@ if exists('b:current_syntax')
   finish
 endif
 
-" This is is a list of all qualifiers that can appear in an EBSL
-" transaction statement; it is required for matching the actual key
-" element of a transaction statement.
-let s:transaction_qualifiers = [
-      \ 'ASCENDING', 'ASSOCIATED', 'AT', 'BATCHED', 'BREAKING_ON', 'CANCELLING', 'COMMITTING', 'COMMIT_EVERY', 'COUNTED', 'CREATE_NEW', 'CRITERIA', 'DEFER_COMMIT', 'DELETING', 'DESCENDING', 'EXISTING', 'FIRST', 'FROM', 'GRAPHED', 'INTO', 'INTO_REFERENCED', 'KEY_IN', 'LAST', 'LEFT', 'LIMITING', 'MATCHING', 'NEW', 'NEWLIST', 'ONLY', 'PRE-ASSEMBLED', 'PROTECTED', 'RECURSIVE', 'REFERENCED', 'RELEASING', 'RIGHT', 'SECONDARY', 'SELECTED', 'SINGLE', 'TESTING', 'THIS_APPLICATION', 'THIS_INSTANCE_OF', 'TO', 'UNVALIDATED', 'USING', 'WRITING'
-      \ ]
-
 syn match ebslTransaction /^\s*\zs\%(FOR\|END\)_\k*\ze.*$/ contains=ebslTransactionStatement,ebslTransactionQualifier,ebslNumber,ebslString
 syn match ebslTransactionStatement /\%(FOR\|END\)_\k*/ contained
 syn keyword ebslTransactionQualifier ASCENDING ASSOCIATED AT BATCHED BREAKING_ON CANCELLING COMMITTING COMMIT_EVERY COUNTED CREATE_NEW CRITERIA DEFER_COMMIT DELETING DESCENDING EXISTING FIRST FROM GRAPHED INTO INTO_REFERENCED KEY_IN LAST LEFT LIMITING MATCHING NEW NEWLIST ONLY PRE-ASSEMBLED PROTECTED RECURSIVE REFERENCED RELEASING RIGHT SECONDARY SELECTED SINGLE TESTING THIS_APPLICATION THIS_INSTANCE_OF TO UNVALIDATED USING WRITING contained
@@ -47,7 +40,9 @@ syn match ebslDelimiter /(\|)\|\[\|\]\|<\|>/
 syn match ebslComment /\%(^\s*\zs\|;\)\%(\*\|REM\s\).*$/ contains=ebslTodo
 syn keyword ebslTodo TODO FIXME XXX NOTE contained
 
-syn region ebslConditionalBlock start=/^\z(\s*\)\%(IF\|FIND\|FINDSTR\|LOCATE\).\+\%(THEN\|ELSE\)\s*$/ end=/^\z1END\s*$/ transparent fold
+" Block regions defined for folding support
+" syn region ebslConditionalBlock start=/^\z(\s*\)\%(IF\|FIND\|FINDSTR\|LOCATE\).\+\%(THEN\|ELSE\)\s*$/ end=/^\z1END\s*$/ transparent fold
+syn region ebslLabelBlock start=/^\z(\s*\)\k\+:\s*$/ end=/^\z1RETURN\s*$/ transparent fold
 
 hi def link ebslTransactionStatement Keyword
 hi def link ebslTransactionQualifier Type
