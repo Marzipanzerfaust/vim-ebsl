@@ -101,9 +101,9 @@ if exists('loaded_endwise')
 
   let b:endwise_addition =
         \ 'NEXT &'
-  let b:endwise_words = '\k\+'
+  let b:endwise_words = ''
   let b:endwise_pattern =
-        \ '\%(\<FOR\>\s*\)\@<=\<&\>'
+        \ '\%(\<FOR\>\s*\)\@<=\<\k\+\>'
   let b:endwise_syngroups = 'ebslKeyword,ebslMacroKeyword'
 endif
 
