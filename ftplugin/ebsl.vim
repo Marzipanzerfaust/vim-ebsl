@@ -16,49 +16,49 @@ setlocal commentstring=*%s
 setlocal iskeyword=A-Z,.,48-57,_
 setlocal tabstop=3 softtabstop=3 shiftwidth=3
 
-" " Folding
-" " A lot of the following code was borrowed from Chapter 49 of Learn
-" " VimScript the Hard Way:
-" " <http://learnvimscriptthehardway.stevelosh.com/chapters/49.html>
-" setlocal foldmethod=expr
+" Folding
+" A lot of the following code was borrowed from Chapter 49 of Learn
+" VimScript the Hard Way:
+" <http://learnvimscriptthehardway.stevelosh.com/chapters/49.html>
+setlocal foldmethod=expr
 
-" function! NextNonBlankLine(lnum)
-"   let numlines = line('$')
-"   let current = a:lnum + 1
+function! NextNonBlankLine(lnum)
+  let numlines = line('$')
+  let current = a:lnum + 1
 
-"   while current <= numlines
-"     if getline(current) =~? '\v\S'
-"       return current
-"     endif
+  while current <= numlines
+    if getline(current) =~? '\v\S'
+      return current
+    endif
 
-"     let current += 1
-"   endwhile
+    let current += 1
+  endwhile
 
-"   return -2
-" endfunction
+  return -2
+endfunction
 
-" function! IndentLevel(lnum)
-"   return indent(a:lnum) / &shiftwidth
-" endfunction
+function! IndentLevel(lnum)
+  return indent(a:lnum) / &shiftwidth
+endfunction
 
-" function! GetEBSLFold(lnum)
-"   if getline(a:lnum) =~ '\v&\s*$'
-"     return '-1'
-"   endif
+function! GetEBSLFold(lnum)
+  if getline(a:lnum) =~ '\v&\s*$'
+    return '-1'
+  endif
 
-"   let this_indent = IndentLevel(a:lnum)
-"   let next_indent = IndentLevel(NextNonBlankLine(a:lnum))
+  let this_indent = IndentLevel(a:lnum)
+  let next_indent = IndentLevel(NextNonBlankLine(a:lnum))
 
-"   if next_indent == this_indent
-"     return this_indent
-"   elseif next_indent < this_indent
-"     return this_indent
-"   elseif next_indent > this_indent
-"     return '>' . next_indent
-"   endif
+  if next_indent == this_indent
+    return this_indent
+  elseif next_indent < this_indent
+    return this_indent
+  elseif next_indent > this_indent
+    return '>' . next_indent
+  endif
 
-"   return '0'
-" endfunction
+  return '0'
+endfunction
 
 " vim-matchit support
 if exists('loaded_matchit')
@@ -79,33 +79,6 @@ if exists('loaded_endwise')
   let s:macro_qualifiers = [
         \ 'ASCENDING', 'ASSOCIATED', 'AT', 'BATCHED', 'BREAKING_ON', 'CANCELLING', 'COMMITTING', 'COMMIT_EVERY', 'COUNTED', 'CREATE_NEW', 'CRITERIA', 'DEFER_COMMIT', 'DELETING', 'DESCENDING', 'EXISTING', 'FIRST', 'FROM', 'GRAPHED', 'INTO', 'INTO_REFERENCED', 'KEY_IN', 'LAST', 'LEFT', 'LIMITING', 'MATCHING', 'NEW', 'NEWLIST', 'ONLY', 'PRE-ASSEMBLED', 'PROTECTED', 'RECURSIVE', 'REFERENCED', 'RELEASING', 'RIGHT', 'SECONDARY', 'SELECTED', 'SINGLE', 'TESTING', 'THIS_APPLICATION', 'THIS_INSTANCE_OF', 'TO', 'UNVALIDATED', 'USING', 'WRITING'
         \ ]
-
-  " let b:endwise_addition =
-  "       \ '\=submatch(0) =~ "THEN" ? "END" : ' .
-  "       \ 'submatch(0) =~ "ELSE" ? "END" : ' .
-  "       \ 'submatch(0) == "BEGIN CASE" ? "END CASE" : ' .
-  "       \ 'submatch(0) =~ "LOOP" ? "REPEAT" : ' .
-  "       \ 'submatch(0) =~ "FOR_" ? "END_" : ' .
-  "       \ 'submatch(0) =~ "FOR" ? "NEXT" : ""'
-  " let b:endwise_words = ''
-  " let b:endwise_pattern =
-  "       \ '^\s*\zs\%(' .
-  "       \ '\%(IF\|FIND\|FINDSTR\|LOCATE\)\+\>.*\<\%(THEN\|ELSE\)\|' .
-  "       \ 'END ELSE\|' .
-  "       \ 'BEGIN CASE\|' .
-  "       \ 'LOOP.*\|' .
-  "       \ 'FOR_\(\k*\).*\|' .
-  "       \ 'FOR &\>.*\|' .
-  "       \ '\)\ze\s*$'
-  " let b:endwise_syngroups = 'ebslKeyword,ebslMacroKeyword'
-
-  " let b:endwise_addition =
-  "       \ 'NEXT &'
-  " let b:endwise_words = ''
-  " let b:endwise_pattern =
-  "       \ '\%(^\s*FOR\s\+\)\@<=\k\+'
-  " " let b:endwise_pattern =
-  " "       \ '\%(\<FOR\>\s*\)\@<=\<\k\+\>'
 
   let b:endwise_addition =
         \ '\=submatch(0) =~ "FOR_" ? "END_" . split(submatch(0))[0][4:] . " " . split(submatch(0))[-1] : ' .
