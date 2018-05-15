@@ -109,7 +109,7 @@ if exists('loaded_endwise')
 
   let b:endwise_addition = '\=submatch(0)'
   let b:endwise_words = 'FOR'
-  let b:endwise_pattern = '\%(\<NEXT\>.*\)\@<!\<&\>'
+  let b:endwise_pattern = '&'
   let b:endwise_syngroups = 'ebslKeyword,ebslMacroKeyword'
 endif
 
