@@ -100,10 +100,10 @@ if exists('loaded_endwise')
   " let b:endwise_syngroups = 'ebslKeyword,ebslMacroKeyword'
 
   let b:endwise_addition =
-        \ '\=submatch(0)." / ".submatch(1)'
-  let b:endwise_words = '\(\k\+\)'
+        \ '&'
+  let b:endwise_words = '\k\+'
   let b:endwise_pattern =
-        \ 'FOR &'
+        \ '\%(\<FOR\>.*\)\@<=\<&\>'
   let b:endwise_syngroups = 'ebslKeyword,ebslMacroKeyword'
 endif
 
