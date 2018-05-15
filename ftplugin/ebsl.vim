@@ -21,6 +21,7 @@ setlocal tabstop=3 softtabstop=3 shiftwidth=3
 " VimScript the Hard Way:
 " <http://learnvimscriptthehardway.stevelosh.com/chapters/49.html>
 setlocal foldmethod=expr
+setlocal foldexpr=GetEBSLFold(v:lnum)
 
 function! NextNonBlankLine(lnum)
   let numlines = line('$')
