@@ -87,16 +87,23 @@ if exists('loaded_endwise')
   "       \ 'submatch(0) =~ "LOOP" ? "REPEAT" : ' .
   "       \ 'submatch(0) =~ "FOR_" ? "END_" : ' .
   "       \ 'submatch(0) =~ "FOR" ? "NEXT" : ""'
+  " let b:endwise_words = ''
+  " let b:endwise_pattern =
+  "       \ '^\s*\zs\%(' .
+  "       \ '\%(IF\|FIND\|FINDSTR\|LOCATE\)\+\>.*\<\%(THEN\|ELSE\)\|' .
+  "       \ 'END ELSE\|' .
+  "       \ 'BEGIN CASE\|' .
+  "       \ 'LOOP.*\|' .
+  "       \ 'FOR_\(\k*\).*\|' .
+  "       \ 'FOR &\>.*\|' .
+  "       \ '\)\ze\s*$'
+  " let b:endwise_syngroups = 'ebslKeyword,ebslMacroKeyword'
+
   let b:endwise_addition = '&'
   let b:endwise_words = '\(\k\+\)'
   let b:endwise_pattern =
         \ '^\s*\zs\%(' .
-        \ '\%(IF\|FIND\|FINDSTR\|LOCATE\)\+\>.*\<\%(THEN\|ELSE\)\|' .
-        \ 'END ELSE\|' .
-        \ 'BEGIN CASE\|' .
-        \ 'LOOP.*\|' .
-        \ 'FOR_\(\k*\).*\|' .
-        \ 'FOR &\>.*\|' .
+        \ 'FOR &\>.*' .
         \ '\)\ze\s*$'
   let b:endwise_syngroups = 'ebslKeyword,ebslMacroKeyword'
 endif
