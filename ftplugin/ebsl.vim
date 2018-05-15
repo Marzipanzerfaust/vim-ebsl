@@ -42,7 +42,7 @@ function! IndentLevel(lnum)
 endfunction
 
 function! GetEBSLFold(lnum)
-  if getline(a:lnum) =~ '\v&\s*$'
+  if getline(a:lnum) =~ '\v^\s*$'
     return '-1'
   endif
 
