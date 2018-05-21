@@ -15,51 +15,7 @@ setlocal comments=:*
 setlocal commentstring=*%s
 setlocal iskeyword=A-Z,.,48-57,_
 setlocal tabstop=3 softtabstop=3 shiftwidth=3
-
-" Folding
-" A lot of the following code was borrowed from Chapter 49 of Learn
-" VimScript the Hard Way:
-" <http://learnvimscriptthehardway.stevelosh.com/chapters/49.html>
-setlocal foldmethod=expr
-setlocal foldexpr=GetEBSLFold(v:lnum)
-
-function! NextNonBlankLine(lnum)
-  let numlines = line('$')
-  let current = a:lnum + 1
-
-  while current <= numlines
-    if getline(current) =~? '\v\S'
-      return current
-    endif
-
-    let current += 1
-  endwhile
-
-  return -2
-endfunction
-
-function! IndentLevel(lnum)
-  return indent(a:lnum) / &shiftwidth
-endfunction
-
-function! GetEBSLFold(lnum)
-  if getline(a:lnum) =~ '\v^\s*$'
-    return '-1'
-  endif
-
-  let this_indent = IndentLevel(a:lnum)
-  let next_indent = IndentLevel(NextNonBlankLine(a:lnum))
-
-  if next_indent == this_indent
-    return this_indent
-  elseif next_indent < this_indent
-    return this_indent
-  elseif next_indent > this_indent
-    return '>' . next_indent
-  endif
-
-  return '0'
-endfunction
+setlocal foldmethod=syntax
 
 " vim-matchit support
 if exists('loaded_matchit')
