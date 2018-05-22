@@ -23,6 +23,7 @@ syn match ebslOperator /\*\|\/\|\^\|#\|=\|&\|!\|:\|<\|>\|-\|+/
 syn keyword ebslOperator AND OR EQ NE GT LT GE LE MATCH MATCHES
 
 syn region ebslPreProcStatement start=/\$/ end=/$/ oneline
+syn region ebslPreProcStatement start=/:/ end=/$/ oneline
 
 syn keyword ebslReservedVariable EDITED.DATA ERROR.OCCURRED INPUT.DATA MSG MSG.ARGUMENTS NEXT.PROC.FLD OUTPUT.DATA WARNING.OCCURRED
 syn match ebslReservedVariable /\<VL\=\.\k\+\>/
