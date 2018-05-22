@@ -7,6 +7,6 @@ This plugin adds support for the Envision-Based Software Language (EBSL), a.k.a.
 
 More features may be added in the future when I feel like it.
 
-To install using a plugin manager, follow the instructions given for your plugin manager of choice. If you do not have a plugin manager, some recommendations are [vim-plug](https://github.com/junegunne/vim-plug) and [Pathogen](https://github.com/tpope/vim-pathogen).
+To install using a plugin manager, follow the instructions given for your plugin manager of choice. If you do not have a plugin manager, some recommendations are [vim-plug](https://github.com/junegunn/vim-plug) and [Pathogen](https://github.com/tpope/vim-pathogen).
 
 To install manually, the easiest way is to `git clone https://github.com/marzipanzerfaust/vim-ebsl` into any directory that makes sense to you, then add the path to the cloned repository to your runtime path with `set runtimepath^=[path/to/repo]`. It's recommended to create a new directory somewhere in your existing runtime path specifically for plugins and clone any repos for plugins into that directory for easier management.
