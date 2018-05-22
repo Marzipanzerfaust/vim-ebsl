@@ -35,7 +35,7 @@ syn match ebslSubroutineLabel /^\s*\zs\k\+:/
 
 syn match ebslSystemVariable /@\%(ACCOUNT\|COMMAND\|CONV\|CRTHIGH\|CRTWIDE\|DATA\|DATE\|DAY\|DICT\|FORMAT\|GID\|HEADER\|ID\|LASTVERB\|LEVEL\|LOGNAME\|LPTRHIGH\|LPTRWIDE\|MONTH\|NULL\|PARASENTENCE\|PATH\|RECORD\|RECUR0\|RECUR1\|RECUR2\|RECUR3\|RECUR4\|SENTENCE\|SYS\.BELL\|SYSTEM\.RETURN\.CODE\|TIME\|TTY\|TUPLE\|UDTHOME\|UID\|USER\.RETURN\.CODE\|USER\.TYPE\|USER0\|USER1\|USER3\|USER4\|USERNO\|WHO\|YEAR\|IM\|FM\|AM\|VM\|SM\|SVM\|TM\)\>/
 
-" syn match ebslDelimiter /(\|)\|\[\|\]\|<\|>/
+syn match ebslDelimiter /(\|)\|\[\|\]/
 
 syn match ebslComment /\%(^\s*\zs\|;\)\%(\*\|REM\s\).*$/ contains=ebslTodo
 syn keyword ebslTodo TODO FIXME XXX NOTE contained
@@ -54,7 +54,7 @@ hi def link ebslReservedVariable Identifier
 hi def link ebslString String
 hi def link ebslSubroutineLabel Special
 hi def link ebslSystemVariable Identifier
-" hi def link ebslDelimiter Delimiter
+hi def link ebslDelimiter Operator
 hi def link ebslComment Comment
 hi def link ebslTodo Todo
 
