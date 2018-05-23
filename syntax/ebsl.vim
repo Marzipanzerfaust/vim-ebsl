@@ -42,7 +42,7 @@ syn match ebslComment /\%(^\s*\zs\|;\)\%(\*\|REM\s\).*$/ contains=ebslTodo
 syn keyword ebslTodo TODO FIXME XXX NOTE contained
 
 " Block regions defined for folding support
-syn region ebslLabelBlock start=/^\z(\s*\)\k\+:/ end=/^\z1RETURN/ transparent fold keepend
+syn region ebslLabelBlock start=/^\z(\s*\)\k\+:/ end=/^\z1RETURN\>/ transparent fold keepend
 
 hi def link ebslTransactionStatement Keyword
 hi def link ebslTransactionQualifier Type
