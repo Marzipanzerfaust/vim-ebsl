@@ -16,7 +16,7 @@ syn match ebslFunction /\<\%(ABS\|ACOS\|ALPHA\|ASCII\|ASIN\|ATAN\|BITAND\|BITNOT
 syn keyword ebslStatement BEGIN BY CALL CALL_SCREEN CALL_SUBR CASE CDD CONTINUE CONVAFTER CONVERT CRT DO ELSE END EXIT FIND FINDSTR FOR GOSUB IF IGNORE IN LOCATE LOCKED LOOP NEXT PAGE PRINT PROCEDURE PROGRAM PROMPT PROMPT_IN_PLACE PROMPT_WIDE REPEAT REPROMPT RETURN SETTING STEP SUBROUTINE SWAP THEN TO TRANSLATE UNTIL WHILE
 
 syn match ebslNumber /\<\d\+\>/  " Integers
-syn match ebslNumber /\<\d\.\d\+\>/  " Floats with a leading number
+syn match ebslNumber /\<\d\+\.\d\+\>/  " Floats with a leading number
 syn match ebslNumber /\<\.\d\+\>/  " Floats with no leading number
 
 syn match ebslOperator /\*\|\/\|\^\|#\|=\|&\|!\|:\|<\|>\|-\|+/
