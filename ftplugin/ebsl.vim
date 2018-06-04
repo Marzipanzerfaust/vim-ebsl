@@ -25,7 +25,7 @@ if exists('loaded_matchit')
         \ '\%(^\s*\)\@<=\<\%(IF\|FIND\|FINDSTR\|LOCATE\)\>:\%(^\s*\)\@<=\<END ELSE\>:\%(^\s*\)\@<=\<END\s*$,' .
         \ '\%(^\s*\)\@<=\<\%(FOR\|LOOP\)\>:\%(^\s*\)\@<=\<\%(WHILE\|UNTIL\)\>:\%(^\s*\)\@<=\<\%(NEXT\|REPEAT\)\>,' .
         \ '\%(^\s*\)\@<=\<FOR_\k*\>:\%(^\s*\)\@<=\<END_\k*\>,' .
-        \ '^\(\s*\)\k\+\:\s*$:\1RETURN\s*$,' .
+        \ '^\s*\k\+\:\s*$:RETURN\s*$,' .
         \ '(:),[:]'
 endif
 
