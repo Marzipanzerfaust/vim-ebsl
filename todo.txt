@@ -1,4 +1,0 @@
-* Autoindent does not currently work if the previous line ended with an
-  inline comment
-* A lot of functionality breaks when lines end with inline comments,
-  actually
