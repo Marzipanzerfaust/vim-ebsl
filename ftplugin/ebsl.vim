@@ -47,11 +47,11 @@ if exists('loaded_endwise')
   let b:endwise_words = ''
   let b:endwise_pattern =
         \ '^\s*\%(' .
-        \ '\zsFOR \k\+\ze.*\|' .
+        \ '\zsFOR \k\+\ze\>.*\|' .
         \ '\%(IF\|FIND\|FINDSTR\|LOCATE\).\+\zs\%(THEN\|ELSE\)\ze\|' .
         \ '\zsBEGIN CASE\ze\|' .
-        \ '\zsLOOP\ze.*\|' .
-        \ '\zsFOR_\k* \%('.join(s:transaction_qualifiers, ' \|').'\)*\k\+\ze.*' .
+        \ '\zsLOOP\ze\>.*\|' .
+        \ '\zsFOR_\k* \%('.join(s:transaction_qualifiers, ' \|').'\)*\k\+\ze\>.*' .
         \ '\)\s*$'
   let b:endwise_syngroups = 'ebslStatement,ebslTransactionStatement'
 endif
