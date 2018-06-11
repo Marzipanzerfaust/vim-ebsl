@@ -52,7 +52,7 @@ if exists('loaded_endwise')
         \ '\zsBEGIN CASE\ze\|' .
         \ '\zsLOOP\ze\>.*\|' .
         \ '\zsFOR_\k* \%('.join(s:transaction_qualifiers, ' \|').'\)*\k\+\ze.*' .
-        \ '\)\s*$'
+        \ '\)\s*\%(;\s*\%(\*\|REM\).*\)\=$'
   let b:endwise_syngroups = 'ebslStatement,ebslTransactionStatement'
 endif
 

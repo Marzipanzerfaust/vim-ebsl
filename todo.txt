@@ -1,5 +1,3 @@
-* vim-matchit does not currently work with labels that have multiple
-  return statements
 * Autoindent does not currently work if the previous line ended with an
   inline comment
 * A lot of functionality breaks when lines end with inline comments,
