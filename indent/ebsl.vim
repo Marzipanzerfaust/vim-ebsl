@@ -56,9 +56,13 @@ function! GetEBSLIndent(lnum)
 
   let ind = indent(lnum)
 
+  " Pattern for anything that constitutes the end of a line, i.e. any
+  " amount of whitespace followed by an optional inline comment
+  let line_ending = '\s*\%(;\%(\*\|REM\>\).*\)\=$'
+
   " Add
   if previous_line =~ '^\s*BEGIN CASE\>' ||
-        \ previous_line =~ '\<\%(THEN\|ELSE\)\s*$' && previous_line !~ '^\s*\%(\*\|REM\>\)' ||
+        \ previous_line =~ '\<\%(THEN\|ELSE\)\s*$' ||
         \ previous_line =~ '^\s*\%(FOR\|LOOP\|WHILE\|UNTIL\)\>' && previous_line !~ '\<REPEAT\s*$' ||
         \ previous_line =~ '^\s*FOR_\k*\>'
     let ind += s:sw()
