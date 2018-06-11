@@ -64,7 +64,7 @@ function! GetEBSLIndent(lnum)
   " Add
   if previous_line =~ '^\s*BEGIN CASE'.line_ending ||
         \ previous_line =~ '\<\%(THEN\|ELSE\)'.line_ending ||
-        \ previous_line =~ '^\s*\%(FOR\|LOOP\|WHILE\|UNTIL\)'.line_ending && previous_line !~ '\<REPEAT\s*$' ||
+        \ previous_line =~ '^\s*\%(FOR\|LOOP\|WHILE\|UNTIL\).*'.line_ending && previous_line !~ '\<REPEAT\s*$' ||
         \ previous_line =~ '^\s*FOR_\k*.*'.line_ending
     let ind += s:sw()
   endif
