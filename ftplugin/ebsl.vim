@@ -50,9 +50,9 @@ if exists('loaded_endwise')
         \ '\zsFOR \k\+\ze\|' .
         \ '\%(IF\|FIND\|FINDSTR\|LOCATE\).\+\zs\%(THEN\|ELSE\)\ze\|' .
         \ '\zsBEGIN CASE\ze\|' .
-        \ '\zsLOOP\ze\|' .
+        \ '\zsLOOP\ze.*\|' .
         \ '\zsFOR_\k* \%('.join(s:transaction_qualifiers, ' \|').'\)*\k\+\ze' .
-        \ '\).*$'
+        \ '\)\s*$'
   let b:endwise_syngroups = 'ebslStatement,ebslTransactionStatement'
 endif
 
