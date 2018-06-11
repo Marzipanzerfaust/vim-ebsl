@@ -39,7 +39,7 @@ syn match ebslSystemVariable /@\%(ACCOUNT\|COMMAND\|CONV\|CRTHIGH\|CRTWIDE\|DATA
 
 syn match ebslDelimiter /(\|)\|\[\|\]\|,\|;/
 
-syn match ebslComment /\%(^\s*\zs\|;\)\%(\*\|REM\s\).*$/ contains=ebslTodo
+syn match ebslComment /\%(^\s*\zs\|;\)\s*\%(\*\|REM\>\).*$/ contains=ebslTodo
 syn keyword ebslTodo TODO FIXME XXX NOTE contained
 
 " Block regions defined for folding support
