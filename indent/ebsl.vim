@@ -62,10 +62,10 @@ function! GetEBSLIndent(lnum)
   let line_ending = '\s*\%(;\%(\*\|REM\>\).*\)\=$'
 
   " Add
-  if previous_line =~ '^\s*BEGIN CASE\>' ||
-        \ previous_line =~ '\<\%(THEN\|ELSE\)\s*$' ||
-        \ previous_line =~ '^\s*\%(FOR\|LOOP\|WHILE\|UNTIL\)\>' && previous_line !~ '\<REPEAT\s*$' ||
-        \ previous_line =~ '^\s*FOR_\k*\>'
+  if previous_line =~ '^\s*BEGIN CASE'.line_ending ||
+        \ previous_line =~ '\<\%(THEN\|ELSE\)'.line_ending ||
+        \ previous_line =~ '^\s*\%(FOR\|LOOP\|WHILE\|UNTIL\)'.line_ending && previous_line !~ '\<REPEAT\s*$' ||
+        \ previous_line =~ '^\s*FOR_\k*'.line_ending
     let ind += s:sw()
   endif
 
