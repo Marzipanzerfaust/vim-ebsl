@@ -39,12 +39,13 @@ function! GetEBSLIndent(lnum)
   endif
 
   " Find a non-blank line above the current line;
-  " skip over labels and pre-processor directives
+  " skip over comments, labels, and pre-processor directives
   let lnum = a:lnum
+  let comment = '^\s*\%(\*\|REM\>\).*'
   while lnum > 0
     let lnum = prevnonblank(lnum - 1)
     let previous_line = getline(lnum)
-    if previous_line !~? labels_or_preproc
+    if previous_line !~ labels_or_preproc && previous_line !~ comment
       break
     endif
   endwhile
