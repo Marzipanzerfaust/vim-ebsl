@@ -2,6 +2,7 @@
 " Language: Envision-Based Software Language (EBSL) a.k.a. Envision Basic
 " Author: Jeffrey Crochet <jeffrey02468@gmail.com>
 " URL: https://github.com/marzipanzerfaust/vim-ebsl
+" FOO
 
 " Only load this indent file when no other was loaded
 if exists("b:did_indent")
