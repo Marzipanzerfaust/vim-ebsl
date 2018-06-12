@@ -39,14 +39,14 @@ if exists('loaded_endwise')
         \ ]
 
   let b:endwise_addition =
-        \ '!exists("b:capslock") ? ' .
-        \ '\=submatch(0) =~ "FOR_" ? "END_" . split(submatch(0))[0][4:] . " " . split(submatch(0))[-1] : ' .
+        \ '\=!exists("b:capslock") ? ' .
+        \ 'submatch(0) =~ "FOR_" ? "END_" . split(submatch(0))[0][4:] . " " . split(submatch(0))[-1] : ' .
         \ 'submatch(0) =~ "FOR" ? "NEXT ".split(submatch(0))[1] : ' .
         \ 'submatch(0) == "THEN" || submatch(0) == "ELSE" ? "END" : ' .
         \ 'submatch(0) == "BEGIN CASE" ? "END CASE" : ' .
         \ 'submatch(0) == "LOOP" ? "REPEAT" : ""' .
         \ ' : ' .
-        \ '\=submatch(0) =~ "FOR_" ? tolower("END_" . split(submatch(0))[0][4:] . " " . split(submatch(0))[-1]) : ' .
+        \ 'submatch(0) =~ "FOR_" ? tolower("END_" . split(submatch(0))[0][4:] . " " . split(submatch(0))[-1]) : ' .
         \ 'submatch(0) =~ "FOR" ? tolower("NEXT ".split(submatch(0))[1]) : ' .
         \ 'submatch(0) == "THEN" || submatch(0) == "ELSE" ? "end" : ' .
         \ 'submatch(0) == "BEGIN CASE" ? "end case" : ' .
