@@ -11,7 +11,7 @@ let b:did_indent = 1
 
 setlocal autoindent
 setlocal indentexpr=GetEBSLIndent(v:lnum)
-setlocal indentkeys=o,O,=END,=NEXT,=REPEAT,=CASE,=WHILE,=UNTIL
+setlocal indentkeys=o,O,0=END,0=NEXT,0=REPEAT,=CASE,=WHILE,=UNTIL
 
 " If available, use shiftwidth() instead of &shiftwidth
 if exists('*shiftwidth')
