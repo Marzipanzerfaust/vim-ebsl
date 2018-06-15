@@ -70,23 +70,23 @@ function! GetEBSLIndent(lnum)
   endif
 
   " Subtract
-  if this_line =~ '^\s*END\>' ||
-        \ this_line =~ '^\s*\%(WHILE\|UNTIL\|NEXT\|REPEAT\)\>' ||
-        \ this_line =~ '^\s*END_\k*\>'
+  if this_line =~? '^\s*END\>' ||
+        \ this_line =~? '^\s*\%(WHILE\|UNTIL\|NEXT\|REPEAT\)\>' ||
+        \ this_line =~? '^\s*END_\k*\>'
     let ind -= s:sw()
   endif
 
-  if this_line =~ '^\s*END CASE\>' && previous_line !~ '^\s*BEGIN CASE\>'
+  if this_line =~? '^\s*END CASE\>' && previous_line !~? '^\s*BEGIN CASE\>'
     let ind -= s:sw()
   endif
 
   " There's a few edge cases for the CASE statement that we have to
   " handle separately
-  if previous_line =~ '^\s*CASE\>' && this_line !~ '^\s*CASE\>'
+  if previous_line =~? '^\s*CASE\>' && this_line !~? '^\s*CASE\>'
     let ind += s:sw()
   endif
 
-  if previous_line !~ '^\s*\%(CASE\|BEGIN CASE\)\>' && this_line =~ '^\s*CASE\>'
+  if previous_line !~? '^\s*\%(CASE\|BEGIN CASE\)\>' && this_line =~? '^\s*CASE\>'
     let ind -= s:sw()
   endif
 
