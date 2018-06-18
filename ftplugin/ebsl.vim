@@ -38,23 +38,12 @@ if exists('loaded_endwise')
         \ 'ASCENDING', 'ASSOCIATED', 'AT', 'BATCHED', 'BREAKING_ON', 'CANCELLING', 'COMMITTING', 'COMMIT_EVERY', 'COUNTED', 'CREATE_NEW', 'CRITERIA', 'DEFER_COMMIT', 'DELETING', 'DESCENDING', 'EXISTING', 'FIRST', 'FROM', 'GRAPHED', 'INTO', 'INTO_REFERENCED', 'KEY_IN', 'LAST', 'LEFT', 'LIMITING', 'MATCHING', 'NEW', 'NEWLIST', 'ONLY', 'PRE-ASSEMBLED', 'PROTECTED', 'RECURSIVE', 'REFERENCED', 'RELEASING', 'RIGHT', 'SECONDARY', 'SELECTED', 'SINGLE', 'TESTING', 'THIS_APPLICATION', 'THIS_INSTANCE_OF', 'TO', 'UNVALIDATED', 'USING', 'WRITING'
         \ ]
 
-  " The b:capslock variable referenced below is used to determine if
-  " vim-capslock is currently enabled: if it is, we need to insert
-  " lowercase characters, since they will automatically be capitalized
-  " by vim-capslock
   let b:endwise_addition =
-        \ '\=!exists("b:capslock") ? ' .
-        \ 'submatch(0) =~ "FOR_" ? "END_" . split(submatch(0))[0][4:] . " " . split(submatch(0))[-1] : ' .
+        \ '\=submatch(0) =~ "FOR_" ? "END_" . split(submatch(0))[0][4:] . " " . split(submatch(0))[-1] : ' .
         \ 'submatch(0) =~ "FOR" ? "NEXT ".split(submatch(0))[1] : ' .
         \ 'submatch(0) == "THEN" || submatch(0) == "ELSE" ? "END" : ' .
         \ 'submatch(0) == "BEGIN CASE" ? "END CASE" : ' .
-        \ 'submatch(0) == "LOOP" ? "REPEAT" : ""' .
-        \ ' : ' .
-        \ 'submatch(0) =~ "FOR_" ? tolower("END_" . split(submatch(0))[0][4:] . " " . split(submatch(0))[-1]) : ' .
-        \ 'submatch(0) =~ "FOR" ? tolower("NEXT ".split(submatch(0))[1]) : ' .
-        \ 'submatch(0) == "THEN" || submatch(0) == "ELSE" ? "end" : ' .
-        \ 'submatch(0) == "BEGIN CASE" ? "end case" : ' .
-        \ 'submatch(0) == "LOOP" ? "repeat" : ""'
+        \ 'submatch(0) == "LOOP" ? "REPEAT" : ""'
   let b:endwise_words = ''
   let b:endwise_pattern =
         \ '^\s*\%(' .
