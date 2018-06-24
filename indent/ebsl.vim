@@ -9,7 +9,6 @@ if exists("b:did_indent")
 endif
 let b:did_indent = 1
 
-setlocal autoindent
 setlocal indentexpr=GetEBSLIndent(v:lnum)
 setlocal indentkeys=o,O,=END,=NEXT,=REPEAT,=CASE,=WHILE,=UNTIL
 
