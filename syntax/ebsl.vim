@@ -28,6 +28,7 @@ syn region ebslPreProcStatement start=/^\s*:/ end=/$/ oneline
 syn keyword ebslReservedVariable EDITED.DATA ERROR.OCCURRED INPUT.DATA MSG MSG.ARGUMENTS NEXT.PROC.FLD OUTPUT.DATA WARNING.OCCURRED
 syn match ebslReservedVariable /\<VL\=\.\k\+\>/
 syn match ebslReservedVariable /\<\k\+\.ADD\.MODE\>/
+syn match ebslReservedVariable /\<R\.\k\+\>/
 
 syn region ebslString start=/'/ end=/'/ oneline
 syn region ebslString start=/"/ end=/"/ oneline
