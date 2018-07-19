@@ -29,6 +29,7 @@ syn keyword ebslReservedVariable EDITED.DATA ERROR.OCCURRED INPUT.DATA MSG MSG.A
 syn match ebslReservedVariable /\<VL\=\.\k\+\>/
 syn match ebslReservedVariable /\<\k\+\.ADD\.MODE\>/
 syn match ebslReservedVariable /\<R\.\k\+\>/
+syn match ebslReservedVariable /\<ABORT\.\k\+\.LOOP\>/
 
 syn region ebslString start=/'/ end=/'/ oneline
 syn region ebslString start=/"/ end=/"/ oneline
