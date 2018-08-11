@@ -56,7 +56,7 @@ hi def link ebslNumber Number
 hi def link ebslPreProcStatement PreProc
 hi def link ebslReservedVariable Identifier
 hi def link ebslString String
-hi def link ebslSubroutineLabel Special
+hi def link ebslSubroutineLabel Underlined
 hi def link ebslSystemVariable Identifier
 " hi def link ebslDelimiter Operator
 hi def link ebslComment Comment
