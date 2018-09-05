@@ -52,13 +52,13 @@ hi def link ebslTransactionQualifier Type
 hi def link ebslFunction Function
 hi def link ebslStatement Keyword
 hi def link ebslNumber Number
-hi def link ebslOperator Operator
+" hi def link ebslOperator Operator
 hi def link ebslPreProcStatement PreProc
 hi def link ebslReservedVariable Identifier
 hi def link ebslString String
 hi def link ebslSubroutineLabel Title
 hi def link ebslSystemVariable Identifier
-hi def link ebslDelimiter Delimiter
+" hi def link ebslDelimiter Delimiter
 hi def link ebslComment Comment
 hi def link ebslTodo Todo
 
