@@ -57,7 +57,7 @@ hi def link ebslPreProcStatement PreProc
 hi def link ebslReservedVariable Identifier
 hi def link ebslString String
 hi def link ebslSubroutineLabel Title
-hi def link ebslSystemVariable Identifier
+hi def link ebslSystemVariable Special
 " hi def link ebslDelimiter Delimiter
 hi def link ebslComment Comment
 hi def link ebslTodo Todo
