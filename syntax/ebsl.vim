@@ -7,7 +7,7 @@ if exists('b:current_syntax')
   finish
 endif
 
-syn match ebslTransaction /^\s*\zs\%(FOR\|END\)_\k*.*$/ contains=ebslTransactionStatement,ebslTransactionQualifier,ebslNumber,ebslString,ebslComment
+syn match ebslTransaction /^\s*\zs\%(FOR\|END\)_\k*.*$/ contains=ebslTransactionStatement,ebslTransactionQualifier,ebslNumber,ebslString,ebslComment,ebslReservedVariable,ebslSystemVariable
 syn match ebslTransactionStatement /\%(FOR\|END\)_\k*/ contained
 syn keyword ebslTransactionQualifier ASCENDING ASSOCIATED AT BATCHED BREAKING_ON CANCELLING COMMITTING COMMIT_EVERY COUNTED CREATE_NEW CRITERIA DEFER_COMMIT DELETING DESCENDING EXISTING FIRST FROM GRAPHED INSTANCE_OF INTO INTO_REFERENCED KEY_IN LAST LEFT LIMITING MATCHING NEW NEWLIST ONLY PRE-ASSEMBLED PROTECTED RECURSIVE REFERENCED RELEASING RIGHT SECONDARY SELECTED SINGLE TESTING THIS_APPLICATION THIS_INSTANCE_OF TO UNVALIDATED USING WRITING contained
 
