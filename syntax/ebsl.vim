@@ -7,9 +7,9 @@ if exists('b:current_syntax')
   finish
 endif
 
-syn match ebslTransaction /^\s*\zs\%(FOR\|END\)_\k*.*$/
+syn match ebslTransaction /^\s*\zs\%(FOR\|END\)_\k*.*$/ display
       \ contains=ebslTransactionStatement,ebslTransactionQualifier,ebslNumber,ebslString,ebslComment,ebslReservedVariable,ebslSystemVariable
-syn match ebslTransactionStatement /\%(FOR\|END\)_\k*/ contained
+syn match ebslTransactionStatement /\%(FOR\|END\)_\k*/ contained display
 syn keyword ebslTransactionQualifier contained
       \ ASCENDING ASSOCIATED AT
       \ BATCHED BREAKING_ON
@@ -71,15 +71,15 @@ syn keyword ebslStatement
       \ UNTIL
       \ WHILE
 
-syn match ebslNumber /\<\d\+\>/  " Integers
-syn match ebslNumber /\<\d\+\.\d\+\>/  " Floats with a leading number
-syn match ebslNumber /\<\.\d\+\>/  " Floats with no leading number
+syn match ebslNumber /\<\d\+\>/ display  " Integers
+syn match ebslNumber /\<\d\+\.\d\+\>/ display  " Floats with a leading number
+syn match ebslNumber /\<\.\d\+\>/ display  " Floats with no leading number
 
-syn match ebslOperator /\*\|\/\|\^\|#\|=\|&\|!\|:\|<\|>\|-\|+/
+syn match ebslOperator /\*\|\/\|\^\|#\|=\|&\|!\|:\|<\|>\|-\|+/ display
 syn keyword ebslOperator AND OR EQ NE GT LT GE LE MATCH MATCHES
 
-syn region ebslPreProcStatement start=/^\s*\$/ end=/$/ oneline
-syn region ebslPreProcStatement start=/^\s*:/ end=/$/ oneline
+syn region ebslPreProcStatement start=/^\s*\$/ end=/$/ oneline display
+syn region ebslPreProcStatement start=/^\s*:/ end=/$/ oneline display
 
 syn keyword ebslReservedVariable
       \ EDITED.DATA ERROR.OCCURRED
@@ -89,26 +89,26 @@ syn keyword ebslReservedVariable
       \ OUTPUT.DATA
       \ WARNING.OCCURRED
 
-syn match ebslReservedVariable /\<VL\=\.\k\+\>/
-syn match ebslReservedVariable /\<\k\+\.ADD\.MODE\>/
-syn match ebslReservedVariable /\<R\.\k\+\>/
-syn match ebslReservedVariable /\<ABORT\.\k\+\.LOOP\>/
+syn match ebslReservedVariable /\<VL\=\.\k\+\>/ display
+syn match ebslReservedVariable /\<\k\+\.ADD\.MODE\>/ display
+syn match ebslReservedVariable /\<R\.\k\+\>/ display
+syn match ebslReservedVariable /\<ABORT\.\k\+\.LOOP\>/ display
 
-syn region ebslString start=/'/ end=/'/ oneline
-syn region ebslString start=/"/ end=/"/ oneline
-syn region ebslString start=/`/ end=/`/ oneline
+syn region ebslString start=/'/ end=/'/ oneline display
+syn region ebslString start=/"/ end=/"/ oneline display
+syn region ebslString start=/`/ end=/`/ oneline display
 
-syn match ebslSubroutineLabel /^\s*\zs\k\+:/
+syn match ebslSubroutineLabel /^\s*\zs\k\+:/ display
 
-syn match ebslSystemVariable /@\%(ACCOUNT\|COMMAND\|CONV\|CRTHIGH\|CRTWIDE\|DATA\|DATE\|DAY\|DICT\|FORMAT\|GID\|HEADER\|ID\|LASTVERB\|LEVEL\|LOGNAME\|LPTRHIGH\|LPTRWIDE\|MONTH\|NULL\|PARASENTENCE\|PATH\|RECORD\|RECUR0\|RECUR1\|RECUR2\|RECUR3\|RECUR4\|SENTENCE\|SYS\.BELL\|SYSTEM\.RETURN\.CODE\|TIME\|TTY\|TUPLE\|UDTHOME\|UID\|USER\.RETURN\.CODE\|USER\.TYPE\|USER0\|USER1\|USER3\|USER4\|USERNO\|WHO\|YEAR\|RM\|FM\|AM\|VM\|SM\|SVM\|TM\)\>/
+syn match ebslSystemVariable /@\%(ACCOUNT\|COMMAND\|CONV\|CRTHIGH\|CRTWIDE\|DATA\|DATE\|DAY\|DICT\|FORMAT\|GID\|HEADER\|ID\|LASTVERB\|LEVEL\|LOGNAME\|LPTRHIGH\|LPTRWIDE\|MONTH\|NULL\|PARASENTENCE\|PATH\|RECORD\|RECUR0\|RECUR1\|RECUR2\|RECUR3\|RECUR4\|SENTENCE\|SYS\.BELL\|SYSTEM\.RETURN\.CODE\|TIME\|TTY\|TUPLE\|UDTHOME\|UID\|USER\.RETURN\.CODE\|USER\.TYPE\|USER0\|USER1\|USER3\|USER4\|USERNO\|WHO\|YEAR\|RM\|FM\|AM\|VM\|SM\|SVM\|TM\)\>/ display
 
-syn match ebslDelimiter /(\|)\|\[\|\]\|,\|;/
+syn match ebslDelimiter /(\|)\|\[\|\]\|,\|;/ display
 
-syn match ebslComment /\%(^\s*\zs\|;\)\s*\%(\*\|REM\>\).*$/ contains=ebslTodo
+syn match ebslComment /\%(^\s*\zs\|;\)\s*\%(\*\|REM\>\).*$/ contains=ebslTodo display
 syn keyword ebslTodo TODO FIXME XXX NOTE contained
 
 " Block regions defined for folding support
-syn region ebslLabelBlock start=/^\z(\s*\)\k\+:/ end=/^\z1RETURN\>/ transparent fold keepend
+syn region ebslLabelBlock start=/^\z(\s*\)\k\+:/ end=/^\z1RETURN\>/ transparent fold keepend display
 
 hi def link ebslTransactionStatement Keyword
 hi def link ebslTransactionQualifier Type
