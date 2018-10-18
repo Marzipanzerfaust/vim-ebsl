@@ -18,6 +18,10 @@ setlocal tabstop=3 softtabstop=3 shiftwidth=3
 setlocal foldmethod=syntax
 
 " vim-matchit support
+" TODO: This doesn't always properly match multiple RETURN's in
+" subroutine blocks
+" TODO: This will sometimes try to match nested oneline IF's with outer
+" END's
 if exists('loaded_matchit')
   let b:match_ignorecase = 0
   let b:match_words =

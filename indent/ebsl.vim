@@ -30,21 +30,21 @@ endif
 
 " Some of this is copied from indent/vb.vim
 function! GetEBSLIndent(lnum)
-  " Labels and pre-processor statements get zero indent
+  " Labels get zero indent
   let this_line = getline(a:lnum)
-  let labels_or_preproc = '^\s*\<\k\+\>:'
-  if this_line =~? labels_or_preproc
+  let label = '^\s*\<\k\+\>:'
+  if this_line =~? label
     return 0
   endif
 
   " Find a non-blank line above the current line;
-  " skip over comments, labels, and pre-processor directives
+  " skip over comments and labels
   let lnum = a:lnum
   let comment = '^\s*\%(\*\|REM\>\).*'
   while lnum > 0
     let lnum = prevnonblank(lnum - 1)
     let previous_line = getline(lnum)
-    if previous_line !~ labels_or_preproc && previous_line !~ comment
+    if previous_line !~ label && previous_line !~ comment
       break
     endif
   endwhile

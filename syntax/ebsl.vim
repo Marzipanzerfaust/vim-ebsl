@@ -87,6 +87,8 @@ syn keyword ebslReservedVariable
       \ MSG MSG.ARGUMENTS
       \ NEXT.PROC.FLD
       \ OUTPUT.DATA
+      \ PROCESS.END
+      \ RECORD.CANCEL
       \ WARNING.OCCURRED
 
 syn match ebslReservedVariable /\<VL\=\.\k\+\>/ display
