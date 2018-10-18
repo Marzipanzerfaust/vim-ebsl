@@ -91,13 +91,9 @@ syn keyword ebslReservedVariable
       \ RECORD.CANCEL
       \ WARNING.OCCURRED
 
-syn match ebslReservedVariable /\<VL\=\.\k\+\>/ display
 syn match ebslReservedVariable /\<\k\+\.ADD\.MODE\>/ display
-syn match ebslReservedVariable /\<R\.\k\+\>/ display
 syn match ebslReservedVariable /\<ABORT\.\k\+\.LOOP\>/ display
-syn match ebslReservedVariable /\<KV\.\k\+\>/ display
-syn match ebslReservedVariable /\<KEY\.\k\+\>/ display
-syn match ebslReservedVariable /\<SN\.\k\+\>/ display
+syn match ebslReservedVariable /\<\%(V\|VL\|R\|KV\|KEY\|SN\|NEXT\)\.\k\+\>/ display
 
 syn region ebslString start=/'/ end=/'/ oneline display
 syn region ebslString start=/"/ end=/"/ oneline display
