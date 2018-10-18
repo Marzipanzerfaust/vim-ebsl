@@ -56,7 +56,7 @@ syn keyword ebslFunction
 syn keyword ebslStatement
       \ BEFORE BEGIN BY
       \ CALL CALL_SCREEN CALL_SUBR CASE CDD CONTINUE CONVAFTER CONVERT CRT
-      \ DEL DIM DO
+      \ DEL DELETE_RECORD DELETE_RECORDS DIM DO
       \ ELSE END EXIT
       \ FIND FINDSTR FOR
       \ GOSUB
