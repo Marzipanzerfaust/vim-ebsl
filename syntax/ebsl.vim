@@ -29,7 +29,7 @@ syn keyword ebslFuncNames contained containedin=ebslFunction
       \ ABS acceptConnection
 
 syn cluster ebslExpression
-      \ contains=ebslNumber,ebslOperator,ebslReservedVariable,ebslString,ebslFunction,ebslFuncArgs
+      \ contains=ebslNumber,ebslOperator,ebslReservedVariable,ebslString,ebslFunction
 
 syn match ebslPreProcStatement /^\s*\zs\$\%(BASICTYPE\|DEFINE\|F\|FALSE\|IFDEF\|IFNDEF\|INCLUDE\|INSERT\|T\|TRUE\|UNDEFINE\|CHAIN\|COPYRIGHT\|EJECT\|MAP\|OPTIONS\|PAGE\).*$/ display
 
@@ -47,7 +47,7 @@ syn keyword ebslStatement
 " }}}
 
 " Default highlighting {{{
-hi def link ebslFunction Function
+hi def link ebslFuncNames Function
 hi def link ebslStatement Keyword
 hi def link ebslNumber Number
 " hi def link ebslOperator Operator
