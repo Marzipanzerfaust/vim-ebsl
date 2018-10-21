@@ -23,13 +23,10 @@ syn region ebslString start=/'/ end=/'/ oneline display
 syn region ebslString start=/"/ end=/"/ oneline display
 syn region ebslString start=/`/ end=/`/ oneline display
 
-syn match ebslFunction /\<\zs\%(@\|\k\)\+\ze(.*)/ contains=ebslFuncNames
-syn match ebslFuncNames /\A@/ contained containedin=ebslFunction
+syn match ebslFunction /\%(@\|\<\zs\k\+\)\ze(.*)/ contains=ebslFuncNames
+syn match ebslFuncNames /@/ contained containedin=ebslFunction
 syn keyword ebslFuncNames contained containedin=ebslFunction
       \ ABS acceptConnection
-
-syn cluster ebslExpression
-      \ contains=ebslNumber,ebslOperator,ebslReservedVariable,ebslString,ebslFunction
 
 syn match ebslPreProcStatement /^\s*\zs\$\%(BASICTYPE\|DEFINE\|F\|FALSE\|IFDEF\|IFNDEF\|INCLUDE\|INSERT\|T\|TRUE\|UNDEFINE\|CHAIN\|COPYRIGHT\|EJECT\|MAP\|OPTIONS\|PAGE\).*$/ display
 
