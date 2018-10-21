@@ -23,7 +23,7 @@ syn region ebslString start=/'/ end=/'/ oneline display
 syn region ebslString start=/"/ end=/"/ oneline display
 syn region ebslString start=/`/ end=/`/ oneline display
 
-syn match ebslFunction /\<\zs\k\+\ze(.*)/ contains=ebslFuncNames
+syn match ebslFunction /\<\zs[@\k]\+\ze(.*)/ contains=ebslFuncNames
 syn match ebslFuncNames /@/ contained containedin=ebslFunction
 syn keyword ebslFuncNames contained containedin=ebslFunction
       \ ABS acceptConnection
