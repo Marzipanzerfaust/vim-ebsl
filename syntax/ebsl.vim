@@ -35,6 +35,7 @@ syn keyword ebslTransactionQualifier contained
       \ WRITING
 
 syn keyword ebslFunction
+      \ @
       \ ABS ACOS ALPHA ASCII ASIN ATAN
       \ BITAND BITNOT BITOR BITXOR CALCULATE
       \ CATS CHAR CHARLEN CHECKSUM COL1 COL2 COS COUNT COUNTS
@@ -79,14 +80,11 @@ syn match ebslNumber /\<\d\+\.\d\+\>/ display  " Floats with a leading number
 syn match ebslNumber /\<\.\d\+\>/ display  " Floats with no leading number
 
 syn match ebslOperator /\*\|\/\|\^\|#\|=\|&\|!\|:\|<\|>\|-\|+/ display
-syn keyword ebslOperator AND OR EQ NE GT LT GE LE MATCH MATCHES
-
-" syn region ebslPreProcStatement start=/^\s*\$/ end=/$/ oneline display
-" syn region ebslPreProcStatement start=/^\s*:/ end=/$/ oneline display
+syn keyword ebslOperator AND OR EQ NE GT LT GE LE MATCH MATCHES CAT
 
 syn match ebslPreProcStatement /^\s*\zs\$\%(BASICTYPE\|DEFINE\|F\|FALSE\|IFDEF\|IFNDEF\|INCLUDE\|INSERT\|T\|TRUE\|UNDEFINE\|CHAIN\|COPYRIGHT\|EJECT\|MAP\|OPTIONS\|PAGE\).*$/ display
 
-syn keyword ebslReservedVariable
+syn keyword ebslReservedVariable nextgroup=ebslFuncArgs
       \ EDITED.DATA ERROR.OCCURRED
       \ INPUT.DATA
       \ MSG MSG.ARGUMENTS
@@ -95,6 +93,7 @@ syn keyword ebslReservedVariable
       \ PROCESS.END
       \ RECORD.CANCEL
       \ WARNING.OCCURRED
+      \ INS
 
 syn match ebslReservedVariable /\<\k\+\.ADD\.MODE\>/ display
 syn match ebslReservedVariable /\<ABORT\.\k\+\.LOOP\>/ display
@@ -108,7 +107,8 @@ syn match ebslSubroutineLabel /^\s*\zs\k\+:/ display
 
 syn match ebslSystemVariable /@\%(ACCOUNT\|COMMAND\|CONV\|CRTHIGH\|CRTWIDE\|DATA\|DATE\|DAY\|DICT\|FORMAT\|GID\|HEADER\|ID\|LASTVERB\|LEVEL\|LOGNAME\|LPTRHIGH\|LPTRWIDE\|MONTH\|NULL\|PARASENTENCE\|PATH\|RECORD\|RECUR0\|RECUR1\|RECUR2\|RECUR3\|RECUR4\|SENTENCE\|SYS\.BELL\|SYSTEM\.RETURN\.CODE\|TIME\|TTY\|TUPLE\|UDTHOME\|UID\|USER\.RETURN\.CODE\|USER\.TYPE\|USER0\|USER1\|USER3\|USER4\|USERNO\|WHO\|YEAR\|RM\|FM\|AM\|VM\|SM\|SVM\|TM\)\>/ display
 
-syn match ebslDelimiter /(\|)\|\[\|\]\|,\|;/ display
+" syn match ebslDelimiter /{\|}\|(\|)\|\[\|\]\|,\|;/ display
+syn region ebslFuncArgs start='(' end=')'
 
 syn match ebslComment /\%(^\s*\zs\|;\)\s*\%(\*\|REM\>\).*$/ contains=ebslTodo display
 syn keyword ebslTodo TODO FIXME XXX NOTE contained
