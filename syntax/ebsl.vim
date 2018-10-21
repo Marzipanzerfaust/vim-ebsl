@@ -23,9 +23,10 @@ syn region ebslString start=/'/ end=/'/ oneline display
 syn region ebslString start=/"/ end=/"/ oneline display
 syn region ebslString start=/`/ end=/`/ oneline display
 
-syn keyword ebslFunction
-      \ \@
-      \ ABS acceptConnection ACOS
+syn match ebslFunction /\<\zs\k\+\ze(.*)\>/ contains=ebslFuncNames
+syn match ebslFuncNames /@/ contained containedin=ebslFunction
+syn keyword ebslFuncNames contained containedin=ebslFunction
+      \ ABS acceptConnection
 
 syn cluster ebslExpression
       \ contains=ebslNumber,ebslOperator,ebslReservedVariable,ebslString,ebslFunction,ebslFuncArgs
