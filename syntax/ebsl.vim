@@ -3,6 +3,9 @@
 " Author: Jeffrey Crochet <jeffrey02468@gmail.com>
 " URL: https://github.com/marzipanzerfaust/vim-ebsl
 
+" TODO: Include function names, keywords and @variables from
+" vim-scripts/unibasic.vim and the UniBasic Commands Reference
+
 if exists('b:current_syntax')
   finish
 endif
@@ -78,8 +81,10 @@ syn match ebslNumber /\<\.\d\+\>/ display  " Floats with no leading number
 syn match ebslOperator /\*\|\/\|\^\|#\|=\|&\|!\|:\|<\|>\|-\|+/ display
 syn keyword ebslOperator AND OR EQ NE GT LT GE LE MATCH MATCHES
 
-syn region ebslPreProcStatement start=/^\s*\$/ end=/$/ oneline display
-syn region ebslPreProcStatement start=/^\s*:/ end=/$/ oneline display
+" syn region ebslPreProcStatement start=/^\s*\$/ end=/$/ oneline display
+" syn region ebslPreProcStatement start=/^\s*:/ end=/$/ oneline display
+
+syn match ebslPreProcStatement /^\s*\zs\$\%(BASICTYPE\|DEFINE\|F\|FALSE\|IFDEF\|IFNDEF\|INCLUDE\|INSERT\|T\|TRUE\|UNDEFINE\|CHAIN\|COPYRIGHT\|EJECT\|MAP\|OPTIONS\|PAGE\).*$/ display
 
 syn keyword ebslReservedVariable
       \ EDITED.DATA ERROR.OCCURRED

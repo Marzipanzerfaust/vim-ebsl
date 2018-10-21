@@ -13,7 +13,7 @@ let b:did_ftplugin = 1
 
 setlocal comments=:*
 setlocal commentstring=*%s
-setlocal iskeyword=a-z,A-Z,.,48-57,_
+setlocal iskeyword+=.
 setlocal tabstop=3 softtabstop=3 shiftwidth=3
 setlocal foldmethod=syntax
 
