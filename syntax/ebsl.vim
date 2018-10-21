@@ -23,12 +23,9 @@ syn region ebslString start=/'/ end=/'/ oneline display
 syn region ebslString start=/"/ end=/"/ oneline display
 syn region ebslString start=/`/ end=/`/ oneline display
 
-syn keyword ebslFunction nextgroup=ebslFuncArgs
-      \ @
+syn keyword ebslFunction
+      \ \@
       \ ABS acceptConnection ACOS
-" A func args region is defined to differentiate between statements and
-" functions that have the same name
-syn region ebslFuncArgs start='(' end=')' transparent
 
 syn cluster ebslExpression
       \ contains=ebslNumber,ebslOperator,ebslReservedVariable,ebslString,ebslFunction,ebslFuncArgs
@@ -45,9 +42,7 @@ syn keyword ebslTodo TODO FIXME XXX NOTE contained
 " This list is for simple statements and commands that do not have any
 " special syntax to account for
 syn keyword ebslStatement
-      \ ABORT ACTIVATEKEY
-      \ ERROR
-      \ ON
+      \ ABORT
 " }}}
 
 " Default highlighting {{{
