@@ -58,20 +58,24 @@ function! GetEBSLIndent(lnum)
 
   " Pattern for anything that constitutes the end of a line, i.e. any
   " amount of whitespace followed by an optional inline comment
-  let line_ending = '\s*\%(;\%(\*\|REM\>\).*\)\=$'
+  let line_ending = '\s*\%(;\s*\%(\*\|!\|REM\>\).*\)\=$'
 
   " Add
   if previous_line =~ '^\s*BEGIN CASE'.line_ending ||
         \ previous_line =~ '\<\%(THEN\|ELSE\)'.line_ending ||
         \ previous_line =~ '^\s*\%(FOR\|LOOP\|WHILE\|UNTIL\)\>' && previous_line !~ '\<REPEAT'.line_ending ||
-        \ previous_line =~ '^\s*FOR_\k*'
+        \ previous_line =~ '^\s*FOR_\k*' ||
+        \ previous_line =~ '^\s*\$IF\%(N\=DEF\)\=\>' ||
+        \ previous_line =~ '^\s*\$ELSE\>'
     let ind += s:sw()
   endif
 
   " Subtract
   if this_line =~ '^\s*END\>' ||
         \ this_line =~ '^\s*\%(WHILE\|UNTIL\|NEXT\|REPEAT\)\>' ||
-        \ this_line =~ '^\s*END_\k*\>'
+        \ this_line =~ '^\s*END_\k*\>' ||
+        \ this_line =~ '^\s*\$END\%(IF\)\=\>' ||
+        \ this_line =~ '^\s*\$ELSE\>'
     let ind -= s:sw()
   endif
 
