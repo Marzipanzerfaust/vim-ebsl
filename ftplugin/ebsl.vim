@@ -69,13 +69,11 @@ if exists('loaded_matchit')
 
   let b:match_skip = synIDattr(synID(line('.'), col('.'), 1), 'name') =~? 'ebslComment\|ebslString'
 
-        " \ [s:Start('FOR'), s:End('EXIT'), s:End('CONTINUE'), s:Start('WHILE'), s:Start('UNTIL'), s:Start('NEXT')],
-        " \ [s:Start('LOOP'), s:Start('WHILE'), s:Start('UNTIL'), s:Start('DO'), s:End('EXIT'), s:End('CONTINUE'), s:Whole('REPEAT')],
   let s:match_list = [
         \ [s:Whole('BEGIN CASE'), s:Start('CASE'), s:Whole('END CASE')],
         \ [s:Whole('\%(END\)\@!\%(\<.\+\<\%(THEN\|ELSE\)\)'), s:Start('END ELSE'), s:Whole('END')],
-        \ [s:Start('FOR'), s:Start('WHILE'), s:Start('UNTIL'), s:Start('NEXT')],
-        \ [s:Start('LOOP'), s:Start('WHILE'), s:Start('UNTIL'), s:Start('DO'), s:Whole('REPEAT')],
+        \ [s:Start('FOR'), s:End('EXIT'), s:End('CONTINUE'), s:Start('NEXT')],
+        \ [s:Start('LOOP'), s:Start('WHILE'), s:Start('UNTIL'), s:Start('DO'), s:End('EXIT'), s:End('CONTINUE'), s:Whole('REPEAT')],
         \ [s:Start('FOR_\k*'), s:Start('END_\k*')],
         \ ['^\k\+\:', '\%(.\+\)\@<=\<RETURN', '^RETURN\>'],
         \ [s:Start('\$IF'), s:Whole('\$END')],
