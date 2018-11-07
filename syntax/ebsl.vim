@@ -21,23 +21,6 @@ syn region ebslString start=/'/ end=/'/ oneline display
 syn region ebslString start=/"/ end=/"/ oneline display
 syn region ebslString start=/`/ end=/`/ oneline display
 
-syn match ebslReservedVariable /\<\k\+\.ADD\.MODE\>/ display
-syn match ebslReservedVariable /\<ABORT\.\k\+\.LOOP\>/ display
-syn match ebslReservedVariable /\<\%(V\|VL\|R\|KV\|KEY\|SN\|NEXT\)\.\k\+\>/ display
-syn match ebslReservedVariable /\<\k\+\.TRANSLATION\>/ display
-syn match ebslReservedVariable /\<\k\+\.ACTION[12]\>/ display
-syn keyword ebslReservedVariable
-      \ CONFIRM.LVL CONFIRMED CRNT.KEY
-      \ EDITED.DATA ERROR.OCCURRED
-      \ INPUT.DATA
-      \ MSG MSG.ARGUMENTS
-      \ NEXT.PROC.FLD NUM.ERRORS.THROWN
-      \ OUTPUT.DATA
-      \ PROCESS.END
-      \ RECORD.CANCEL
-      \ TEC.ERROR.IDS
-      \ WARNING.OCCURRED
-
 " NOTE: Function names should only be matched if they are immediately
 " proceeded by parentheses:
 let s:func_names = [
@@ -139,6 +122,8 @@ syn match ebslMacro /\%(\$\k\+\)\%(^\s*\)\@<!/ display
 syn match ebslPreProc /^\s*\zs\$.\+/ display
 syn region ebslPreProc start=/^\s*\zs:/ end=/:\ze/ oneline display
 
+syn match ebslDatabaseElement /\<\%(VL\=\|R\)\.\k\+\>/ display
+
 " @ variables:
 let s:spec_names = [
       \ 'ACCOUNT', 'AM',
@@ -160,7 +145,24 @@ let s:spec_names = [
       \ 'YEAR'
       \ ]
 let s:spec_pattern = join(s:spec_names, '\|')
-exec 'syn match ebslSpecialVar /@\%('.s:spec_pattern.'\)\>/ display'
+exec 'syn match ebslReservedVariable /@\%('.s:spec_pattern.'\)\>/ display'
+
+syn match ebslReservedVariable /\<\k\+\.ADD\.MODE\>/ display
+syn match ebslReservedVariable /\<ABORT\.\k\+\.LOOP\>/ display
+syn match ebslReservedVariable /\<\%(KEY\|SN\|NEXT\)\.\k\+\>/ display
+syn match ebslReservedVariable /\<\k\+\.TRANSLATION\>/ display
+syn match ebslReservedVariable /\<\k\+\.ACTION[12]\>/ display
+syn keyword ebslReservedVariable
+      \ CONFIRM.LVL CONFIRMED CRNT.KEY
+      \ EDITED.DATA ERROR.OCCURRED
+      \ INPUT.DATA
+      \ MSG MSG.ARGUMENTS
+      \ NEXT.PROC.FLD NUM.ERRORS.THROWN
+      \ OUTPUT.DATA
+      \ PROCESS.END
+      \ RECORD.CANCEL
+      \ TEC.ERROR.IDS
+      \ WARNING.OCCURRED
 
 syn keyword ebslTodo TODO FIXME XXX NOTE contained
 " }}}
@@ -170,13 +172,13 @@ hi def link ebslComment             Comment
 hi def link ebslString              String
 hi def link ebslNumber              Number
 hi def link ebslFloat               Float
-hi def link ebslReservedVariable    Identifier
+hi def link ebslDatabaseElement     Identifier
+hi def link ebslReservedVariable    Special
 hi def link ebslFunction            Function
 hi def link ebslKeyword             Keyword
 hi def link ebslPreProc             PreProc
 hi def link ebslLabel               Label
 hi def link ebslOperator            Operator
-hi def link ebslSpecialVar          Special
 hi def link ebslDelimiter           Delimiter
 hi def link ebslDatabaseAccess      Statement
 hi def link ebslMacro               PreProc
