@@ -109,7 +109,7 @@ if exists('loaded_endwise')
         \ '\zsLOOP\ze\>.*',
         \ '\zsFOR_\k* \%(\%('.join(s:database_qualifiers, '\|').'\)\s*\)*\k\+\ze.*'
         \ ]
-  let b:endwise_pattern = s:sol . join(s:match_patterns, '\|') . s:eol
+  let b:endwise_pattern = s:sol . '\%(' . join(s:match_patterns, '\|') . '\)' . s:eol
 
   let b:endwise_syngroups = 'ebslKeyword,ebslPreProc,ebslDatabaseAccess'
 endif
