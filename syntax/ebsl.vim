@@ -113,6 +113,7 @@ let s:strip_word_pattern = join(map(s:strip_word_names, function('s:AddIgnoreCha
 exec 'syn match ebslKeyword /\<\%('.s:strip_word_pattern.'\)\k*\%((\)\@!/ display'
 
 syn match ebslDatabaseAccess /^\s*\zs\%(FOR\|END\)_\k*/ display
+syn match ebslDatabaseElement /\<\%(VL\=\|R\)\.\k\+\>/ display
 
 syn match ebslLabel /^\s*\zs\k\+:/ display
 syn region ebslLabelBlock start=/^\z(\s*\)\k\+:/ end=/^\z1RETURN\>/ transparent fold keepend
@@ -121,8 +122,6 @@ syn match ebslMacro /\%(\$\k\+\)\%(^\s*\)\@<!/ display
 
 syn match ebslPreProc /^\s*\zs\$.\+/ display
 syn region ebslPreProc start=/^\s*\zs:/ end=/:\ze/ oneline display
-
-syn match ebslDatabaseElement /\<\%(VL\=\|R\)\.\k\+\>/ display
 
 " @ variables:
 let s:spec_names = [
@@ -145,7 +144,7 @@ let s:spec_names = [
       \ 'YEAR'
       \ ]
 let s:spec_pattern = join(s:spec_names, '\|')
-exec 'syn match ebslReservedVariable /@\%('.s:spec_pattern.'\)\>/ display'
+exec 'syn match ebslSpecialVariable /@\%('.s:spec_pattern.'\)\>/ display'
 
 syn match ebslReservedVariable /\<\k\+\.ADD\.MODE\>/ display
 syn match ebslReservedVariable /\<ABORT\.\k\+\.LOOP\>/ display
@@ -173,7 +172,8 @@ hi def link ebslString              String
 hi def link ebslNumber              Number
 hi def link ebslFloat               Float
 hi def link ebslDatabaseElement     Identifier
-hi def link ebslReservedVariable    Special
+hi def link ebslReservedVariable    Identifier
+hi def link ebslSpecialVariable     Special
 hi def link ebslFunction            Function
 hi def link ebslKeyword             Keyword
 hi def link ebslPreProc             PreProc
