@@ -144,7 +144,7 @@ let s:spec_names = [
       \ 'YEAR'
       \ ]
 let s:spec_pattern = join(s:spec_names, '\|')
-exec 'syn match ebslSpecialVariable /@\%('.s:spec_pattern.'\)\>/ display'
+exec 'syn match ebslReservedVariable /@\%('.s:spec_pattern.'\)\>/ display'
 
 syn match ebslReservedVariable /\<\k\+\.ADD\.MODE\>/ display
 syn match ebslReservedVariable /\<ABORT\.\k\+\.LOOP\>/ display
@@ -173,7 +173,6 @@ hi def link ebslNumber              Number
 hi def link ebslFloat               Float
 hi def link ebslDatabaseElement     Identifier
 hi def link ebslReservedVariable    Identifier
-hi def link ebslSpecialVariable     Special
 hi def link ebslFunction            Function
 hi def link ebslKeyword             Keyword
 hi def link ebslPreProc             PreProc
