@@ -78,19 +78,15 @@ endif
 
 " vim-endwise support
 if exists('loaded_endwise')
-  " If vim-capslock is also being used, we need to modify the `capslock`
-  " augroup to *only* insert upper case letters when capslock is enabled
+  " If vim-capslock is also being used, we need to make sure that *only*
+  " uppercase characters are inserted whenver capslock is enabled
   if exists("loaded_capslock")
-    augroup capslock
-      autocmd!
-      autocmd User Flags call Hoist('window', 'CapsLockStatusline')
-      autocmd InsertLeave * call s:exitcallback()
-      if exists('##InsertCharPre')
-        autocmd InsertCharPre *
-              \ if s:enabled('i') |
-              \   let v:char = toupper(c:char) |
-              \ endif
-      endif
+    augroup ebsl_vim_capslock_fix
+      au!
+      au InsertCharPre *
+            \ if exists("b:capslock") |
+            \   let v:char = toupper(v:char) |
+            \ endif
     augroup END
   endif
 
