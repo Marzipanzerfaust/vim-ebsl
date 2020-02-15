@@ -7,16 +7,16 @@ if exists('b:current_syntax')
   finish
 endif
 
-" Syntax definitions {{{
+" Syntax definitions
 syn match ebslDelimiter /[()[\]{},;]/ display
-
-syn match ebslComment /\%(^\|;\)\s*\%(\*\|!\|REM\>\).*/ contains=ebslTodo display
 
 syn match ebslInteger /\<[+-]\=\d\+\>/ display
 syn match ebslFloat /\<[+-]\=\%(\d\+\)\=\.\d\+\>/ display
 
 syn match ebslOperator /[*/^#=&!:<>\-+]/ display
 syn keyword ebslKeywordOperator CAT EQ NE LT GT GE LE MATCH MATCHES AND OR
+
+syn match ebslComment /\%(^\|;\)\s*\%(\*\|!\|REM\>\).*/ contains=ebslTodo display
 
 syn region ebslString start=/'/ end=/'/ oneline display
 syn region ebslString start=/"/ end=/"/ oneline display
@@ -165,9 +165,8 @@ syn keyword ebslReservedVariable
       \ WARNING.OCCURRED
 
 syn keyword ebslTodo TODO FIXME XXX NOTE contained
-" }}}
 
-" Default highlighting {{{
+" Default highlighting
 hi def link ebslComment						Comment
 hi def link ebslString						String
 hi def link ebslInteger						Number
@@ -184,8 +183,7 @@ hi def link ebslDelimiter					Delimiter
 hi def link ebslDatabaseAccess		Statement
 hi def link ebslMacro							PreProc
 hi def link ebslTodo							Todo
-" }}}
 
 let b:current_syntax = 'ebsl'
 
-" vim:fdm=marker noexpandtab
+" vim:noexpandtab
