@@ -10,11 +10,11 @@ endif
 " Syntax definitions
 syn match ebslDelimiter /[()[\]{},;]/ display
 
-syn match ebslInteger /\%(\%(\w\|[]})\"']\s*\)\@<!-\)\=\<\d\+\>/ display
-syn match ebslFloat /\%(\%(\w\|[]})\"']\s*\)\@<!-\)\=\<\%(\d\+\)\=\.\d\+\>/ display
-
 syn match ebslOperator /[*/^#=&!:<>\-+]/ display
 syn keyword ebslKeywordOperator CAT EQ NE LT GT GE LE MATCH MATCHES AND OR
+
+syn match ebslInteger /\%(\%(\w\|[]})\"']\s*\)\@<!-\)\=\<\d\+\>/ display
+syn match ebslFloat /\%(\%(\w\|[]})\"']\s*\)\@<!-\)\=\<\%(\d\+\)\=\.\d\+\>/ display
 
 syn match ebslComment /\%(^\|;\)\s*\%(\*\|!\|REM\>\).*/ contains=ebslTodo display
 
