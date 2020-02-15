@@ -8,15 +8,16 @@ if exists('b:current_syntax')
 endif
 
 " Syntax definitions {{{
-syn match ebslOperator "[*/^#=&!:<>\-+]\|\s\+\%(CAT\|EQ\|NE\|LT\|GT\|GE\|LE\|MATCH\|MATCHES\|AND\|OR\)\s\+" display
+syn match ebslOperator /[*/^#=&!:<>\-+]/ display
+syn keyword ebslKeywordOperator CAT EQ NE LT GT GE LE MATCH MATCHES AND OR
 
 syn match ebslDelimiter /[()[\]{},;]/ display
 
 syn match ebslComment /\%(^\|;\)\s*\%(\*\|!\|REM\>\).*/ contains=ebslTodo display
 
-syn cluster ebslLiteral contains=ebslNumber,ebslFloat,ebslString
-syn match ebslNumber /\<\d\+\>/ display
-syn match ebslFloat /\<\%(\d\+\)\=\.\d\+\>/ display
+syn match ebslInteger /\<[+-]\=\d\+\>/ display
+syn match ebslFloat /\<[+-]\=\%(\d\+\)\=\.\d\+\>/ display
+
 syn region ebslString start=/'/ end=/'/ oneline display
 syn region ebslString start=/"/ end=/"/ oneline display
 syn region ebslString start=/`/ end=/`/ oneline display
@@ -167,21 +168,24 @@ syn keyword ebslTodo TODO FIXME XXX NOTE contained
 " }}}
 
 " Default highlighting {{{
-hi def link ebslComment             Comment
-hi def link ebslString              String
-hi def link ebslNumber              Number
-hi def link ebslFloat               Float
-hi def link ebslDatabaseElement     Identifier
-hi def link ebslReservedVariable    Identifier
-hi def link ebslFunction            Function
-hi def link ebslKeyword             Keyword
-hi def link ebslPreProc             PreProc
-hi def link ebslLabel               Label
-hi def link ebslOperator            Operator
-hi def link ebslDelimiter           Delimiter
-hi def link ebslDatabaseAccess      Statement
-hi def link ebslMacro               PreProc
-hi def link ebslTodo                Todo
+hi def link ebslComment						Comment
+hi def link ebslString						String
+hi def link ebslInteger						Number
+hi def link ebslFloat							Float
+hi def link ebslDatabaseElement		Identifier
+hi def link ebslReservedVariable	Identifier
+hi def link ebslFunction					Function
+hi def link ebslKeyword						Keyword
+hi def link ebslPreProc						PreProc
+hi def link ebslLabel							Label
+hi def link ebslOperator					Operator
+hi def link ebslKeywordOperator		Keyword
+hi def link ebslDelimiter					Delimiter
+hi def link ebslDatabaseAccess		Statement
+hi def link ebslMacro							PreProc
+hi def link ebslTodo							Todo
 " }}}
 
 let b:current_syntax = 'ebsl'
+
+" vim:fdm=marker noexpandtab

@@ -16,13 +16,7 @@ setlocal commentstring=*%s
 setlocal iskeyword+=.
 setlocal tabstop=3 softtabstop=3 shiftwidth=3
 
-if exists('ebsl_fold')
-  let s:fold = g:ebsl_fold
-else
-  let s:fold = 1
-endif
-
-if s:fold
+if exists("ebsl_fold")
   setlocal foldmethod=syntax
 endif
 
@@ -53,8 +47,8 @@ endfunction
 " vim-matchit support
 if exists('loaded_matchit')
   " Given a two-dimensional array, where each row is a list of patterns
-  " representing an entry in match_words, return the full string
-  " required for match_words
+  " representing an entry in `match_words`, return the full string
+  " required for `match_words`
   function! MatchitString(list)
     let strlist = []
 
