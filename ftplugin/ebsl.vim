@@ -17,6 +17,7 @@ setlocal iskeyword+=.
 setlocal tabstop=3 softtabstop=3 shiftwidth=3
 
 echom exists("ebsl_fold")
+echom exists("g:ebsl_fold")
 if exists("ebsl_fold")
   setlocal foldmethod=syntax
 endif
