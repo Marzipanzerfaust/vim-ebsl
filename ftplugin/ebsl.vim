@@ -78,6 +78,22 @@ endif
 
 " vim-endwise support
 if exists('loaded_endwise')
+  " If vim-capslock is also being used, we need to modify the `capslock`
+  " augroup to *only* insert upper case letters when capslock is enabled
+  if exists("loaded_capslock")
+    augroup capslock
+      autocmd!
+      autocmd User Flags call Hoist('window', 'CapsLockStatusline')
+      autocmd InsertLeave * call s:exitcallback()
+      if exists('##InsertCharPre')
+        autocmd InsertCharPre *
+              \ if s:enabled('i') |
+              \   let v:char = toupper(c:char) |
+              \ endif
+      endif
+    augroup END
+  endif
+
   let b:endwise_addition =
         \ '\=submatch(0) =~ "FOR_" ? "END_" . split(submatch(0))[0][4:] . " " . split(submatch(0))[-1] : ' .
         \ 'submatch(0) =~ "FOR" ? "NEXT ".split(submatch(0))[1] : ' .
