@@ -8,15 +8,15 @@ if exists('b:current_syntax')
 endif
 
 " Syntax definitions {{{
-syn match ebslOperator /[*/^#=&!:<>\-+]/ display
-syn keyword ebslKeywordOperator CAT EQ NE LT GT GE LE MATCH MATCHES AND OR
-
 syn match ebslDelimiter /[()[\]{},;]/ display
 
 syn match ebslComment /\%(^\|;\)\s*\%(\*\|!\|REM\>\).*/ contains=ebslTodo display
 
 syn match ebslInteger /\<[+-]\=\d\+\>/ display
 syn match ebslFloat /\<[+-]\=\%(\d\+\)\=\.\d\+\>/ display
+
+syn match ebslOperator /[*/^#=&!:<>\-+]/ display
+syn keyword ebslKeywordOperator CAT EQ NE LT GT GE LE MATCH MATCHES AND OR
 
 syn region ebslString start=/'/ end=/'/ oneline display
 syn region ebslString start=/"/ end=/"/ oneline display
