@@ -15,8 +15,8 @@ syn keyword ebslKeywordOperator CAT EQ NE LT GT GE LE MATCH MATCHES AND OR
 
 " syn match ebslInteger /\%(\%(\w\|[]})\"']\s*\)\@<!-\)\=\<\d\+\>/ display
 " syn match ebslFloat /\%(\%(\w\|[]})\"']\s*\)\@<!-\)\=\<\%(\d\+\)\=\.\d\+\>/ display
-syn match ebslInteger /[+-]\=\<\d\+\>/ display
-syn match ebslFloat /[+-]\=\<\%(\d\+\)\=\.\d\+\>/ display
+syn match ebslInteger /\>\@<![+-]\=\<\d\+\>/ display
+syn match ebslFloat /\>\@<![+-]\=\<\%(\d\+\)\=\.\d\+\>/ display
 
 syn match ebslComment /\%(^\|;\)\s*\%(\*\|!\|REM\>\).*/ contains=ebslTodo display
 
