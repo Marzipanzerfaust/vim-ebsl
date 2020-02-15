@@ -16,7 +16,7 @@ setlocal commentstring=*%s
 setlocal iskeyword+=.
 setlocal tabstop=3 softtabstop=3 shiftwidth=3
 
-if exists("ebsl_fold")
+if exists("g:ebsl_fold")
   setlocal foldmethod=syntax
 endif
 
