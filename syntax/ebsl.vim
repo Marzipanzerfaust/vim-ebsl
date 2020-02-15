@@ -10,8 +10,10 @@ endif
 " Syntax definitions
 syn match ebslDelimiter /[()[\]{},;]/ display
 
-syn match ebslInteger /\<[+-]\=\d\+\>/ display
-syn match ebslFloat /\<[+-]\=\%(\d\+\)\=\.\d\+\>/ display
+syn match ebslInteger /\<\d\+\>/ display
+syn match ebslFloat /\<\%(\d\+\)\=\.\d\+\>/ display
+
+syn match ebslUnaryOperator /[+-]/ display nextgroup=ebslInteger,ebslFloat
 
 syn match ebslOperator /[*/^#=&!:<>\-+]/ display
 syn keyword ebslKeywordOperator CAT EQ NE LT GT GE LE MATCH MATCHES AND OR
