@@ -82,9 +82,6 @@ if exists('loaded_endwise')
   " augroup to *only* insert upper case letters when capslock is enabled
   if exists("loaded_capslock")
     augroup capslock
-      autocmd!
-      autocmd User Flags call Hoist('window', 'CapsLockStatusline')
-      autocmd InsertLeave * call s:exitcallback()
       if exists('##InsertCharPre')
         autocmd InsertCharPre *
               \ if s:enabled('i') |
