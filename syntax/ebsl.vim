@@ -96,7 +96,7 @@ syn keyword ebslFunction nextgroup=ebslFuncArguments saveSecurityContext setAuth
 syn keyword ebslFunction nextgroup=ebslFuncArguments writeSocket
 syn keyword ebslFunction nextgroup=ebslFuncArguments @
 
-syn region ebslFuncArguments matchgroup=ebslFuncParentheses start="(" end=")" contained display oneline
+syn region ebslFuncArguments matchgroup=ebslFuncParentheses start="(" end=")" contains=@ebslTop contained display oneline
 
 " NOTE: There is some overlap in names between functions and statement
 " keywords, so these are only matched if they are *not* proceeded by
