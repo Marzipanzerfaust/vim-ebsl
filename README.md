@@ -1,4 +1,6 @@
-This plugin adds support for the Envision-Based Software Language (EBSL), a.k.a. Envision Basic, to vim. Features include:
+This plugin adds support for the Envision-Based Software Language (EBSL), a.k.a. Envision Basic, to vim. Envision Basic is the programming language used by [Ellucian Colleague](https://www.ellucian.com/solutions/ellucian-colleague).
+
+Features include:
 * Syntax highlighting
 * Indentation
 * Folding for subroutines
