@@ -57,9 +57,11 @@ let s:func_names = [
       \ 'writeSocket'
       \ ]
 let s:func_pattern = join(s:func_names, '\|')
-exec 'syn match ebslFunction /\<\%('.s:func_pattern.'\)\%((\)\@=/ display'
+" exec 'syn match ebslFunction /\<\%('.s:func_pattern.'\)\%((\)\@=/ display'
+exec 'syn match ebslFunction /\<\%('.s:func_pattern.'\)(\@=/ display'
 " The @ function
-syn match ebslFunction /@\%((\)\@=/ display
+" syn match ebslFunction /@\%((\)\@=/ display
+syn match ebslFunction /@\ze(/
 
 " NOTE: There is some overlap in names between functions and statement
 " keywords, so these are only matched if they are *not* proceeded by
@@ -88,7 +90,8 @@ let s:keyword_names = [
       \ 'WAITING', 'WAKE', 'WARNING', 'WEOF', 'WEOFSEQ', 'WHILE', 'WINDOW', 'WINDOWS', 'WITH', 'WRITE', 'WRITELIST', 'WRITEONLY', 'WRITESEQ', 'WRITESEQF', 'WRITET', 'WRITEU', 'WRITEV', 'WRITEVU', 'WRITING'
       \ ]
 let s:keyword_pattern = join(s:keyword_names, '\|')
-exec 'syn match ebslKeyword /\<\%('.s:keyword_pattern.'\)\%((\)\@!\>/ display'
+" exec 'syn match ebslKeyword /\<\%('.s:keyword_pattern.'\)\%((\)\@!\>/ display'
+exec 'syn match ebslKeyword /\<\%('.s.keyword_pattern.'\)(\@!\>/ display'
 
 " The below function and keyword names strip out any [.-_] before being
 " matched
