@@ -91,7 +91,7 @@ let s:keyword_names = [
       \ ]
 let s:keyword_pattern = join(s:keyword_names, '\|')
 " exec 'syn match ebslKeyword /\<\%('.s:keyword_pattern.'\)\%((\)\@!\>/ display'
-exec 'syn match ebslKeyword /\<\%('.s.keyword_pattern.'\)(\@!\>/ display'
+exec 'syn match ebslKeyword /\<\%('.s:keyword_pattern.'\)(\@!\>/ display'
 
 " The below function and keyword names strip out any [.-_] before being
 " matched
