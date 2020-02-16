@@ -17,6 +17,7 @@ syn match ebslInteger /\>\@1<![+-]\=\<\d\+\>/ display
 syn match ebslFloat /\>\@1<![+-]\=\<\%(\d\+\)\=\.\d\+\>/ display
 
 syn match ebslComment /\%(^\|;\)\s*\%(\*\|!\|REM\>\).*/ contains=ebslTodo display
+syn keyword ebslTodo TODO FIXME XXX NOTE
 
 syn region ebslString start=/'/ end=/'/ oneline display
 syn region ebslString start=/"/ end=/"/ oneline display
@@ -57,10 +58,8 @@ let s:func_names = [
       \ 'writeSocket'
       \ ]
 let s:func_pattern = join(s:func_names, '\|')
-" exec 'syn match ebslFunction /\<\%('.s:func_pattern.'\)\%((\)\@=/ display'
 exec 'syn match ebslFunction /\<\%('.s:func_pattern.'\)(\@=/ display'
 " The @ function
-" syn match ebslFunction /@\%((\)\@=/ display
 syn match ebslFunction /@\ze(/
 
 " NOTE: There is some overlap in names between functions and statement
@@ -90,7 +89,6 @@ let s:keyword_names = [
       \ 'WAITING', 'WAKE', 'WARNING', 'WEOF', 'WEOFSEQ', 'WHILE', 'WINDOW', 'WINDOWS', 'WITH', 'WRITE', 'WRITELIST', 'WRITEONLY', 'WRITESEQ', 'WRITESEQF', 'WRITET', 'WRITEU', 'WRITEV', 'WRITEVU', 'WRITING'
       \ ]
 let s:keyword_pattern = join(s:keyword_names, '\|')
-" exec 'syn match ebslKeyword /\<\%('.s:keyword_pattern.'\)\%((\)\@!\>/ display'
 exec 'syn match ebslKeyword /\<\%('.s:keyword_pattern.'\)(\@!\>/ display'
 
 " The below function and keyword names strip out any [.-_] before being
@@ -125,7 +123,6 @@ syn region ebslLabelBlock start=/^\z(\s*\)\k\+:/ end=/^\z1RETURN\>/ transparent 
 syn match ebslPreProc /^\s*\zs\$.\+/ display
 syn region ebslPreProc start=/^\s*\zs:/ end=/:/ oneline display
 
-" syn match ebslMacro /\%(\$\k\+\)\%(^\s*\)\@<!/ display
 syn match ebslMacro /\%(^\s*\)\@<!\%(\$\k\+\)/
 
 " @ variables:
@@ -168,26 +165,22 @@ syn keyword ebslReservedVariable
       \ TEC.ERROR.IDS
       \ WARNING.OCCURRED
 
-syn keyword ebslTodo TODO FIXME XXX NOTE contained
-
 " Default highlighting
-hi def link ebslComment						Comment
-hi def link ebslString						String
-hi def link ebslInteger						Number
-hi def link ebslFloat							Float
-hi def link ebslDatabaseElement		Identifier
-hi def link ebslReservedVariable	Identifier
-hi def link ebslFunction					Function
-hi def link ebslKeyword						Keyword
-hi def link ebslPreProc						PreProc
-hi def link ebslLabel							Label
-hi def link ebslOperator					Operator
-hi def link ebslKeywordOperator		Keyword
-hi def link ebslDelimiter					Delimiter
-hi def link ebslDatabaseAccess		Statement
-hi def link ebslMacro							PreProc
-hi def link ebslTodo							Todo
+hi def link ebslComment          Comment
+hi def link ebslString           String
+hi def link ebslInteger          Number
+hi def link ebslFloat            Float
+hi def link ebslDatabaseElement  Identifier
+hi def link ebslReservedVariable Identifier
+hi def link ebslFunction         Function
+hi def link ebslKeyword          Keyword
+hi def link ebslPreProc          PreProc
+hi def link ebslLabel            Label
+hi def link ebslOperator         Operator
+hi def link ebslKeywordOperator  Keyword
+hi def link ebslDelimiter        Delimiter
+hi def link ebslDatabaseAccess   Statement
+hi def link ebslMacro            PreProc
+hi def link ebslTodo             Todo
 
 let b:current_syntax = 'ebsl'
-
-" vim:noexpandtab
