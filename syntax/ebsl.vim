@@ -8,7 +8,9 @@ if exists('b:current_syntax')
 endif
 
 " Syntax definitions
-syn match ebslDelimiter /[()[\]{},;]/ display
+
+" Cluster for groups that can only occur on the top level
+syn cluster ebslTop contains=ebslComment,ebslKeyword,ebslLabel,ebslPreProc
 
 syn match ebslOperator /[*/^#=&!:<>\-+]/ display
 syn keyword ebslKeywordOperator CAT EQ NE LT GT GE LE MATCH MATCHES AND OR
@@ -25,42 +27,76 @@ syn region ebslString matchgroup=ebslStringDelimiter start=/`/ end=/`/ oneline d
 
 " NOTE: Function names should only be matched if they are immediately
 " proceeded by parentheses:
-let s:func_names = [
-      \ 'ABS', 'ACOS', 'ALPHA', 'ASCII', 'ASIN', 'ATAN',
-      \ 'BITAND', 'BITNOT', 'BITOR', 'BITXOR', 'BYTELEN',
-      \ 'CALCULATE', 'CATS', 'CHANGE', 'CHAR', 'CHARLEN', 'CHARS', 'CHECKSUM', 'COL1', 'COL2', 'CONVERT', 'COS', 'COUNT', 'COUNTS', 'CloseXMLData',
-      \ 'DATE', 'DBTOXML', 'DCOUNT', 'DELETE', 'DIGEST', 'DIR', 'DISPLAYWIDTH', 'DOWNCASE', 'DQUOTE', 'DROUND',
-      \ 'EBCDIC', 'EDADRV_Cleanup', 'EDADRV_CloseStmt', 'EDADRV_Connect', 'EDADRV_Disconnect', 'EDADRV_DropStmt', 'EDADRV_EndTransaction', 'EDADRV_ExecuteStmt', 'EDADRV_FetchStmt', 'EDADRV_FreeResult', 'EDADRV_GetDBInfo', 'EDADRV_GetEDAAttr', 'EDADRV_GetErrmsg', 'EDADRV_GetSpecialInfo', 'EDADRV_LoadSymbols', 'EDADRV_Perform', 'EDADRV_PrepareStmt', 'ENCODE', 'ENCRYPT', 'EQS', 'EREPLACE', 'EXP', 'EXTRACT',
-      \ 'FIELD', 'FIELDSTORE', 'FILEINFO', 'FMT',
-      \ 'GES', 'GETENV', 'GETPTR', 'GETPU', 'GETQUEUE', 'GETREADU', 'GETUSERGROUP', 'GETUSERID', 'GETUSERNAME', 'GROUP', 'GTS',
-      \ 'HASH',
-      \ 'ICONV', 'ICONVS', 'IN', 'INDEX', 'INDICES', 'INMAT', 'INSERT', 'INT', 'ISMB', 'ISNV', 'ISNVS', 'ITYPE',
-      \ 'LEN', 'LENS', 'LES', 'LISTUSER', 'LN', 'LOWER', 'LTS',
-      \ 'MATCHFIELD', 'MAXIMUM', 'MBLEN', 'MINIMUM', 'MOD',
-      \ 'NEG', 'NES', 'NFAUSER', 'NOT', 'NOTS', 'NUM', 'NUMS',
-      \ 'OCONV', 'OCONVS', 'OpenXMLData',
-      \ 'PWR', 'PrepareXML',
-      \ 'QUOTE',
-      \ 'RAISE', 'RECORDLOCKED', 'REM', 'REMOVE', 'REPLACE', 'REUSE', 'RND', 'ReadXMLData', 'ReleaseXML',
-      \ 'SADD', 'SCMP', 'SDIV', 'SELECTINFO', 'SEQ', 'SEQS', 'SETENV', 'SIGNATURE', 'SIN', 'SMUL', 'SOAPCreateRequest', 'SOAPCreateSecureRequest', 'SOAPGetDefault', 'SOAPGetFault', 'SOAPGetResponseHeader', 'SOAPRequestWrite', 'SOAPSetDefault', 'SOAPSetParameters', 'SOAPSetRequestBody', 'SOAPSetRequestContent', 'SOAPSetRequestHeader', 'SOAPSubmitRequest', 'SORT', 'SOUNDEX', 'SPACE', 'SPACES', 'SPLICE', 'SQLAllocConnect', 'SQLAllocEnv', 'SQLAllocStmt', 'SQLBindCol', 'SQLBindParameter', 'SQLCancel', 'SQLColAttributes', 'SQLColumns', 'SQLConnect', 'SQLDescribeCol', 'SQLDisconnect', 'SQLError', 'SQLExecDirect', 'SQLExecute', 'SQLFetch', 'SQLFreeConnect', 'SQLFreeEnv', 'SQLFreeStmt', 'SQLGetInfo', 'SQLGetTypeInfo', 'SQLNumParams', 'SQLNumResultCols', 'SQLParamOptions', 'SQLPrepare', 'SQLRowCount', 'SQLSetConnectOption', 'SQLSetParam', 'SQLSpecialColumns', 'SQLStatistics', 'SQLTables', 'SQLTransact', 'SQRT', 'SQUOTE', 'SSUB', 'STATUS', 'STR', 'STRS', 'SUBSTRINGS', 'SUM', 'SYSTEM',
-      \ 'TAN', 'TIME', 'TIMEDATE', 'TRIM', 'TRIMB', 'TRIMF', 'TRIMS',
-      \ 'UNASSIGNED', 'UPCASE',
-      \ 'XDOMAddChild', 'XDOMAppend', 'XDOMClone', 'XDOMClose', 'XDOMCreateNode', 'XDOMCreateRoot', 'XDOMEvaluate', 'XDOMGetAttribute', 'XDOMGetNodeName', 'XDOMGetNodeType', 'XDOMGetNodeValue', 'XDOMGetOwnerDocument', 'XDOMGetUserData', 'XDOMImportNode', 'XDOMInsert', 'XDOMLocate', 'XDOMLocateNode', 'XDOMOpen', 'XDOMRemove', 'XDOMReplace', 'XDOMSetNodeValue', 'XDOMSetUserData', 'XDOMTransform', 'XDOMValidate', 'XDOMValidateDom', 'XDOMWrite', 'XLATE', 'XMAPAppendRec', 'XMAPClose', 'XMAPCreate', 'XMAPOpen', 'XMAPReadNext', 'XMAPToXMLDoc', 'XMLError', 'XMLExecute', 'XMLGetError', 'XMLGetOptionValue', 'XMLGetOptions', 'XMLSetOptions', 'XMLTODB',
-      \ 'acceptConnection', 'addAuthenticationRule', 'addCertificate', 'addRequestParameter', 'amInitialize', 'amReceiveMsg', 'amReceiveRequest', 'amSendMsg', 'amSendRequst', 'amSendResponse', 'amTerminate', 'analyzeCertificate',
-      \ 'closeSocket', 'createCertRequest', 'createCertificate', 'createRequest', 'createSecureRequest', 'createSecurityContext',
-      \ 'generateKey', 'getCipherSuite', 'getHTTPDefault', 'getResponseHeader', 'getSocketInformation', 'getSocketOptions',
-      \ 'initSecureServerSocket', 'initServerSocket',
-      \ 'loadSecurityContext',
-      \ 'openSecureSocket', 'openSocket',
-      \ 'protocolLogging',
-      \ 'readSocket',
-      \ 'saveSecurityContext', 'setAuthenticationDepth', 'setCipherSuite', 'setClientAuthentication', 'setHTTPDefault', 'setPrivateKey', 'setRandomSeed', 'setRequestHeader', 'setSocketOptions', 'showSecurityContext', 'submitRequest',
-      \ 'writeSocket'
-      \ ]
-let s:func_pattern = join(s:func_names, '\|')
-exec 'syn match ebslFunction /\<\%('.s:func_pattern.'\)(\@=/ display'
-" The @ function
-syn match ebslFunction /@\ze(/
+" let s:func_names = [
+"       \ 'ABS', 'ACOS', 'ALPHA', 'ASCII', 'ASIN', 'ATAN',
+"       \ 'BITAND', 'BITNOT', 'BITOR', 'BITXOR', 'BYTELEN',
+"       \ 'CALCULATE', 'CATS', 'CHANGE', 'CHAR', 'CHARLEN', 'CHARS', 'CHECKSUM', 'COL1', 'COL2', 'CONVERT', 'COS', 'COUNT', 'COUNTS', 'CloseXMLData',
+"       \ 'DATE', 'DBTOXML', 'DCOUNT', 'DELETE', 'DIGEST', 'DIR', 'DISPLAYWIDTH', 'DOWNCASE', 'DQUOTE', 'DROUND',
+"       \ 'EBCDIC', 'EDADRV_Cleanup', 'EDADRV_CloseStmt', 'EDADRV_Connect', 'EDADRV_Disconnect', 'EDADRV_DropStmt', 'EDADRV_EndTransaction', 'EDADRV_ExecuteStmt', 'EDADRV_FetchStmt', 'EDADRV_FreeResult', 'EDADRV_GetDBInfo', 'EDADRV_GetEDAAttr', 'EDADRV_GetErrmsg', 'EDADRV_GetSpecialInfo', 'EDADRV_LoadSymbols', 'EDADRV_Perform', 'EDADRV_PrepareStmt', 'ENCODE', 'ENCRYPT', 'EQS', 'EREPLACE', 'EXP', 'EXTRACT',
+"       \ 'FIELD', 'FIELDSTORE', 'FILEINFO', 'FMT',
+"       \ 'GES', 'GETENV', 'GETPTR', 'GETPU', 'GETQUEUE', 'GETREADU', 'GETUSERGROUP', 'GETUSERID', 'GETUSERNAME', 'GROUP', 'GTS',
+"       \ 'HASH',
+"       \ 'ICONV', 'ICONVS', 'IN', 'INDEX', 'INDICES', 'INMAT', 'INSERT', 'INT', 'ISMB', 'ISNV', 'ISNVS', 'ITYPE',
+"       \ 'LEN', 'LENS', 'LES', 'LISTUSER', 'LN', 'LOWER', 'LTS',
+"       \ 'MATCHFIELD', 'MAXIMUM', 'MBLEN', 'MINIMUM', 'MOD',
+"       \ 'NEG', 'NES', 'NFAUSER', 'NOT', 'NOTS', 'NUM', 'NUMS',
+"       \ 'OCONV', 'OCONVS', 'OpenXMLData',
+"       \ 'PWR', 'PrepareXML',
+"       \ 'QUOTE',
+"       \ 'RAISE', 'RECORDLOCKED', 'REM', 'REMOVE', 'REPLACE', 'REUSE', 'RND', 'ReadXMLData', 'ReleaseXML',
+"       \ 'SADD', 'SCMP', 'SDIV', 'SELECTINFO', 'SEQ', 'SEQS', 'SETENV', 'SIGNATURE', 'SIN', 'SMUL', 'SOAPCreateRequest', 'SOAPCreateSecureRequest', 'SOAPGetDefault', 'SOAPGetFault', 'SOAPGetResponseHeader', 'SOAPRequestWrite', 'SOAPSetDefault', 'SOAPSetParameters', 'SOAPSetRequestBody', 'SOAPSetRequestContent', 'SOAPSetRequestHeader', 'SOAPSubmitRequest', 'SORT', 'SOUNDEX', 'SPACE', 'SPACES', 'SPLICE', 'SQLAllocConnect', 'SQLAllocEnv', 'SQLAllocStmt', 'SQLBindCol', 'SQLBindParameter', 'SQLCancel', 'SQLColAttributes', 'SQLColumns', 'SQLConnect', 'SQLDescribeCol', 'SQLDisconnect', 'SQLError', 'SQLExecDirect', 'SQLExecute', 'SQLFetch', 'SQLFreeConnect', 'SQLFreeEnv', 'SQLFreeStmt', 'SQLGetInfo', 'SQLGetTypeInfo', 'SQLNumParams', 'SQLNumResultCols', 'SQLParamOptions', 'SQLPrepare', 'SQLRowCount', 'SQLSetConnectOption', 'SQLSetParam', 'SQLSpecialColumns', 'SQLStatistics', 'SQLTables', 'SQLTransact', 'SQRT', 'SQUOTE', 'SSUB', 'STATUS', 'STR', 'STRS', 'SUBSTRINGS', 'SUM', 'SYSTEM',
+"       \ 'TAN', 'TIME', 'TIMEDATE', 'TRIM', 'TRIMB', 'TRIMF', 'TRIMS',
+"       \ 'UNASSIGNED', 'UPCASE',
+"       \ 'XDOMAddChild', 'XDOMAppend', 'XDOMClone', 'XDOMClose', 'XDOMCreateNode', 'XDOMCreateRoot', 'XDOMEvaluate', 'XDOMGetAttribute', 'XDOMGetNodeName', 'XDOMGetNodeType', 'XDOMGetNodeValue', 'XDOMGetOwnerDocument', 'XDOMGetUserData', 'XDOMImportNode', 'XDOMInsert', 'XDOMLocate', 'XDOMLocateNode', 'XDOMOpen', 'XDOMRemove', 'XDOMReplace', 'XDOMSetNodeValue', 'XDOMSetUserData', 'XDOMTransform', 'XDOMValidate', 'XDOMValidateDom', 'XDOMWrite', 'XLATE', 'XMAPAppendRec', 'XMAPClose', 'XMAPCreate', 'XMAPOpen', 'XMAPReadNext', 'XMAPToXMLDoc', 'XMLError', 'XMLExecute', 'XMLGetError', 'XMLGetOptionValue', 'XMLGetOptions', 'XMLSetOptions', 'XMLTODB',
+"       \ 'acceptConnection', 'addAuthenticationRule', 'addCertificate', 'addRequestParameter', 'amInitialize', 'amReceiveMsg', 'amReceiveRequest', 'amSendMsg', 'amSendRequst', 'amSendResponse', 'amTerminate', 'analyzeCertificate',
+"       \ 'closeSocket', 'createCertRequest', 'createCertificate', 'createRequest', 'createSecureRequest', 'createSecurityContext',
+"       \ 'generateKey', 'getCipherSuite', 'getHTTPDefault', 'getResponseHeader', 'getSocketInformation', 'getSocketOptions',
+"       \ 'initSecureServerSocket', 'initServerSocket',
+"       \ 'loadSecurityContext',
+"       \ 'openSecureSocket', 'openSocket',
+"       \ 'protocolLogging',
+"       \ 'readSocket',
+"       \ 'saveSecurityContext', 'setAuthenticationDepth', 'setCipherSuite', 'setClientAuthentication', 'setHTTPDefault', 'setPrivateKey', 'setRandomSeed', 'setRequestHeader', 'setSocketOptions', 'showSecurityContext', 'submitRequest',
+"       \ 'writeSocket'
+"       \ ]
+" let s:func_pattern = join(s:func_names, '\|')
+" exec 'syn match ebslFunction /\<\%('.s:func_pattern.'\)(\@=/ display'
+" " The @ function
+" syn match ebslFunction /@\ze(/
+
+syn keyword ebslFunction nextgroup=ebslFuncArguments ABS ACOS ALPHA ASCII ASIN ATAN
+syn keyword ebslFunction nextgroup=ebslFuncArguments BITAND BITNOT BITOR BITXOR BYTELEN
+syn keyword ebslFunction nextgroup=ebslFuncArguments CALCULATE CATS CHANGE CHAR CHARLEN CHARS CHECKSUM COL1 COL2 CONVERT COS COUNT COUNTS CloseXMLData
+syn keyword ebslFunction nextgroup=ebslFuncArguments DATE DBTOXML DCOUNT DELETE DIGEST DIR DISPLAYWIDTH DOWNCASE DQUOTE DROUND
+syn keyword ebslFunction nextgroup=ebslFuncArguments EBCDIC EDADRV_Cleanup EDADRV_CloseStmt EDADRV_Connect EDADRV_Disconnect EDADRV_DropStmt EDADRV_EndTransaction EDADRV_ExecuteStmt EDADRV_FetchStmt EDADRV_FreeResult EDADRV_GetDBInfo EDADRV_GetEDAAttr EDADRV_GetErrmsg EDADRV_GetSpecialInfo EDADRV_LoadSymbols EDADRV_Perform EDADRV_PrepareStmt ENCODE ENCRYPT EQS EREPLACE EXP EXTRACT
+syn keyword ebslFunction nextgroup=ebslFuncArguments FIELD FIELDSTORE FILEINFO FMT
+syn keyword ebslFunction nextgroup=ebslFuncArguments GES GETENV GETPTR GETPU GETQUEUE GETREADU GETUSERGROUP GETUSERID GETUSERNAME GROUP GTS
+syn keyword ebslFunction nextgroup=ebslFuncArguments HASH
+syn keyword ebslFunction nextgroup=ebslFuncArguments ICONV ICONVS IN INDEX INDICES INMAT INSERT INT ISMB ISNV ISNVS ITYPE
+syn keyword ebslFunction nextgroup=ebslFuncArguments LEN LENS LES LISTUSER LN LOWER LTS
+syn keyword ebslFunction nextgroup=ebslFuncArguments MATCHFIELD MAXIMUM MBLEN MINIMUM MOD
+syn keyword ebslFunction nextgroup=ebslFuncArguments NEG NES NFAUSER NOT NOTS NUM NUMS
+syn keyword ebslFunction nextgroup=ebslFuncArguments OCONV OCONVS OpenXMLData
+syn keyword ebslFunction nextgroup=ebslFuncArguments PWR PrepareXML
+syn keyword ebslFunction nextgroup=ebslFuncArguments QUOTE
+syn keyword ebslFunction nextgroup=ebslFuncArguments RAISE RECORDLOCKED REM REMOVE REPLACE REUSE RND ReadXMLData ReleaseXML
+syn keyword ebslFunction nextgroup=ebslFuncArguments SADD SCMP SDIV SELECTINFO SEQ SEQS SETENV SIGNATURE SIN SMUL SOAPCreateRequest SOAPCreateSecureRequest SOAPGetDefault SOAPGetFault SOAPGetResponseHeader SOAPRequestWrite SOAPSetDefault SOAPSetParameters SOAPSetRequestBody SOAPSetRequestContent SOAPSetRequestHeader SOAPSubmitRequest SORT SOUNDEX SPACE SPACES SPLICE SQLAllocConnect SQLAllocEnv SQLAllocStmt SQLBindCol SQLBindParameter SQLCancel SQLColAttributes SQLColumns SQLConnect SQLDescribeCol SQLDisconnect SQLError SQLExecDirect SQLExecute SQLFetch SQLFreeConnect SQLFreeEnv SQLFreeStmt SQLGetInfo SQLGetTypeInfo SQLNumParams SQLNumResultCols SQLParamOptions SQLPrepare SQLRowCount SQLSetConnectOption SQLSetParam SQLSpecialColumns SQLStatistics SQLTables SQLTransact SQRT SQUOTE SSUB STATUS STR STRS SUBSTRINGS SUM SYSTEM
+syn keyword ebslFunction nextgroup=ebslFuncArguments TAN TIME TIMEDATE TRIM TRIMB TRIMF TRIMS
+syn keyword ebslFunction nextgroup=ebslFuncArguments UNASSIGNED UPCASE
+syn keyword ebslFunction nextgroup=ebslFuncArguments XDOMAddChild XDOMAppend XDOMClone XDOMClose XDOMCreateNode XDOMCreateRoot XDOMEvaluate XDOMGetAttribute XDOMGetNodeName XDOMGetNodeType XDOMGetNodeValue XDOMGetOwnerDocument XDOMGetUserData XDOMImportNode XDOMInsert XDOMLocate XDOMLocateNode XDOMOpen XDOMRemove XDOMReplace XDOMSetNodeValue XDOMSetUserData XDOMTransform XDOMValidate XDOMValidateDom XDOMWrite XLATE XMAPAppendRec XMAPClose XMAPCreate XMAPOpen XMAPReadNext XMAPToXMLDoc XMLError XMLExecute XMLGetError XMLGetOptionValue XMLGetOptions XMLSetOptions XMLTODB
+syn keyword ebslFunction nextgroup=ebslFuncArguments acceptConnection addAuthenticationRule addCertificate addRequestParameter amInitialize amReceiveMsg amReceiveRequest amSendMsg amSendRequst amSendResponse amTerminate analyzeCertificate
+syn keyword ebslFunction nextgroup=ebslFuncArguments closeSocket createCertRequest createCertificate createRequest createSecureRequest createSecurityContext
+syn keyword ebslFunction nextgroup=ebslFuncArguments generateKey getCipherSuite getHTTPDefault getResponseHeader getSocketInformation getSocketOptions
+syn keyword ebslFunction nextgroup=ebslFuncArguments initSecureServerSocket initServerSocket
+syn keyword ebslFunction nextgroup=ebslFuncArguments loadSecurityContext
+syn keyword ebslFunction nextgroup=ebslFuncArguments openSecureSocket openSocket
+syn keyword ebslFunction nextgroup=ebslFuncArguments protocolLogging
+syn keyword ebslFunction nextgroup=ebslFuncArguments readSocket
+syn keyword ebslFunction nextgroup=ebslFuncArguments saveSecurityContext setAuthenticationDepth setCipherSuite setClientAuthentication setHTTPDefault setPrivateKey setRandomSeed setRequestHeader setSocketOptions showSecurityContext submitRequest
+syn keyword ebslFunction nextgroup=ebslFuncArguments writeSocket
+syn keyword ebslFunction nextgroup=ebslFuncArguments @
+
+syn region ebslFuncArguments matchgroup=ebslFuncParentheses start="(" end=")" contained display oneline
 
 " NOTE: There is some overlap in names between functions and statement
 " keywords, so these are only matched if they are *not* proceeded by
@@ -174,6 +210,7 @@ hi def link ebslFloat            Float
 hi def link ebslDatabaseElement  Identifier
 hi def link ebslReservedVariable Identifier
 hi def link ebslFunction         Function
+hi def link ebslFuncParentheses  Delimiter
 hi def link ebslKeyword          Keyword
 hi def link ebslPreProc          PreProc
 hi def link ebslPreProcDelimiter Delimiter
