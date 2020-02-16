@@ -19,9 +19,9 @@ syn match ebslFloat /\>\@1<![+-]\=\<\%(\d\+\)\=\.\d\+\>/ display
 syn match ebslComment /\%(^\|;\)\s*\%(\*\|!\|REM\>\).*/ contains=ebslTodo display
 syn keyword ebslTodo TODO FIXME XXX NOTE
 
-syn region ebslString start=/'/ end=/'/ oneline display
-syn region ebslString start=/"/ end=/"/ oneline display
-syn region ebslString start=/`/ end=/`/ oneline display
+syn region ebslString matchgroup=ebslStringDelimiter start=/'/ end=/'/ oneline display
+syn region ebslString matchgroup=ebslStringDelimiter start=/"/ end=/"/ oneline display
+syn region ebslString matchgroup=ebslStringDelimiter start=/`/ end=/`/ oneline display
 
 " NOTE: Function names should only be matched if they are immediately
 " proceeded by parentheses:
@@ -121,7 +121,7 @@ syn match ebslLabel /^\s*\zs\k\+\ze:/ display
 syn region ebslLabelBlock start=/^\z(\s*\)\k\+:/ end=/^\z1RETURN\>/ transparent fold keepend
 
 syn match ebslPreProc /^\s*\zs\$.\+/ display
-syn region ebslPreProc start=/^\s*\zs:/ end=/:/ oneline display
+syn region ebslPreProc matchgroup=ebslPreProcDelimiter start=/^\s*\zs:/ end=/:/ oneline display
 
 syn match ebslMacro /\%(^\s*\)\@<!\%(\$\k\+\)/
 
@@ -168,6 +168,7 @@ syn keyword ebslReservedVariable
 " Default highlighting
 hi def link ebslComment          Comment
 hi def link ebslString           String
+hi def link ebslStringDelimiter  Delimiter
 hi def link ebslInteger          Number
 hi def link ebslFloat            Float
 hi def link ebslDatabaseElement  Identifier
@@ -175,6 +176,7 @@ hi def link ebslReservedVariable Identifier
 hi def link ebslFunction         Function
 hi def link ebslKeyword          Keyword
 hi def link ebslPreProc          PreProc
+hi def link ebslPreProcDelimiter Delimiter
 hi def link ebslLabel            Label
 hi def link ebslOperator         Operator
 hi def link ebslKeywordOperator  Keyword
