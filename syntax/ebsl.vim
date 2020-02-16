@@ -110,11 +110,11 @@ endfunction
 
 let s:strip_func_pattern = join(map(s:strip_func_names, function('s:AddIgnoreChars')), '\|')
 
-exec 'syn match ebslFunction /\<\%('.s:strip_func_pattern.'\)\k*\%((\)\@=/ display'
+exec 'syn match ebslFunction /\<\%('.s:strip_func_pattern.'\)\k*(\@=/ display'
 
 let s:strip_word_pattern = join(map(s:strip_word_names, function('s:AddIgnoreChars')), '\|')
 
-exec 'syn match ebslKeyword /\<\%('.s:strip_word_pattern.'\)\k*\%((\)\@!/ display'
+exec 'syn match ebslKeyword /\<\%('.s:strip_word_pattern.'\)\k*(\@!\>/ display'
 
 syn match ebslDatabaseAccess /^\s*\zs\%(FOR\|END\)_\k*/ display
 syn match ebslDatabaseElement /\<\%(VL\=\|R\)\.\k\+\>/ display
@@ -122,10 +122,11 @@ syn match ebslDatabaseElement /\<\%(VL\=\|R\)\.\k\+\>/ display
 syn match ebslLabel /^\s*\zs\k\+\ze:/ display
 syn region ebslLabelBlock start=/^\z(\s*\)\k\+:/ end=/^\z1RETURN\>/ transparent fold keepend
 
-syn match ebslMacro /\%(\$\k\+\)\%(^\s*\)\@<!/ display
-
 syn match ebslPreProc /^\s*\zs\$.\+/ display
-syn region ebslPreProc start=/^\s*\zs:/ end=/:\ze/ oneline display
+syn region ebslPreProc start=/^\s*\zs:/ end=/:/ oneline display
+
+" syn match ebslMacro /\%(\$\k\+\)\%(^\s*\)\@<!/ display
+syn match ebslMacro /\%(^\s*\)\@<!\%(\$\k\+\)/
 
 " @ variables:
 let s:spec_names = [
