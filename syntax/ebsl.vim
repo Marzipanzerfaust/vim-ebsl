@@ -115,8 +115,8 @@ exec 'syn match ebslKeyword /\<\%('.s:strip_word_pattern.'\)\k*(\@!\>/ display'
 syn match ebslDatabaseAccess /^\s*\zs\%(FOR\|END\)_\k*/ display
 syn match ebslDatabaseElement /\<\%(VL\=\|R\)\.\k\+\>/ display
 
-syn match ebslLabel /^\k\+:\s$/ display
-syn region ebslLabelBlock start=/^\k\+:\s$/ end=/^RETURN\s*$/ transparent fold keepend
+syn match ebslLabel /^\k\+:\s*$/ display
+syn region ebslLabelBlock start=/^\k\+:\s*$/ end=/^RETURN\s*$/ transparent fold keepend
 
 syn match ebslPreProc /^\s*\zs\$.\+/ display
 syn region ebslPreProc matchgroup=ebslPreProcDelimiter start=/^\s*\zs:/ end=/:/ oneline display
