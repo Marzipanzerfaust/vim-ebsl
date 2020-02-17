@@ -116,7 +116,7 @@ syn match ebslDatabaseAccess /^\s*\zs\%(FOR\|END\)_\k*/ display
 syn match ebslDatabaseElement /\<\%(VL\=\|R\)\.\k\+\>/ display
 
 syn match ebslLabel /^\s*\zs\k\+\ze:/ display
-syn region ebslLabelBlock start=/^\z(\s*\)\k\+:/ end=/^\z1RETURN\>/ transparent fold keepend
+syn region ebslLabelBlock start=/^\k\+:/ end=/^RETURN\>/ transparent fold keepend
 
 syn match ebslPreProc /^\s*\zs\$.\+/ display
 syn region ebslPreProc matchgroup=ebslPreProcDelimiter start=/^\s*\zs:/ end=/:/ oneline display
