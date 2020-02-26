@@ -12,7 +12,7 @@ syn match ebslOperator /[*/^#=&!:<>\-+]/ display
 syn keyword ebslKeywordOperator CAT EQ NE LT GT GE LE MATCH MATCHES AND OR
 
 syn match ebslInteger /\%(\%(\>\|)\|]\|>\)\%(\s*\)\=\)\@<![+-]\=\<\d\+\>/ display
-syn match ebslFloat /\>\@1<![+-]\=\<\%(\d\+\)\=\.\d\+\>/ display
+syn match ebslFloat /\%(\%(\>\|)\|]\|>\)\%(\s*\)\=\)\@<![+-]\=\<\%(\d\+\)\=\.\d\+\>/ display
 
 syn match ebslComment /\%(^\|;\)\s*\%(\*\|!\|REM\>\).*/ contains=ebslTodo display
 syn keyword ebslTodo TODO FIXME XXX NOTE
