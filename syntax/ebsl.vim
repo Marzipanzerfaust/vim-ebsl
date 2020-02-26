@@ -7,7 +7,9 @@ if exists('b:current_syntax')
   finish
 endif
 
-" Syntax definitions
+syn iskeyword 48-57,a-z,A-Z,_,.
+
+" Group definitions
 syn match ebslOperator /[*/^#=&!:<>\-+]/ display
 syn keyword ebslKeywordOperator CAT EQ NE LT GT GE LE MATCH MATCHES AND OR
 

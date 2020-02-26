@@ -13,7 +13,6 @@ let b:did_ftplugin = 1
 
 setlocal comments=:*
 setlocal commentstring=*%s
-setlocal iskeyword+=.
 setlocal tabstop=3 softtabstop=3 shiftwidth=3
 
 if exists("ebsl_fold")
