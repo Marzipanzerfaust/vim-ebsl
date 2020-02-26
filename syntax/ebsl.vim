@@ -13,8 +13,8 @@ syn iskeyword 48-57,a-z,A-Z,_,.
 syn match ebslOperator /[*/^#=&!:<>\-+]/ display
 syn keyword ebslKeywordOperator CAT EQ NE LT GT GE LE MATCH MATCHES AND OR
 
-syn match ebslInteger /\%(\%(\%(\>\|)\|]\|>\)\%(\s*\)\=\)\@<![+-]\=\)\<\d\+\>/ display
-syn match ebslFloat /\%(\%(\%(\>\|)\|]\|>\)\%(\s*\)\=\)\@<![+-]\=\)\<\%(\d\+\)\=\.\d\+\>/ display
+syn match ebslInteger /\%(\%(\%(\k\|)\|]\|>\)\s*\)\@<![+-]\)\=\<\d\+\>/ display
+syn match ebslFloat /\%(\%(\%(\k\|)\|]\|>\)\s*\)\@<![+-]\)\=\<\%(\d\+\)\=\.\d\+\>/ display
 
 syn match ebslComment /\%(^\|;\)\s*\%(\*\|!\|REM\>\).*/ contains=ebslTodo display
 syn keyword ebslTodo TODO FIXME XXX NOTE
@@ -58,9 +58,10 @@ let s:func_names = [
       \ 'writeSocket'
       \ ]
 let s:func_pattern = join(s:func_names, '\|')
-exec 'syn match ebslFunction /\<\%('.s:func_pattern.'\)(\@=/ display'
+exec 'syn match ebslFunction /\<\%('.s:func_pattern.'\)\ze\s*(/ display'
+
 " The @ function
-syn match ebslFunction /@\ze(/
+syn match ebslFunction /\k\@1<!@\ze\s*(/ display
 
 " NOTE: There is some overlap in names between functions and statement
 " keywords, so these are only matched if they are *not* proceeded by
@@ -89,7 +90,7 @@ let s:keyword_names = [
       \ 'WAITING', 'WAKE', 'WARNING', 'WEOF', 'WEOFSEQ', 'WHILE', 'WINDOW', 'WINDOWS', 'WITH', 'WRITE', 'WRITELIST', 'WRITEONLY', 'WRITESEQ', 'WRITESEQF', 'WRITET', 'WRITEU', 'WRITEV', 'WRITEVU', 'WRITING'
       \ ]
 let s:keyword_pattern = join(s:keyword_names, '\|')
-exec 'syn match ebslKeyword /\<\%('.s:keyword_pattern.'\)(\@!\>/ display'
+exec 'syn match ebslKeyword /\<\%('.s:keyword_pattern.'\)\>\%(\s*(\)\@!/ display'
 
 " The below function and keyword names strip out any [.-_] before being
 " matched
@@ -108,11 +109,11 @@ endfunction
 
 let s:strip_func_pattern = join(map(s:strip_func_names, function('s:AddIgnoreChars')), '\|')
 
-exec 'syn match ebslFunction /\<\%('.s:strip_func_pattern.'\)\k*(\@=/ display'
+exec 'syn match ebslFunction /\<\%('.s:strip_func_pattern.'\)\ze\s*(/ display'
 
 let s:strip_word_pattern = join(map(s:strip_word_names, function('s:AddIgnoreChars')), '\|')
 
-exec 'syn match ebslKeyword /\<\%('.s:strip_word_pattern.'\)\k*(\@!\>/ display'
+exec 'syn match ebslKeyword /\<\%('.s:strip_word_pattern.'\)\>\%(\s*(\)\@!/ display'
 
 syn match ebslDatabaseAccess /^\s*\zs\%(FOR\|END\)_\k*/ display
 syn match ebslDatabaseElement /\<\%(VL\=\|R\)\.\k\+\>/ display
