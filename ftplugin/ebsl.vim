@@ -1,7 +1,7 @@
 " Vim filetype plugin file
 " Language: Envision-Based Software Language (EBSL) a.k.a. Envision Basic
-" Author: Jeffrey Crochet <marzipanzerfaust@protonmail.com>
-" URL: https://github.com/marzipanzerfaust/vim-ebsl
+" Author: Jeffrey Crochet <jlcrochet@pm.me>
+" URL: https://github.com/jlcrochet/vim-ebsl
 
 " Only do this when not done yet for this buffer
 if exists("b:did_ftplugin")
@@ -78,9 +78,9 @@ endif
 " vim-endwise support
 if exists('loaded_endwise')
   " If vim-capslock is also being used, we need to make sure that *only*
-  " uppercase characters are inserted whenver capslock is enabled
+  " uppercase characters are inserted whenever capslock is enabled
   if exists("loaded_capslock")
-    augroup ebsl_vim_capslock_fix
+    augroup ebsl_capslock_fix
       au!
       au InsertCharPre *
             \ if exists("b:capslock") |

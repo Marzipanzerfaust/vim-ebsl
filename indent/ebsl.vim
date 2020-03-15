@@ -1,7 +1,7 @@
 " Vim indent file
 " Language: Envision-Based Software Language (EBSL) a.k.a. Envision Basic
-" Author: Jeffrey Crochet <marzipanzerfaust@protonmail.com>
-" URL: https://github.com/marzipanzerfaust/vim-ebsl
+" Author: Jeffrey Crochet <jlcrochet@pm.me>
+" URL: https://github.com/jlcrochet/vim-ebsl
 
 " Only load this indent file when no other was loaded
 if exists("b:did_indent")
