@@ -93,9 +93,6 @@ syn keyword ebslFunction nextgroup=ebslParentheses skipwhite
       \ saveSecurityContext setAuthenticationDepth setCipherSuite setClientAuthentication setHTTPDefault setPrivateKey setRandomSeed setRequestHeader setSocketOptions showSecurityContext submitRequest
       \ writeSocket
 
-" The @ function
-syn match ebslFunction /\k\zs@\ze\s*(/ display
-
 " NOTE: There is some overlap in names between functions and statement
 " keywords, so these are only matched if they are *not* proceeded by
 " parentheses
