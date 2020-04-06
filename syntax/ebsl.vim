@@ -26,6 +26,7 @@ syn region ebslString matchgroup=ebslStringDelimiter start=/`/ end=/`/ oneline d
 " NOTE: Function names should only be matched if they are immediately
 " proceeded by parentheses:
 let s:func_names = [
+      \ '@',
       \ 'ABS', 'ACOS', 'ALPHA', 'ASCII', 'ASIN', 'ATAN',
       \ 'BITAND', 'BITNOT', 'BITOR', 'BITXOR', 'BYTELEN',
       \ 'CALCULATE', 'CATS', 'CHANGE', 'CHAR', 'CHARLEN', 'CHARS', 'CHECKSUM', 'COL1', 'COL2', 'CONVERT', 'COS', 'COUNT', 'COUNTS', 'CloseXMLData',
@@ -59,9 +60,6 @@ let s:func_names = [
       \ ]
 let s:func_pattern = join(s:func_names, '\|')
 exec 'syn match ebslFunction /\<\%('.s:func_pattern.'\)\ze\s*(/ display'
-
-" The @ function
-syn match ebslFunction /\k\zs@\ze\s*(/ display
 
 " NOTE: There is some overlap in names between functions and statement
 " keywords, so these are only matched if they are *not* proceeded by
