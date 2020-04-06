@@ -16,7 +16,7 @@ syn keyword ebslKeywordOperator CAT EQ NE LT GT GE LE MATCH MATCHES AND OR
 syn match ebslInteger /\%(\%(\%(\k\|)\|]\|>\)\s*\)\@<![+-]\)\=\<\d\+\>/ display
 syn match ebslFloat /\%(\%(\%(\k\|)\|]\|>\)\s*\)\@<![+-]\)\=\<\%(\d\+\)\=\.\d\+\>/ display
 
-syn match ebslComment /\%(^\|;\)\s*\zs\%(\*\|!\|REM\>\).*/ contains=ebslTodo display
+syn match ebslComment /\%(^\s*\zs\|;\s*\)\%(\*\|!\|REM\>\).*/ contains=ebslTodo display
 syn keyword ebslTodo TODO FIXME XXX NOTE
 
 syn region ebslString matchgroup=ebslStringDelimiter start=/'/ end=/'/ oneline display
@@ -126,29 +126,6 @@ syn region ebslPreProc matchgroup=ebslPreProcDelimiter start=/^\s*\zs:/ end=/:/ 
 
 syn match ebslMacro /\S\s*\zs\$\k\+/
 
-" @ variables:
-" let s:spec_names = [
-"       \ 'ACCOUNT', 'AM',
-"       \ 'COMMAND', 'CONV', 'CRTHIGH', 'CRTWIDE',
-"       \ 'DATA', 'DATE', 'DAY', 'DICT',
-"       \ 'FM', 'FORMAT',
-"       \ 'GID',
-"       \ 'HEADER',
-"       \ 'ID',
-"       \ 'LASTVERB', 'LEVEL', 'LOGNAME', 'LPTRHIGH', 'LPTRWIDE',
-"       \ 'MONTH',
-"       \ 'PARASENTENCE', 'PATH',
-"       \ 'RECORD', 'RECUR0', 'RECUR1', 'RECUR2', 'RECUR3', 'RECUR4', 'RM',
-"       \ 'SENTENCE', 'SM', 'SVM', 'SYS.BELL', 'SYSTEM.RETURN.CODE',
-"       \ 'TIME', 'TM', 'TRANSACTION', 'TTY',
-"       \ 'UDTNO', 'UID', 'USER.RETURN.CODE', 'USER.TYPE', 'USER0', 'USER1', 'USER2', 'USER3', 'USER4', 'USERNO',
-"       \ 'VM',
-"       \ 'WHO',
-"       \ 'YEAR'
-"       \ ]
-" let s:spec_pattern = join(s:spec_names, '\|')
-" exec 'syn match ebslReservedVariable /@\%('.s:spec_pattern.'\)\>/ display'
-
 syn keyword ebslReservedVariable
       \ @ACCOUNT @AM
       \ @COMMAND @CONV @CRTHIGH @CRTWIDE
@@ -173,6 +150,7 @@ syn match ebslReservedVariable /\<ABORT\.\k\+\.LOOP\>/ display
 syn match ebslReservedVariable /\<\%(KEY\|SN\|NEXT\)\.\k\+\>/ display
 syn match ebslReservedVariable /\<\k\+\.TRANSLATION\>/ display
 syn match ebslReservedVariable /\<\k\+\.ACTION[12]\>/ display
+
 syn keyword ebslReservedVariable
       \ CONFIRM.LVL CONFIRMED CRNT.KEY
       \ EDITED.DATA ERROR.OCCURRED
