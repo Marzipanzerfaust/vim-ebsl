@@ -7,7 +7,7 @@ if exists('b:current_syntax')
   finish
 endif
 
-syn iskeyword 48-57,a-z,A-Z,_,.
+syn iskeyword 48-57,a-z,A-Z,_,.,@-@
 
 " Group definitions
 syn match ebslOperator /[*/^#=&!:<>\-+]/ display
@@ -16,7 +16,7 @@ syn keyword ebslKeywordOperator CAT EQ NE LT GT GE LE MATCH MATCHES AND OR
 syn match ebslInteger /\%(\%(\%(\k\|)\|]\|>\)\s*\)\@<![+-]\)\=\<\d\+\>/ display
 syn match ebslFloat /\%(\%(\%(\k\|)\|]\|>\)\s*\)\@<![+-]\)\=\<\%(\d\+\)\=\.\d\+\>/ display
 
-syn match ebslComment /\%(^\|;\)\s*\%(\*\|!\|REM\>\).*/ contains=ebslTodo display
+syn match ebslComment /\%(^\|;\)\s*\zs\%(\*\|!\|REM\>\).*/ contains=ebslTodo display
 syn keyword ebslTodo TODO FIXME XXX NOTE
 
 syn region ebslString matchgroup=ebslStringDelimiter start=/'/ end=/'/ oneline display
@@ -61,7 +61,7 @@ let s:func_pattern = join(s:func_names, '\|')
 exec 'syn match ebslFunction /\<\%('.s:func_pattern.'\)\ze\s*(/ display'
 
 " The @ function
-syn match ebslFunction /\k\@1<!@\ze\s*(/ display
+syn match ebslFunction /\k\zs@\ze\s*(/ display
 
 " NOTE: There is some overlap in names between functions and statement
 " keywords, so these are only matched if they are *not* proceeded by
@@ -118,36 +118,55 @@ exec 'syn match ebslKeyword /\<\%('.s:strip_word_pattern.'\)\>\%(\s*(\)\@!/ disp
 syn match ebslDatabaseAccess /^\s*\zs\%(FOR\|END\)_\k*/ display
 syn match ebslDatabaseElement /\<\%(VL\=\|R\)\.\k\+\>/ display
 
-syn match ebslLabel /^\k\+:\s*$/ display
-syn region ebslLabelBlock start=/^\k\+:\s*$/ end=/^RETURN\s*$/ transparent fold keepend
+syn match ebslLabel /^\zs\k\+:/ display
+syn region ebslLabelBlock start=/^\zs\k\+:/ end=/^RETURN\>/ transparent fold keepend
 
 syn match ebslPreProc /^\s*\zs\$.\+/ display
 syn region ebslPreProc matchgroup=ebslPreProcDelimiter start=/^\s*\zs:/ end=/:/ oneline display
 
-syn match ebslMacro /\%(^\s*\)\@<!\%(\$\k\+\)/
+syn match ebslMacro /\S\s*\zs\$\k\+/
 
 " @ variables:
-let s:spec_names = [
-      \ 'ACCOUNT', 'AM',
-      \ 'COMMAND', 'CONV', 'CRTHIGH', 'CRTWIDE',
-      \ 'DATA', 'DATE', 'DAY', 'DICT',
-      \ 'FM', 'FORMAT',
-      \ 'GID',
-      \ 'HEADER',
-      \ 'ID',
-      \ 'LASTVERB', 'LEVEL', 'LOGNAME', 'LPTRHIGH', 'LPTRWIDE',
-      \ 'MONTH',
-      \ 'PARASENTENCE', 'PATH',
-      \ 'RECORD', 'RECUR0', 'RECUR1', 'RECUR2', 'RECUR3', 'RECUR4', 'RM',
-      \ 'SENTENCE', 'SM', 'SVM', 'SYS.BELL', 'SYSTEM.RETURN.CODE',
-      \ 'TIME', 'TM', 'TRANSACTION', 'TTY',
-      \ 'UDTNO', 'UID', 'USER.RETURN.CODE', 'USER.TYPE', 'USER0', 'USER1', 'USER2', 'USER3', 'USER4', 'USERNO',
-      \ 'VM',
-      \ 'WHO',
-      \ 'YEAR'
-      \ ]
-let s:spec_pattern = join(s:spec_names, '\|')
-exec 'syn match ebslReservedVariable /@\%('.s:spec_pattern.'\)\>/ display'
+" let s:spec_names = [
+"       \ 'ACCOUNT', 'AM',
+"       \ 'COMMAND', 'CONV', 'CRTHIGH', 'CRTWIDE',
+"       \ 'DATA', 'DATE', 'DAY', 'DICT',
+"       \ 'FM', 'FORMAT',
+"       \ 'GID',
+"       \ 'HEADER',
+"       \ 'ID',
+"       \ 'LASTVERB', 'LEVEL', 'LOGNAME', 'LPTRHIGH', 'LPTRWIDE',
+"       \ 'MONTH',
+"       \ 'PARASENTENCE', 'PATH',
+"       \ 'RECORD', 'RECUR0', 'RECUR1', 'RECUR2', 'RECUR3', 'RECUR4', 'RM',
+"       \ 'SENTENCE', 'SM', 'SVM', 'SYS.BELL', 'SYSTEM.RETURN.CODE',
+"       \ 'TIME', 'TM', 'TRANSACTION', 'TTY',
+"       \ 'UDTNO', 'UID', 'USER.RETURN.CODE', 'USER.TYPE', 'USER0', 'USER1', 'USER2', 'USER3', 'USER4', 'USERNO',
+"       \ 'VM',
+"       \ 'WHO',
+"       \ 'YEAR'
+"       \ ]
+" let s:spec_pattern = join(s:spec_names, '\|')
+" exec 'syn match ebslReservedVariable /@\%('.s:spec_pattern.'\)\>/ display'
+
+syn keyword ebslReservedVariable
+      \ @ACCOUNT @AM
+      \ @COMMAND @CONV @CRTHIGH @CRTWIDE
+      \ @DATA @DATE @DAY @DICT
+      \ @FM @FORMAT
+      \ @GID
+      \ @HEADER
+      \ @ID
+      \ @LASTVERB @LEVEL @LOGNAME @LPTRHIGH @LPTRWIDE
+      \ @MONTH
+      \ @PARASENTENCE @PATH
+      \ @RECORD @RECUR0 @RECUR1 @RECUR2 @RECUR3 @RECUR4 @RM
+      \ @SENTENCE @SM @SVM @SYS.BELL @SYSTEM.RETURN.CODE
+      \ @TIME @TM @TRANSACTION @TTY
+      \ @UDTNO @UID @USER.RETURN.CODE @USER.TYPE @USER0 @USER1 @USER2 @USER3 @USER4 @USERNO
+      \ @VM
+      \ @WHO
+      \ @YEAR
 
 syn match ebslReservedVariable /\<\k\+\.ADD\.MODE\>/ display
 syn match ebslReservedVariable /\<ABORT\.\k\+\.LOOP\>/ display
