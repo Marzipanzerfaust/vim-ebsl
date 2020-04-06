@@ -25,40 +25,72 @@ syn region ebslString matchgroup=ebslStringDelimiter start=/`/ end=/`/ oneline d
 
 " NOTE: Function names should only be matched if they are immediately
 " proceeded by parentheses:
-let s:func_names = [
-      \ 'ABS', 'ACOS', 'ALPHA', 'ASCII', 'ASIN', 'ATAN',
-      \ 'BITAND', 'BITNOT', 'BITOR', 'BITXOR', 'BYTELEN',
-      \ 'CALCULATE', 'CATS', 'CHANGE', 'CHAR', 'CHARLEN', 'CHARS', 'CHECKSUM', 'COL1', 'COL2', 'CONVERT', 'COS', 'COUNT', 'COUNTS', 'CloseXMLData',
-      \ 'DATE', 'DBTOXML', 'DCOUNT', 'DELETE', 'DIGEST', 'DIR', 'DISPLAYWIDTH', 'DOWNCASE', 'DQUOTE', 'DROUND',
-      \ 'EBCDIC', 'EDADRV_Cleanup', 'EDADRV_CloseStmt', 'EDADRV_Connect', 'EDADRV_Disconnect', 'EDADRV_DropStmt', 'EDADRV_EndTransaction', 'EDADRV_ExecuteStmt', 'EDADRV_FetchStmt', 'EDADRV_FreeResult', 'EDADRV_GetDBInfo', 'EDADRV_GetEDAAttr', 'EDADRV_GetErrmsg', 'EDADRV_GetSpecialInfo', 'EDADRV_LoadSymbols', 'EDADRV_Perform', 'EDADRV_PrepareStmt', 'ENCODE', 'ENCRYPT', 'EQS', 'EREPLACE', 'EXP', 'EXTRACT',
-      \ 'FIELD', 'FIELDSTORE', 'FILEINFO', 'FMT',
-      \ 'GES', 'GETENV', 'GETPTR', 'GETPU', 'GETQUEUE', 'GETREADU', 'GETUSERGROUP', 'GETUSERID', 'GETUSERNAME', 'GROUP', 'GTS',
-      \ 'HASH',
-      \ 'ICONV', 'ICONVS', 'IN', 'INDEX', 'INDICES', 'INMAT', 'INSERT', 'INT', 'ISMB', 'ISNV', 'ISNVS', 'ITYPE',
-      \ 'LEN', 'LENS', 'LES', 'LISTUSER', 'LN', 'LOWER', 'LTS',
-      \ 'MATCHFIELD', 'MAXIMUM', 'MBLEN', 'MINIMUM', 'MOD',
-      \ 'NEG', 'NES', 'NFAUSER', 'NOT', 'NOTS', 'NUM', 'NUMS',
-      \ 'OCONV', 'OCONVS', 'OpenXMLData',
-      \ 'PWR', 'PrepareXML',
-      \ 'QUOTE',
-      \ 'RAISE', 'RECORDLOCKED', 'REM', 'REMOVE', 'REPLACE', 'REUSE', 'RND', 'ReadXMLData', 'ReleaseXML',
-      \ 'SADD', 'SCMP', 'SDIV', 'SELECTINFO', 'SEQ', 'SEQS', 'SETENV', 'SIGNATURE', 'SIN', 'SMUL', 'SOAPCreateRequest', 'SOAPCreateSecureRequest', 'SOAPGetDefault', 'SOAPGetFault', 'SOAPGetResponseHeader', 'SOAPRequestWrite', 'SOAPSetDefault', 'SOAPSetParameters', 'SOAPSetRequestBody', 'SOAPSetRequestContent', 'SOAPSetRequestHeader', 'SOAPSubmitRequest', 'SORT', 'SOUNDEX', 'SPACE', 'SPACES', 'SPLICE', 'SQLAllocConnect', 'SQLAllocEnv', 'SQLAllocStmt', 'SQLBindCol', 'SQLBindParameter', 'SQLCancel', 'SQLColAttributes', 'SQLColumns', 'SQLConnect', 'SQLDescribeCol', 'SQLDisconnect', 'SQLError', 'SQLExecDirect', 'SQLExecute', 'SQLFetch', 'SQLFreeConnect', 'SQLFreeEnv', 'SQLFreeStmt', 'SQLGetInfo', 'SQLGetTypeInfo', 'SQLNumParams', 'SQLNumResultCols', 'SQLParamOptions', 'SQLPrepare', 'SQLRowCount', 'SQLSetConnectOption', 'SQLSetParam', 'SQLSpecialColumns', 'SQLStatistics', 'SQLTables', 'SQLTransact', 'SQRT', 'SQUOTE', 'SSUB', 'STATUS', 'STR', 'STRS', 'SUBSTRINGS', 'SUM', 'SYSTEM',
-      \ 'TAN', 'TIME', 'TIMEDATE', 'TRIM', 'TRIMB', 'TRIMF', 'TRIMS',
-      \ 'UNASSIGNED', 'UPCASE',
-      \ 'XDOMAddChild', 'XDOMAppend', 'XDOMClone', 'XDOMClose', 'XDOMCreateNode', 'XDOMCreateRoot', 'XDOMEvaluate', 'XDOMGetAttribute', 'XDOMGetNodeName', 'XDOMGetNodeType', 'XDOMGetNodeValue', 'XDOMGetOwnerDocument', 'XDOMGetUserData', 'XDOMImportNode', 'XDOMInsert', 'XDOMLocate', 'XDOMLocateNode', 'XDOMOpen', 'XDOMRemove', 'XDOMReplace', 'XDOMSetNodeValue', 'XDOMSetUserData', 'XDOMTransform', 'XDOMValidate', 'XDOMValidateDom', 'XDOMWrite', 'XLATE', 'XMAPAppendRec', 'XMAPClose', 'XMAPCreate', 'XMAPOpen', 'XMAPReadNext', 'XMAPToXMLDoc', 'XMLError', 'XMLExecute', 'XMLGetError', 'XMLGetOptionValue', 'XMLGetOptions', 'XMLSetOptions', 'XMLTODB',
-      \ 'acceptConnection', 'addAuthenticationRule', 'addCertificate', 'addRequestParameter', 'amInitialize', 'amReceiveMsg', 'amReceiveRequest', 'amSendMsg', 'amSendRequst', 'amSendResponse', 'amTerminate', 'analyzeCertificate',
-      \ 'closeSocket', 'createCertRequest', 'createCertificate', 'createRequest', 'createSecureRequest', 'createSecurityContext',
-      \ 'generateKey', 'getCipherSuite', 'getHTTPDefault', 'getResponseHeader', 'getSocketInformation', 'getSocketOptions',
-      \ 'initSecureServerSocket', 'initServerSocket',
-      \ 'loadSecurityContext',
-      \ 'openSecureSocket', 'openSocket',
-      \ 'protocolLogging',
-      \ 'readSocket',
-      \ 'saveSecurityContext', 'setAuthenticationDepth', 'setCipherSuite', 'setClientAuthentication', 'setHTTPDefault', 'setPrivateKey', 'setRandomSeed', 'setRequestHeader', 'setSocketOptions', 'showSecurityContext', 'submitRequest',
-      \ 'writeSocket'
-      \ ]
-let s:func_pattern = join(s:func_names, '\|')
-exec 'syn match ebslFunction /\<\%('.s:func_pattern.'\)\ze\s*(/ display'
+" let s:func_names = [
+"       \ 'ABS', 'ACOS', 'ALPHA', 'ASCII', 'ASIN', 'ATAN',
+"       \ 'BITAND', 'BITNOT', 'BITOR', 'BITXOR', 'BYTELEN',
+"       \ 'CALCULATE', 'CATS', 'CHANGE', 'CHAR', 'CHARLEN', 'CHARS', 'CHECKSUM', 'COL1', 'COL2', 'CONVERT', 'COS', 'COUNT', 'COUNTS', 'CloseXMLData',
+"       \ 'DATE', 'DBTOXML', 'DCOUNT', 'DELETE', 'DIGEST', 'DIR', 'DISPLAYWIDTH', 'DOWNCASE', 'DQUOTE', 'DROUND',
+"       \ 'EBCDIC', 'EDADRV_Cleanup', 'EDADRV_CloseStmt', 'EDADRV_Connect', 'EDADRV_Disconnect', 'EDADRV_DropStmt', 'EDADRV_EndTransaction', 'EDADRV_ExecuteStmt', 'EDADRV_FetchStmt', 'EDADRV_FreeResult', 'EDADRV_GetDBInfo', 'EDADRV_GetEDAAttr', 'EDADRV_GetErrmsg', 'EDADRV_GetSpecialInfo', 'EDADRV_LoadSymbols', 'EDADRV_Perform', 'EDADRV_PrepareStmt', 'ENCODE', 'ENCRYPT', 'EQS', 'EREPLACE', 'EXP', 'EXTRACT',
+"       \ 'FIELD', 'FIELDSTORE', 'FILEINFO', 'FMT',
+"       \ 'GES', 'GETENV', 'GETPTR', 'GETPU', 'GETQUEUE', 'GETREADU', 'GETUSERGROUP', 'GETUSERID', 'GETUSERNAME', 'GROUP', 'GTS',
+"       \ 'HASH',
+"       \ 'ICONV', 'ICONVS', 'IN', 'INDEX', 'INDICES', 'INMAT', 'INSERT', 'INT', 'ISMB', 'ISNV', 'ISNVS', 'ITYPE',
+"       \ 'LEN', 'LENS', 'LES', 'LISTUSER', 'LN', 'LOWER', 'LTS',
+"       \ 'MATCHFIELD', 'MAXIMUM', 'MBLEN', 'MINIMUM', 'MOD',
+"       \ 'NEG', 'NES', 'NFAUSER', 'NOT', 'NOTS', 'NUM', 'NUMS',
+"       \ 'OCONV', 'OCONVS', 'OpenXMLData',
+"       \ 'PWR', 'PrepareXML',
+"       \ 'QUOTE',
+"       \ 'RAISE', 'RECORDLOCKED', 'REM', 'REMOVE', 'REPLACE', 'REUSE', 'RND', 'ReadXMLData', 'ReleaseXML',
+"       \ 'SADD', 'SCMP', 'SDIV', 'SELECTINFO', 'SEQ', 'SEQS', 'SETENV', 'SIGNATURE', 'SIN', 'SMUL', 'SOAPCreateRequest', 'SOAPCreateSecureRequest', 'SOAPGetDefault', 'SOAPGetFault', 'SOAPGetResponseHeader', 'SOAPRequestWrite', 'SOAPSetDefault', 'SOAPSetParameters', 'SOAPSetRequestBody', 'SOAPSetRequestContent', 'SOAPSetRequestHeader', 'SOAPSubmitRequest', 'SORT', 'SOUNDEX', 'SPACE', 'SPACES', 'SPLICE', 'SQLAllocConnect', 'SQLAllocEnv', 'SQLAllocStmt', 'SQLBindCol', 'SQLBindParameter', 'SQLCancel', 'SQLColAttributes', 'SQLColumns', 'SQLConnect', 'SQLDescribeCol', 'SQLDisconnect', 'SQLError', 'SQLExecDirect', 'SQLExecute', 'SQLFetch', 'SQLFreeConnect', 'SQLFreeEnv', 'SQLFreeStmt', 'SQLGetInfo', 'SQLGetTypeInfo', 'SQLNumParams', 'SQLNumResultCols', 'SQLParamOptions', 'SQLPrepare', 'SQLRowCount', 'SQLSetConnectOption', 'SQLSetParam', 'SQLSpecialColumns', 'SQLStatistics', 'SQLTables', 'SQLTransact', 'SQRT', 'SQUOTE', 'SSUB', 'STATUS', 'STR', 'STRS', 'SUBSTRINGS', 'SUM', 'SYSTEM',
+"       \ 'TAN', 'TIME', 'TIMEDATE', 'TRIM', 'TRIMB', 'TRIMF', 'TRIMS',
+"       \ 'UNASSIGNED', 'UPCASE',
+"       \ 'XDOMAddChild', 'XDOMAppend', 'XDOMClone', 'XDOMClose', 'XDOMCreateNode', 'XDOMCreateRoot', 'XDOMEvaluate', 'XDOMGetAttribute', 'XDOMGetNodeName', 'XDOMGetNodeType', 'XDOMGetNodeValue', 'XDOMGetOwnerDocument', 'XDOMGetUserData', 'XDOMImportNode', 'XDOMInsert', 'XDOMLocate', 'XDOMLocateNode', 'XDOMOpen', 'XDOMRemove', 'XDOMReplace', 'XDOMSetNodeValue', 'XDOMSetUserData', 'XDOMTransform', 'XDOMValidate', 'XDOMValidateDom', 'XDOMWrite', 'XLATE', 'XMAPAppendRec', 'XMAPClose', 'XMAPCreate', 'XMAPOpen', 'XMAPReadNext', 'XMAPToXMLDoc', 'XMLError', 'XMLExecute', 'XMLGetError', 'XMLGetOptionValue', 'XMLGetOptions', 'XMLSetOptions', 'XMLTODB',
+"       \ 'acceptConnection', 'addAuthenticationRule', 'addCertificate', 'addRequestParameter', 'amInitialize', 'amReceiveMsg', 'amReceiveRequest', 'amSendMsg', 'amSendRequst', 'amSendResponse', 'amTerminate', 'analyzeCertificate',
+"       \ 'closeSocket', 'createCertRequest', 'createCertificate', 'createRequest', 'createSecureRequest', 'createSecurityContext',
+"       \ 'generateKey', 'getCipherSuite', 'getHTTPDefault', 'getResponseHeader', 'getSocketInformation', 'getSocketOptions',
+"       \ 'initSecureServerSocket', 'initServerSocket',
+"       \ 'loadSecurityContext',
+"       \ 'openSecureSocket', 'openSocket',
+"       \ 'protocolLogging',
+"       \ 'readSocket',
+"       \ 'saveSecurityContext', 'setAuthenticationDepth', 'setCipherSuite', 'setClientAuthentication', 'setHTTPDefault', 'setPrivateKey', 'setRandomSeed', 'setRequestHeader', 'setSocketOptions', 'showSecurityContext', 'submitRequest',
+"       \ 'writeSocket'
+"       \ ]
+" let s:func_pattern = join(s:func_names, '\|')
+" exec 'syn match ebslFunction /\<\%('.s:func_pattern.'\)\ze\s*(/ display'
+
+syn keyword ebslFunction nextgroup=ebslParentheses skipwhite
+      \ ABS ACOS ALPHA ASCII ASIN ATAN
+      \ BITAND BITNOT BITOR BITXOR BYTELEN
+      \ CALCULATE CATS CHANGE CHAR CHARLEN CHARS CHECKSUM COL1 COL2 CONVERT COS COUNT COUNTS CloseXMLData
+      \ DATE DBTOXML DCOUNT DELETE DIGEST DIR DISPLAYWIDTH DOWNCASE DQUOTE DROUND
+      \ EBCDIC EDADRV_Cleanup EDADRV_CloseStmt EDADRV_Connect EDADRV_Disconnect EDADRV_DropStmt EDADRV_EndTransaction EDADRV_ExecuteStmt EDADRV_FetchStmt EDADRV_FreeResult EDADRV_GetDBInfo EDADRV_GetEDAAttr EDADRV_GetErrmsg EDADRV_GetSpecialInfo EDADRV_LoadSymbols EDADRV_Perform EDADRV_PrepareStmt ENCODE ENCRYPT EQS EREPLACE EXP EXTRACT
+      \ FIELD FIELDSTORE FILEINFO FMT
+      \ GES GETENV GETPTR GETPU GETQUEUE GETREADU GETUSERGROUP GETUSERID GETUSERNAME GROUP GTS
+      \ HASH
+      \ ICONV ICONVS IN INDEX INDICES INMAT INSERT INT ISMB ISNV ISNVS ITYPE
+      \ LEN LENS LES LISTUSER LN LOWER LTS
+      \ MATCHFIELD MAXIMUM MBLEN MINIMUM MOD
+      \ NEG NES NFAUSER NOT NOTS NUM NUMS
+      \ OCONV OCONVS OpenXMLData
+      \ PWR PrepareXML
+      \ QUOTE
+      \ RAISE RECORDLOCKED REM REMOVE REPLACE REUSE RND ReadXMLData ReleaseXML
+      \ SADD SCMP SDIV SELECTINFO SEQ SEQS SETENV SIGNATURE SIN SMUL SOAPCreateRequest SOAPCreateSecureRequest SOAPGetDefault SOAPGetFault SOAPGetResponseHeader SOAPRequestWrite SOAPSetDefault SOAPSetParameters SOAPSetRequestBody SOAPSetRequestContent SOAPSetRequestHeader SOAPSubmitRequest SORT SOUNDEX SPACE SPACES SPLICE SQLAllocConnect SQLAllocEnv SQLAllocStmt SQLBindCol SQLBindParameter SQLCancel SQLColAttributes SQLColumns SQLConnect SQLDescribeCol SQLDisconnect SQLError SQLExecDirect SQLExecute SQLFetch SQLFreeConnect SQLFreeEnv SQLFreeStmt SQLGetInfo SQLGetTypeInfo SQLNumParams SQLNumResultCols SQLParamOptions SQLPrepare SQLRowCount SQLSetConnectOption SQLSetParam SQLSpecialColumns SQLStatistics SQLTables SQLTransact SQRT SQUOTE SSUB STATUS STR STRS SUBSTRINGS SUM SYSTEM
+      \ TAN TIME TIMEDATE TRIM TRIMB TRIMF TRIMS
+      \ UNASSIGNED UPCASE
+      \ XDOMAddChild XDOMAppend XDOMClone XDOMClose XDOMCreateNode XDOMCreateRoot XDOMEvaluate XDOMGetAttribute XDOMGetNodeName XDOMGetNodeType XDOMGetNodeValue XDOMGetOwnerDocument XDOMGetUserData XDOMImportNode XDOMInsert XDOMLocate XDOMLocateNode XDOMOpen XDOMRemove XDOMReplace XDOMSetNodeValue XDOMSetUserData XDOMTransform XDOMValidate XDOMValidateDom XDOMWrite XLATE XMAPAppendRec XMAPClose XMAPCreate XMAPOpen XMAPReadNext XMAPToXMLDoc XMLError XMLExecute XMLGetError XMLGetOptionValue XMLGetOptions XMLSetOptions XMLTODB
+      \ acceptConnection addAuthenticationRule addCertificate addRequestParameter amInitialize amReceiveMsg amReceiveRequest amSendMsg amSendRequst amSendResponse amTerminate analyzeCertificate
+      \ closeSocket createCertRequest createCertificate createRequest createSecureRequest createSecurityContext
+      \ generateKey getCipherSuite getHTTPDefault getResponseHeader getSocketInformation getSocketOptions
+      \ initSecureServerSocket initServerSocket
+      \ loadSecurityContext
+      \ openSecureSocket openSocket
+      \ protocolLogging
+      \ readSocket
+      \ saveSecurityContext setAuthenticationDepth setCipherSuite setClientAuthentication setHTTPDefault setPrivateKey setRandomSeed setRequestHeader setSocketOptions showSecurityContext submitRequest
+      \ writeSocket
 
 " The @ function
 syn match ebslFunction /\k\zs@\ze\s*(/ display
@@ -66,31 +98,54 @@ syn match ebslFunction /\k\zs@\ze\s*(/ display
 " NOTE: There is some overlap in names between functions and statement
 " keywords, so these are only matched if they are *not* proceeded by
 " parentheses
-let s:keyword_names = [
-      \ 'ABORT', 'ACTIVATEKEY', 'ADD', 'ADD_ONLY', 'ALL', 'ALLOW_CANCEL', 'ALL_OF', 'AND_EV', 'AND_FROM', 'APPEND', 'ASCENDING', 'ASSIGN', 'ASSOCIATED', 'ASYNC', 'AT', 'AUX',
-      \ 'BATCHED', 'BEFORE', 'BEGIN', 'BOTH', 'BPIOCP', 'BPIOCPN', 'BREAK', 'BREAKING_ON', 'BROWSE', 'BUFFER.KEYS', 'BUT_NOT_FROM', 'BY',
-      \ 'CALL', 'CALLC', 'CALLING', 'CALL_PROCESS', 'CALL_SCREEN', 'CALL_SUBR', 'CANCEL', 'CANCELLING', 'CAPTURE', 'CAPTURING', 'CASE', 'CDD', 'CHAIN', 'CHAIN_SCREEN', 'CLEAR', 'CLEARCOM', 'CLEARCOMMON', 'CLEARDATA', 'CLEARFILE', 'CLEARINPUT', 'CLEARSELECT', 'CLEARSQL', 'CLOSE', 'CLOSESEQ', 'COM', 'COMMIT', 'COMMITTING', 'COMMIT_EVERY', 'COMMON', 'COMO', 'CONCAT', 'CONDITIONALLY', 'CONFIRM', 'CONSOLIDATING', 'CONTINUE', 'CONVAFTER', 'CONVERT', 'CONV_AFTER', 'COPY_LOGICAL', 'COUNTED', 'CREATE_NEW', 'CRITERIA', 'CRT',
-      \ 'DATA', 'DEACTIVATEKEY', 'DEBUG', 'DEFAULT_RECORD', 'DEFER_COMMIT', 'DEFFUN', 'DEL', 'DELETE', 'DELETELIST', 'DELETEU', 'DELETE_RECORD', 'DELETE_RECORDS', 'DELETING', 'DESCENDING', 'DIM', 'DIMENSION', 'DISABLEDEC', 'DISPLAY', 'DO',
-      \ 'ECHO', 'ELSE', 'EMAIL', 'ENABLEDEC', 'END', 'ENTER', 'EQU', 'EQUATE', 'ERROR', 'ERROR_IF', 'EXECUTE', 'EXECUTESQL', 'EXISTING', 'EXIT',
-      \ 'FIELD', 'FIELDS', 'FILELOCK', 'FILEUNLOCK', 'FIND', 'FINDSTR', 'FIRST', 'FLUSH', 'FOOTING', 'FOR', 'FORCE', 'FORMLIST', 'FROM', 'FULL_ACCESS', 'FUNCTION',
-      \ 'GARBAGECOLLECT', 'GET', 'GETLIST', 'GETTING_ACTION_CODES', 'GETX', 'GO', 'GOSUB', 'GOTO', 'GRAPHED', 'GROUPSTORE',
-      \ 'HEADING', 'HOLD', 'HUSH',
-      \ 'IF', 'IGNORE', 'IN', 'INPUT', 'INPUTCLEAR', 'INPUTERR', 'INPUTIF', 'INPUTNULL', 'INPUTTRAP', 'INQUIRY', 'INS', 'INSTANCE_OF', 'INTO', 'INTO_REFERENCED', 'ITEMIZING',
-      \ 'KEY', 'KEY_IN',
-      \ 'LAST', 'LEFT', 'LENGTH', 'LIMITING', 'LINE', 'LIT', 'LITERALLY', 'LOCATE', 'LOCK', 'LOCKED', 'LOOKUP', 'LOOP',
-      \ 'MAT', 'MATBUILD', 'MATCHING', 'MATPARSE', 'MATREAD', 'MATREADL', 'MATREADU', 'MATWRITE', 'MATWRITEU', 'MDPERFORM', 'MOVE_CONTROLLER',
-      \ 'NEW', 'NEWLIST', 'NEXT', 'NOADD', 'NOBROWSE', 'NOCONV', 'NOCONVERT', 'NODELAY', 'NOFMT', 'NOT', 'NO_ACCESS', 'NO_ADD', 'NO_CONV', 'NO_DELETE', 'NULL',
-      \ 'OFF', 'ON', 'ONLY', 'OPEN', 'OPENSEQ', 'OSBREAD', 'OSBWRITE', 'OSCLOSE', 'OSDELETE', 'OSOPEN', 'OSREAD', 'OSWRITE', 'OUTPUT',
-      \ 'PAGE', 'PASSCOM', 'PASSLIST', 'PAUSE', 'PCPERFORM', 'PDF', 'PERFORM', 'PHANTOM', 'PRECISION', 'PRE_ASSEMBLED', 'PRINT', 'PRINTER', 'PRINTERR', 'PRINT_DETAIL', 'PRINT_TOTAL', 'PROCEDURE', 'PROCREAD', 'PROCWRITE', 'PROGRAM', 'PROMPT', 'PROMPT_IN_PLACE', 'PROMPT_WIDE', 'PROTECTED',
-      \ 'READ', 'READBCK', 'READBCKL', 'READBCKU', 'READFWD', 'READFWDL', 'READFWDU', 'READL', 'READLIST', 'READNEXT', 'READNEXTTUPLE', 'READONLY', 'READSELECT', 'READSEQ', 'READT', 'READU', 'READV', 'READVL', 'READVU', 'READXBCK', 'READXFWD', 'RECORDLOCKL', 'RECORDLOCKU', 'RECORD_CACHING', 'RECURSIVE', 'REFERENCED', 'RELEASE', 'RELEASING', 'REMOVE', 'REPEAT', 'REPROMPT', 'RESET', 'RESIZET', 'RETCODE', 'RETURN', 'RETURNING', 'REWIND', 'RIGHT', 'RNDSEED', 'RQM', 'RTNLIST', 'RUN',
-      \ 'SCREEN', 'SECONDARY', 'SELECT', 'SELECTED', 'SELECTINDEX', 'SEND', 'SENDX', 'SETINDEX', 'SETPTR', 'SETTING', 'SET_SECURITY', 'SHOWA', 'SHOWC', 'SINGLE', 'SLEEP', 'SORTING', 'START', 'STEP', 'STMT', 'STOP', 'SUBROUTINE', 'SUSPEND', 'SWAP', 'SYNC',
-      \ 'TEMPLATE', 'TESTING', 'THEN', 'THIS_APPLICATION_ONLY', 'THIS_INSTANCE_OF', 'THROW_ERROR', 'TO', 'TRANSACTION', 'TRANSLATE', 'TRANSLATING', 'TYPE',
-      \ 'UNFILTERED', 'UNIT', 'UNLOCK', 'UNTIL', 'UNVALIDATED', 'UPDATE', 'USING', 'UTDEXECUTE',
-      \ 'VALIDATE', 'VALIDATE.KEY', 'VALIDATION',
-      \ 'WAITING', 'WAKE', 'WARNING', 'WEOF', 'WEOFSEQ', 'WHILE', 'WINDOW', 'WINDOWS', 'WITH', 'WRITE', 'WRITELIST', 'WRITEONLY', 'WRITESEQ', 'WRITESEQF', 'WRITET', 'WRITEU', 'WRITEV', 'WRITEVU', 'WRITING'
-      \ ]
-let s:keyword_pattern = join(s:keyword_names, '\|')
-exec 'syn match ebslKeyword /\<\%('.s:keyword_pattern.'\)\>\%(\s*(\)\@!/ display'
+" let s:keyword_names = [
+"       \ 'ABORT', 'ACTIVATEKEY', 'ADD', 'ADD_ONLY', 'ALL', 'ALLOW_CANCEL', 'ALL_OF', 'AND_EV', 'AND_FROM', 'APPEND', 'ASCENDING', 'ASSIGN', 'ASSOCIATED', 'ASYNC', 'AT', 'AUX',
+"       \ 'BATCHED', 'BEFORE', 'BEGIN', 'BOTH', 'BPIOCP', 'BPIOCPN', 'BREAK', 'BREAKING_ON', 'BROWSE', 'BUFFER.KEYS', 'BUT_NOT_FROM', 'BY',
+"       \ 'CALL', 'CALLC', 'CALLING', 'CALL_PROCESS', 'CALL_SCREEN', 'CALL_SUBR', 'CANCEL', 'CANCELLING', 'CAPTURE', 'CAPTURING', 'CASE', 'CDD', 'CHAIN', 'CHAIN_SCREEN', 'CLEAR', 'CLEARCOM', 'CLEARCOMMON', 'CLEARDATA', 'CLEARFILE', 'CLEARINPUT', 'CLEARSELECT', 'CLEARSQL', 'CLOSE', 'CLOSESEQ', 'COM', 'COMMIT', 'COMMITTING', 'COMMIT_EVERY', 'COMMON', 'COMO', 'CONCAT', 'CONDITIONALLY', 'CONFIRM', 'CONSOLIDATING', 'CONTINUE', 'CONVAFTER', 'CONVERT', 'CONV_AFTER', 'COPY_LOGICAL', 'COUNTED', 'CREATE_NEW', 'CRITERIA', 'CRT',
+"       \ 'DATA', 'DEACTIVATEKEY', 'DEBUG', 'DEFAULT_RECORD', 'DEFER_COMMIT', 'DEFFUN', 'DEL', 'DELETE', 'DELETELIST', 'DELETEU', 'DELETE_RECORD', 'DELETE_RECORDS', 'DELETING', 'DESCENDING', 'DIM', 'DIMENSION', 'DISABLEDEC', 'DISPLAY', 'DO',
+"       \ 'ECHO', 'ELSE', 'EMAIL', 'ENABLEDEC', 'END', 'ENTER', 'EQU', 'EQUATE', 'ERROR', 'ERROR_IF', 'EXECUTE', 'EXECUTESQL', 'EXISTING', 'EXIT',
+"       \ 'FIELD', 'FIELDS', 'FILELOCK', 'FILEUNLOCK', 'FIND', 'FINDSTR', 'FIRST', 'FLUSH', 'FOOTING', 'FOR', 'FORCE', 'FORMLIST', 'FROM', 'FULL_ACCESS', 'FUNCTION',
+"       \ 'GARBAGECOLLECT', 'GET', 'GETLIST', 'GETTING_ACTION_CODES', 'GETX', 'GO', 'GOSUB', 'GOTO', 'GRAPHED', 'GROUPSTORE',
+"       \ 'HEADING', 'HOLD', 'HUSH',
+"       \ 'IF', 'IGNORE', 'IN', 'INPUT', 'INPUTCLEAR', 'INPUTERR', 'INPUTIF', 'INPUTNULL', 'INPUTTRAP', 'INQUIRY', 'INS', 'INSTANCE_OF', 'INTO', 'INTO_REFERENCED', 'ITEMIZING',
+"       \ 'KEY', 'KEY_IN',
+"       \ 'LAST', 'LEFT', 'LENGTH', 'LIMITING', 'LINE', 'LIT', 'LITERALLY', 'LOCATE', 'LOCK', 'LOCKED', 'LOOKUP', 'LOOP',
+"       \ 'MAT', 'MATBUILD', 'MATCHING', 'MATPARSE', 'MATREAD', 'MATREADL', 'MATREADU', 'MATWRITE', 'MATWRITEU', 'MDPERFORM', 'MOVE_CONTROLLER',
+"       \ 'NEW', 'NEWLIST', 'NEXT', 'NOADD', 'NOBROWSE', 'NOCONV', 'NOCONVERT', 'NODELAY', 'NOFMT', 'NOT', 'NO_ACCESS', 'NO_ADD', 'NO_CONV', 'NO_DELETE', 'NULL',
+"       \ 'OFF', 'ON', 'ONLY', 'OPEN', 'OPENSEQ', 'OSBREAD', 'OSBWRITE', 'OSCLOSE', 'OSDELETE', 'OSOPEN', 'OSREAD', 'OSWRITE', 'OUTPUT',
+"       \ 'PAGE', 'PASSCOM', 'PASSLIST', 'PAUSE', 'PCPERFORM', 'PDF', 'PERFORM', 'PHANTOM', 'PRECISION', 'PRE_ASSEMBLED', 'PRINT', 'PRINTER', 'PRINTERR', 'PRINT_DETAIL', 'PRINT_TOTAL', 'PROCEDURE', 'PROCREAD', 'PROCWRITE', 'PROGRAM', 'PROMPT', 'PROMPT_IN_PLACE', 'PROMPT_WIDE', 'PROTECTED',
+"       \ 'READ', 'READBCK', 'READBCKL', 'READBCKU', 'READFWD', 'READFWDL', 'READFWDU', 'READL', 'READLIST', 'READNEXT', 'READNEXTTUPLE', 'READONLY', 'READSELECT', 'READSEQ', 'READT', 'READU', 'READV', 'READVL', 'READVU', 'READXBCK', 'READXFWD', 'RECORDLOCKL', 'RECORDLOCKU', 'RECORD_CACHING', 'RECURSIVE', 'REFERENCED', 'RELEASE', 'RELEASING', 'REMOVE', 'REPEAT', 'REPROMPT', 'RESET', 'RESIZET', 'RETCODE', 'RETURN', 'RETURNING', 'REWIND', 'RIGHT', 'RNDSEED', 'RQM', 'RTNLIST', 'RUN',
+"       \ 'SCREEN', 'SECONDARY', 'SELECT', 'SELECTED', 'SELECTINDEX', 'SEND', 'SENDX', 'SETINDEX', 'SETPTR', 'SETTING', 'SET_SECURITY', 'SHOWA', 'SHOWC', 'SINGLE', 'SLEEP', 'SORTING', 'START', 'STEP', 'STMT', 'STOP', 'SUBROUTINE', 'SUSPEND', 'SWAP', 'SYNC',
+"       \ 'TEMPLATE', 'TESTING', 'THEN', 'THIS_APPLICATION_ONLY', 'THIS_INSTANCE_OF', 'THROW_ERROR', 'TO', 'TRANSACTION', 'TRANSLATE', 'TRANSLATING', 'TYPE',
+"       \ 'UNFILTERED', 'UNIT', 'UNLOCK', 'UNTIL', 'UNVALIDATED', 'UPDATE', 'USING', 'UTDEXECUTE',
+"       \ 'VALIDATE', 'VALIDATE.KEY', 'VALIDATION',
+"       \ 'WAITING', 'WAKE', 'WARNING', 'WEOF', 'WEOFSEQ', 'WHILE', 'WINDOW', 'WINDOWS', 'WITH', 'WRITE', 'WRITELIST', 'WRITEONLY', 'WRITESEQ', 'WRITESEQF', 'WRITET', 'WRITEU', 'WRITEV', 'WRITEVU', 'WRITING'
+"       \ ]
+" let s:keyword_pattern = join(s:keyword_names, '\|')
+" exec 'syn match ebslKeyword /\<\%('.s:keyword_pattern.'\)\>\%(\s*(\)\@!/ display'
+
+syn keyword ebslKeyword
+      \ ABORT ACTIVATEKEY ADD ADD_ONLY ALL ALLOW_CANCEL ALL_OF AND_EV AND_FROM APPEND ASCENDING ASSIGN ASSOCIATED ASYNC AT AUX
+      \ BATCHED BEFORE BEGIN BOTH BPIOCP BPIOCPN BREAK BREAKING_ON BROWSE BUFFER.KEYS BUT_NOT_FROM BY
+      \ CALL CALLC CALLING CALL_PROCESS CALL_SCREEN CALL_SUBR CANCEL CANCELLING CAPTURE CAPTURING CASE CDD CHAIN CHAIN_SCREEN CLEAR CLEARCOM CLEARCOMMON CLEARDATA CLEARFILE CLEARINPUT CLEARSELECT CLEARSQL CLOSE CLOSESEQ COM COMMIT COMMITTING COMMIT_EVERY COMMON COMO CONCAT CONDITIONALLY CONFIRM CONSOLIDATING CONTINUE CONVAFTER CONVERT CONV_AFTER COPY_LOGICAL COUNTED CREATE_NEW CRITERIA CRT
+      \ DATA DEACTIVATEKEY DEBUG DEFAULT_RECORD DEFER_COMMIT DEFFUN DEL DELETE DELETELIST DELETEU DELETE_RECORD DELETE_RECORDS DELETING DESCENDING DIM DIMENSION DISABLEDEC DISPLAY DO
+      \ ECHO ELSE EMAIL ENABLEDEC END ENTER EQU EQUATE ERROR ERROR_IF EXECUTE EXECUTESQL EXISTING EXIT
+      \ FIELD FIELDS FILELOCK FILEUNLOCK FIND FINDSTR FIRST FLUSH FOOTING FOR FORCE FORMLIST FROM FULL_ACCESS FUNCTION
+      \ GARBAGECOLLECT GET GETLIST GETTING_ACTION_CODES GETX GO GOSUB GOTO GRAPHED GROUPSTORE
+      \ HEADING HOLD HUSH
+      \ IF IGNORE IN INPUT INPUTCLEAR INPUTERR INPUTIF INPUTNULL INPUTTRAP INQUIRY INS INSTANCE_OF INTO INTO_REFERENCED ITEMIZING
+      \ KEY KEY_IN
+      \ LAST LEFT LENGTH LIMITING LINE LIT LITERALLY LOCATE LOCK LOCKED LOOKUP LOOP
+      \ MAT MATBUILD MATCHING MATPARSE MATREAD MATREADL MATREADU MATWRITE MATWRITEU MDPERFORM MOVE_CONTROLLER
+      \ NEW NEWLIST NEXT NOADD NOBROWSE NOCONV NOCONVERT NODELAY NOFMT NOT NO_ACCESS NO_ADD NO_CONV NO_DELETE NULL
+      \ OFF ON ONLY OPEN OPENSEQ OSBREAD OSBWRITE OSCLOSE OSDELETE OSOPEN OSREAD OSWRITE OUTPUT
+      \ PAGE PASSCOM PASSLIST PAUSE PCPERFORM PDF PERFORM PHANTOM PRECISION PRE_ASSEMBLED PRINT PRINTER PRINTERR PRINT_DETAIL PRINT_TOTAL PROCEDURE PROCREAD PROCWRITE PROGRAM PROMPT PROMPT_IN_PLACE PROMPT_WIDE PROTECTED
+      \ READ READBCK READBCKL READBCKU READFWD READFWDL READFWDU READL READLIST READNEXT READNEXTTUPLE READONLY READSELECT READSEQ READT READU READV READVL READVU READXBCK READXFWD RECORDLOCKL RECORDLOCKU RECORD_CACHING RECURSIVE REFERENCED RELEASE RELEASING REMOVE REPEAT REPROMPT RESET RESIZET RETCODE RETURN RETURNING REWIND RIGHT RNDSEED RQM RTNLIST RUN
+      \ SCREEN SECONDARY SELECT SELECTED SELECTINDEX SEND SENDX SETINDEX SETPTR SETTING SET_SECURITY SHOWA SHOWC SINGLE SLEEP SORTING START STEP STMT STOP SUBROUTINE SUSPEND SWAP SYNC
+      \ TEMPLATE TESTING THEN THIS_APPLICATION_ONLY THIS_INSTANCE_OF THROW_ERROR TO TRANSACTION TRANSLATE TRANSLATING TYPE
+      \ UNFILTERED UNIT UNLOCK UNTIL UNVALIDATED UPDATE USING UTDEXECUTE
+      \ VALIDATE VALIDATE.KEY VALIDATION
+      \ WAITING WAKE WARNING WEOF WEOFSEQ WHILE WINDOW WINDOWS WITH WRITE WRITELIST WRITEONLY WRITESEQ WRITESEQF WRITET WRITEU WRITEV WRITEVU WRITING
 
 " The below function and keyword names strip out any [.-_] before being
 " matched
