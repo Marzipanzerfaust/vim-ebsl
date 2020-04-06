@@ -61,6 +61,7 @@ syn region ebslString matchgroup=ebslStringDelimiter start=/`/ end=/`/ oneline d
 " exec 'syn match ebslFunction /\<\%('.s:func_pattern.'\)\ze\s*(/ display'
 
 syn keyword ebslFunction nextgroup=ebslParentheses skipwhite
+      \ @
       \ ABS ACOS ALPHA ASCII ASIN ATAN
       \ BITAND BITNOT BITOR BITXOR BYTELEN
       \ CALCULATE CATS CHANGE CHAR CHARLEN CHARS CHECKSUM COL1 COL2 CONVERT COS COUNT COUNTS CloseXMLData
