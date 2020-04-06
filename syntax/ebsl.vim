@@ -60,7 +60,7 @@ syn region ebslString matchgroup=ebslStringDelimiter start=/`/ end=/`/ oneline d
 " let s:func_pattern = join(s:func_names, '\|')
 " exec 'syn match ebslFunction /\<\%('.s:func_pattern.'\)\ze\s*(/ display'
 
-syn keyword ebslFunction nextgroup=ebslParentheses skipwhite
+syn keyword ebslFunction nextgroup=ebslFuncArguments skipwhite
       \ @
       \ ABS ACOS ALPHA ASCII ASIN ATAN
       \ BITAND BITNOT BITOR BITXOR BYTELEN
@@ -92,6 +92,8 @@ syn keyword ebslFunction nextgroup=ebslParentheses skipwhite
       \ readSocket
       \ saveSecurityContext setAuthenticationDepth setCipherSuite setClientAuthentication setHTTPDefault setPrivateKey setRandomSeed setRequestHeader setSocketOptions showSecurityContext submitRequest
       \ writeSocket
+
+syn region ebslFuncArguments start=/(/ end=/)/ transparent display oneline contained
 
 " NOTE: There is some overlap in names between functions and statement
 " keywords, so these are only matched if they are *not* proceeded by
