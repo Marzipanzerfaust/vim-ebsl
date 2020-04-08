@@ -103,11 +103,11 @@ endfunction
 
 let s:strip_func_pattern = join(map(s:strip_func_names, function('s:AddIgnoreChars')), '\|')
 
-exec 'syn match ebslFunction /\<\%('.s:strip_func_pattern.'\)\ze\s*(/ display'
+exec 'syn match ebslFunction /\<\%('.s:strip_func_pattern.'\)\>/ display'
 
 let s:strip_word_pattern = join(map(s:strip_word_names, function('s:AddIgnoreChars')), '\|')
 
-exec 'syn match ebslKeyword /\<\%('.s:strip_word_pattern.'\)\>\%(\s*(\)\@!/ display'
+exec 'syn match ebslKeyword /\<\%('.s:strip_word_pattern.'\)\>/ display'
 
 syn match ebslDatabaseAccess /^\s*\zs\%(FOR\|END\)_\k*/ display
 syn match ebslDatabaseElement /\<\%(VL\=\|R\)\.\k\+\>/ display
@@ -118,7 +118,7 @@ syn region ebslLabelBlock start=/^\zs\k\+:/ end=/^RETURN\>/ transparent fold kee
 syn match ebslPreProc /^\s*\zs\$.\+/ display
 syn region ebslPreProc matchgroup=ebslPreProcDelimiter start=/^\s*\zs:/ end=/:/ oneline display
 
-syn match ebslMacro /\S\s*\zs\$\k\+/
+syn match ebslMacro /\%(^\s*\)\@<!\$\k\+/
 
 syn keyword ebslReservedVariable
       \ @ACCOUNT @AM
