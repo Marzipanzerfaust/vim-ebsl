@@ -82,9 +82,9 @@ syn keyword ebslKeyword
 " The following keywords can also be used as functions, so we need to
 " match them as ebslFunction if they are proceeded by a parenthesis,
 " otherwise ebslKeyword
-let s:ambiguous_words = ["CONVERT", "DELETE", "FIELD", "IN", "NOT", "REMOVE"]
-exe 'syn match ebslFunction /\<\%('.join(s:ambiguous_words, '\|').'\)\>\s*(/ display'
-exe 'syn match ebslKeyword  /\<\%('.join(s:ambiguous_words, '\|').'\)\>\%(\s*(\)\@!/ display'
+let s:ambiguous_words = join(["CONVERT", "DELETE", "FIELD", "IN", "NOT", "REMOVE"], '\|')
+exe 'syn match ebslFunction /\<\%('.s:ambiguous_words.'\)\>\s*(/ display'
+exe 'syn match ebslKeyword  /\<\%('.s:ambiguous_words.'\)\>\%(\s*(\)\@<!/ display'
 
 " The below function and keyword names strip out any [.-_] before being
 " matched
