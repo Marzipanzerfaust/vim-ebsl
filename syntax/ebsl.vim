@@ -83,7 +83,7 @@ syn keyword ebslKeyword
 " match them as ebslFunction if they are proceeded by a parenthesis,
 " otherwise ebslKeyword
 let s:ambiguous_words = join(["CONVERT", "DELETE", "FIELD", "IN", "NOT", "REMOVE"], '\|')
-exe 'syn match ebslFunction /\<\%('.s:ambiguous_words.'\)\>\s*(/ display'
+exe 'syn match ebslFunction /\<\%('.s:ambiguous_words.'\)\>\ze\s*(/ display'
 exe 'syn match ebslKeyword  /\<\%('.s:ambiguous_words.'\)\>\ze\s*[^(]/ display'
 
 " The below function and keyword names strip out any [.-_] before being
