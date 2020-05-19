@@ -14,6 +14,7 @@ let b:did_ftplugin = 1
 setlocal comments=:*
 setlocal commentstring=*%s
 setlocal tabstop=3 softtabstop=3 shiftwidth=3
+setlocal iskeyword+=.
 
 if exists("ebsl_fold")
   setlocal foldmethod=syntax
