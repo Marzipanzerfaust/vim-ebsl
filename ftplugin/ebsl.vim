@@ -12,7 +12,7 @@ endif
 let b:did_ftplugin = 1
 
 setlocal comments=:*
-setlocal commentstring=*%s
+setlocal commentstring=*\ %s
 setlocal tabstop=3 softtabstop=3 shiftwidth=3
 setlocal iskeyword+=.
 

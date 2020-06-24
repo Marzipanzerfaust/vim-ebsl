@@ -7,7 +7,7 @@ if exists('b:current_syntax')
   finish
 endif
 
-syn iskeyword 48-57,a-z,A-Z,_,.,@-@
+syn iskeyword @,48-57,_,.,@-@
 
 " Group definitions
 syn match ebslOperator /[*/^#=&!:<>\-+]/ display
@@ -85,6 +85,7 @@ syn keyword ebslKeyword
 let s:ambiguous_words = join(["CONVERT", "DELETE", "FIELD", "IN", "NOT", "REMOVE"], '\|')
 exe 'syn match ebslFunction /\<\%('.s:ambiguous_words.'\)\>\ze\s*(/ display'
 exe 'syn match ebslKeyword  /\<\%('.s:ambiguous_words.'\)\>\ze\%(\s*(\)\@!/ display'
+unlet s:ambiguous_words
 
 " The below function and keyword names strip out any [.-_] before being
 " matched
@@ -108,6 +109,11 @@ exec 'syn match ebslFunction /\<\%('.s:strip_func_pattern.'\)\>/ display'
 let s:strip_word_pattern = join(map(s:strip_word_names, function('s:AddIgnoreChars')), '\|')
 
 exec 'syn match ebslKeyword /\<\%('.s:strip_word_pattern.'\)\>/ display'
+
+unlet s:strip_func_pattern
+unlet s:strip_func_names
+unlet s:strip_word_pattern
+unlet s:strip_word_names
 
 syn match ebslDatabaseAccess /^\s*\zs\%(FOR\|END\)_\k*/ display
 syn match ebslDatabaseElement /\<\%(VL\=\|R\)\.\k\+\>/ display
